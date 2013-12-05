@@ -31,3 +31,5 @@ end
 
 gem 'ember-rails'
 gem 'ember-source', '1.2.0' # or the version you need
+#better way to work with classes and extends tahn in normal js
+gem 'ember_script-rails', :github => 'ghempton/ember-script-rails'
