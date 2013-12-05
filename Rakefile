@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-DamePraciApp::Application.load_tasks
+PickwickApp::Application.load_tasks
