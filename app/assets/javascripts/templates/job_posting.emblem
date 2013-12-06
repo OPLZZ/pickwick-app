@@ -1,0 +1,26 @@
+header#header.navbar
+  a click="backToJobPostings"
+    button.btn.btn-link.pull-left.white.header-btn
+      i.icon-chevron-sign-left
+      | Back
+
+section#content
+  .main
+    h1 = title
+    if contact
+      h2
+        = contact
+    if url
+      a href= url
+        = url
+    ul.job_posting
+      if location
+        li.icon-location
+          = location
+      if employment_type
+        li.icon-tie
+          = employment_type
+      if compensation
+        li.icon-money
+          = compensation
+    = description

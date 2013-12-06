@@ -1,3 +1,3 @@
 class PickwickApp.IndexRoute extends Ember.Route
-  model: ->
-    ['red', 'yellow', 'blue']
+  redirect: ->
+    @transitionTo "job_postings.index"

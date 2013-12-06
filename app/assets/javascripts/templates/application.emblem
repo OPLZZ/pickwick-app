@@ -6,4 +6,5 @@ h2 Welcome to Ember.js
     li.menu-text click="goToPostsFromMenu"
       a Job Postings
 
+' heelo
 = outlet

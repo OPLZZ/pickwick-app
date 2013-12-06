@@ -4,15 +4,18 @@ class JobPostingsController < ApplicationController
   # GET /job_postings
   def index
     @job_postings = JobPosting.all
+    render json: @job_postings
   end
 
   # GET /job_postings/1
   def show
+    render json: @job_posting
   end
 
   # GET /job_postings/new
   def new
     @job_posting = JobPosting.new
+    render json: @job_posting
   end
 
   # GET /job_postings/1/edit
