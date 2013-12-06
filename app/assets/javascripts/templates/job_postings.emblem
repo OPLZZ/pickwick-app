@@ -1,1 +1,35 @@
-= animatedOutlet name="job_postings"
+header#header.navbar
+  a.pull-left click="toggleMenu"
+    i.icon-chevron-left
+      ' upravit vyhledávání
+  
+section#content
+  .main.infinite-scroll-box
+    .row
+      .col
+        .row-fluid
+          .list-group.m-b-small
+            each
+              link-to 'job_posting' this
+                ' TESSTT
+              .job_posting.list
+                i.icon-chevron-right.link_to_detail style="float:right"
+                .title= title
+                if contact
+                  .contact= contact
+                ul
+                  if location
+                    li.icon-location
+                      = location
+                  if employment_type
+                    li.icon-tie
+                      = employment_type
+                  if compensation
+                    li.icon-money
+                      = compensation
+        if loadingMore
+          ' Loading more data (automatically!)
+        else
+          a click='getMore' Load more data (manually)
+
+  = outlet

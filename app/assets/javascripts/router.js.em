@@ -2,5 +2,5 @@
 
 PickwickApp.Router.map ->
   @resource('job_postings', ->
-    @resource('job_posting', { path: ':job_posting_id' })
+    @resource('job_posting', { path: ':id' })
   )

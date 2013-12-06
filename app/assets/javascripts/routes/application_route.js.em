@@ -1,12 +1,12 @@
 class PickwickApp.ApplicationRoute extends Ember.Route
   remembered_scroll: 0
   events:
-    goToJobPosting: (job_posting) ->
-      @remembered_scroll = $('.infinite-scroll-box').scrollTop()
-      @transitionToAnimated "job_posting", {job_postings: "slideLeft"}, job_posting
+#    goToJobPosting: (job_posting) ->
+#      @remembered_scroll = $('.infinite-scroll-box').scrollTop()
+#      @transitionTo "job_posting", job_posting
 
     backToJobPostings: ->
-      @transitionToAnimated "job_postings.index", job_postings: "slideRight"
+      @transitionTo "job_postings.index"
 
       remembered_scroll = @remembered_scroll
       setTimeout (->
