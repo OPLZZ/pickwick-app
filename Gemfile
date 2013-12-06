@@ -45,6 +45,8 @@ gem 'active_model_serializers'
 #end
 
 
+gem 'heroku'
+
 gem 'pry-rails'
 
 ruby "2.0.0"
