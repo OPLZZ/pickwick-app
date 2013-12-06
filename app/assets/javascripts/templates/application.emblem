@@ -9,4 +9,8 @@
 
   ul.nav.affix-top style="margin-top:50px;"
 
+    form
+      Ember.TextField valueBinding="search_query" placeholder='vyhledávací text'
+      button
+        .icon-magnifier vyhledat
 = outlet

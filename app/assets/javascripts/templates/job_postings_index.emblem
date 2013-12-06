@@ -25,4 +25,7 @@ section#content
                   if job_posting.compensation
                     li.icon-money
                       = job_posting.compensation
-
+        if loadingMore
+          ' Loading more data (automatically!)
+        else
+          a click='getMore' Load more data (manually)

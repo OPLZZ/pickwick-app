@@ -6,6 +6,7 @@
 #= require vendor/ember-animated-outlet
 #= require vendor/ember-touch
 #= require vendor/ember-fastclick
+#= require vendor/infinite-scroll
 #= require_self
 #= require pickwick_app
 
