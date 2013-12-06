@@ -46,6 +46,7 @@ gem 'active_model_serializers'
 
 
 gem 'heroku'
+gem 'rails_12factor', group: :production
 
 gem 'pry-rails'
 
