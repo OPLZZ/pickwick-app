@@ -466,7 +466,7 @@ Ember.AnimatedContainerView.registerEffect('slowSlideDown', function(ct, newView
 var slideOver = function(ct, newView, oldView, callback, direction) {
     var ctEl = ct.$(),
         newEl = newView.$(),
-        duration = 450;
+        duration = 150;
     ctEl.addClass('ember-animated-container-slideOver-old');
     setTimeout(function() {
         newEl.addClass('ember-animated-container-slideOver-'+direction+'-new');

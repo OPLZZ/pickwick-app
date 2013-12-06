@@ -49,17 +49,14 @@
       }
     },
     isScrolledToBottom: function(){
-      var distanceToViewportTop = (
-        $(document).height() - $(window).height());
-      var viewPortTop = $(document).scrollTop();
+      var viewPortTop = $('.infinite-scroll-box').scrollTop();
 
       if (viewPortTop === 0) {
         // if we are at the top of the page, don't do
         // the infinite scroll thing
         return false;
       }
-
-      return (viewPortTop - distanceToViewportTop === 0);
+      return true;
     }
   });
 

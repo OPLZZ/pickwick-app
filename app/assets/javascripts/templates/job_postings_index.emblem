@@ -4,7 +4,7 @@ header#header.navbar
       ' upravit vyhledávání
   
 section#content
-  .main
+  .main.infinite-scroll-box
     .row
       .col
         .row-fluid

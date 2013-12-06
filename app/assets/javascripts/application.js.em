@@ -3,6 +3,7 @@
 #= require handlebars
 #= require ember
 #= require ember-data
+#= require vendor/scroll-to
 #= require vendor/ember-animated-outlet
 #= require vendor/ember-touch
 #= require vendor/ember-fastclick
