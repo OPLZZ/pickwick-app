@@ -1,6 +1,6 @@
 # for more details see: http://emberjs.com/guides/views/
 
-class PickwickApp.JobPostingsView extends Ember.View
+class PickwickApp.JobPostingsIndexView extends Ember.View
   templateName: 'job_postings_index'
   swipeOptions:
     direction: Em.OneGestureDirection.Left | Em.OneGestureDirection.Right

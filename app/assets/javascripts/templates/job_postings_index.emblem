@@ -1,0 +1,26 @@
+header#header.navbar
+  a.pull-left click="toggleMenu"
+    i.icon-chevron-left
+      ' Upravit vyhledávání
+  
+section#content
+  .main
+    .row
+      .col
+        .row-fluid
+          .list-group.m-b-small
+            each job_posting in controller
+              .list-group-item click="goToJobPosting job_posting"
+                i.icon-chevron-right style="float:right"
+                = job_posting.title
+                ul.job_posting
+                  if job_posting.location
+                    li.icon-location
+                      = job_posting.location
+                  if job_posting.employment_type
+                    li.icon-tie
+                      = job_posting.employment_type
+                  if job_posting.compensation
+                    li.icon-money
+                      = job_posting.compensation
+

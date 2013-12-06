@@ -1,8 +1,7 @@
 header#header.navbar
-  a click="backToJobPostings"
-    button.btn.btn-link.pull-left.white.header-btn
-      i.icon-chevron-sign-left
-      | Back
+  a.pull-left click="backToJobPostings"
+    i.icon-chevron-left
+    | zpět
 
 section#content
   .main
