@@ -4,7 +4,7 @@ header#header.navbar
     | zpět
 
 section#content
-  .main
+  .main.job_posting_detail
     h1 = title
     if contact
       h2

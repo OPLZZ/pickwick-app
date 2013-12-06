@@ -1,7 +1,7 @@
 header#header.navbar
   a.pull-left click="toggleMenu"
     i.icon-chevron-left
-      ' Upravit vyhledávání
+      ' upravit vyhledávání
   
 section#content
   .main
@@ -10,10 +10,12 @@ section#content
         .row-fluid
           .list-group.m-b-small
             each job_posting in controller
-              .list-group-item click="goToJobPosting job_posting"
-                i.icon-chevron-right style="float:right"
-                = job_posting.title
-                ul.job_posting
+              .job_posting.list click="goToJobPosting job_posting"
+                i.icon-chevron-right.link_to_detail style="float:right"
+                .title= job_posting.title
+                if job_posting.contact
+                  .contact= job_posting.contact
+                ul
                   if job_posting.location
                     li.icon-location
                       = job_posting.location

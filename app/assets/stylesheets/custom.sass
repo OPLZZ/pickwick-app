@@ -6,7 +6,7 @@
   position: fixed
   height: 100%
   z-index: 1
-  background-color: #47a3da
+  background-color: #fff
   padding: 0px
   box-shadow: -3px 3px 3px #dddddd
 
@@ -16,19 +16,21 @@
     top: 0
     left: 0
     width: 100%
-    color: #afdefa
+    color: #444
     font-size: 1.5em
     padding: 10px
     margin: 0
     font-weight: 300
-    background: #0d77b6
+    background: #F7F8F8
+    border-bottom: 1px solid #B3B3B3
   a
-    color: #fff
+    cursor: pointer
+    color: #777
     text-decoration: none
-    &:hover
-      color: #47a3da
-    &:active
-      color: #47a3da
+    &:hover, &:active
+      color: #444
+    [class^="icon-"]:before, [class*=" icon-"]:before
+      margin-left: 10px
 
 #header
   border-radius: 0px
@@ -36,19 +38,19 @@
   top: 0
   left: 0
   width: 100%
-  color: #afdefa
+  color: #444
   font-size: 1.5em
   padding: 10px
   margin: 0
   font-weight: 300
-  background: #0d77b6
+  background: #F7F8F8
+  border-bottom: 1px solid #B3B3B3
   a
-    color: #fff
+    cursor: pointer
+    color: #777
     text-decoration: none
-    &:hover
-      color: #47a3da
-    &:active
-      color: #47a3da
+    &:hover, &:active
+      color: #444
 
 .push-right
   left: 60%
