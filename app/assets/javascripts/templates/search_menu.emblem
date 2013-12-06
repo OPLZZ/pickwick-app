@@ -1,0 +1,15 @@
+.menu class=controller.menuVisible:visible
+
+  h3 
+    a.pull-right click="goToJobPostingsFromMenu"
+        | zpět
+        i.icon-chevron-right
+
+    ' Vylepšení vyhledávání
+
+  ul.nav.affix-top style="margin-top:50px;"
+
+    form
+      Ember.TextField valueBinding="search_query" placeholder='vyhledávací text'
+      button
+        .icon-magnifier vyhledat

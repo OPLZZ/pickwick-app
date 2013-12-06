@@ -17,6 +17,14 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       @controller.toggleProperty "menuVisible"
       @controller.pushBody()
 
+    showMenu: ->
+      @controller.set "menuVisible", true
+      @controller.pushBody()
+
+    hideMenu: ->
+      @controller.set "menuVisible", false
+      @controller.pushBody()
+
     goToJobPostingsFromMenu: ->
       @send "toggleMenu"
       @transitionTo "job_postings.index"

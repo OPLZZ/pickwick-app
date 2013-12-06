@@ -8,13 +8,17 @@ class PickwickApp.JobPostingsIndexView extends Ember.View with InfiniteScroll.Vi
     swipeThreshold: 10
 
   touchMove: (event) ->
-    event.preventDefault()
+    #event.preventDefault()
 
   swipeEnd: (recognizer, evt) ->
     direction = recognizer.get("swipeDirection")
+
+    console.log(@get("controller"))
+    console.log(direction)
     if direction is Em.OneGestureDirection.Right
-      @get("controller").send "goToJobPostingsFromMenu"
-    else @get("controller").send "toggleMenu"  if direction is Em.OneGestureDirection.Left
+      @get("controller").send "showMenu" #"goToJobPostingsFromMenu"
+    else if direction is Em.OneGestureDirection.Left
+      @get("controller").send "hideMenu"
 
 
   didInsertElement: ->
