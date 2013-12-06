@@ -1,3 +1,42 @@
+.push-left
+  #frame_index
+    left: -100%
+  #frame_detail
+    left: 0px
+
+.push-right
+  #frame_index
+    left: 100%
+  #frame_detail
+    left: 200%
+
+#frame_index
+  -webkit-transition: all 0.3s ease
+  -moz-transition: all 0.3s ease
+  transition: all 0.3s ease
+  left: 0px
+  width: 100%
+  position: fixed
+  height: 100%
+  z-index: 2
+  background-color: #fff
+  padding: 0px
+  box-shadow: -3px 3px 3px #dddddd
+
+
+#frame_detail
+  -webkit-transition: all 0.3s ease
+  -moz-transition: all 0.3s ease
+  transition: all 0.3s ease
+  left: 100%
+  width: 100%
+  position: fixed
+  height: 100%
+  z-index: 2
+  background-color: #fff
+  padding: 0px
+  box-shadow: -3px 3px 3px #dddddd
+
 .menu
   &.visible
     left: 0px
@@ -32,7 +71,7 @@
     [class^="icon-"]:before, [class*=" icon-"]:before
       margin-left: 10px
 
-#header
+header
   border-radius: 0px
   height: 48px
   top: 0
@@ -51,9 +90,15 @@
     text-decoration: none
     &:hover, &:active
       color: #444
+      text-decoration: none
+    [class^="icon-"]:before, [class*=" icon-"]:before
+      margin-right: 10px
 
 .push-right
-  left: 60%
+  left: 100%
+
+.push-left
+  left: -100%
 
 .menu
   -webkit-transition: all 0.3s ease
@@ -64,9 +109,8 @@ body
   -webkit-transition: all 0.3s ease
   -moz-transition: all 0.3s ease
   transition: all 0.3s ease
+  height: 100%
   overflow-x: hidden
-  position: relative
-  left: 0
 
 .btn-link
   margin-left: -12px

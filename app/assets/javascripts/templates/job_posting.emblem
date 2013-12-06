@@ -1,9 +1,9 @@
-header#header.navbar
+header
   a.pull-left click="backToJobPostings"
     i.icon-chevron-left
     | zpět
 
-section#content.infinite-scroll-box
+section.infinite-scroll-box
   .main.job_posting_detail
     h1 = title
     if contact

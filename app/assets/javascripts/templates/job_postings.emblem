@@ -1,35 +1,34 @@
-header#header.navbar
-  a.pull-left click="toggleMenu"
-    i.icon-chevron-left
-      ' upravit vyhledávání
-  
-section#content
-  .main.infinite-scroll-box
+#frame_index
+  header
+    a.pull-left click="toggleMenu"
+      i.icon-chevron-left
+        ' upravit vyhledávání
+
+  .infinite-scroll-box
     .row
       .col
         .row-fluid
           .list-group.m-b-small
-            each
-              link-to 'job_posting' this
-                ' TESSTT
-              .job_posting.list
+            each job_posting in controller
+              .job_posting.list click="goToJobPosting job_posting"
                 i.icon-chevron-right.link_to_detail style="float:right"
-                .title= title
-                if contact
-                  .contact= contact
+                .title= job_posting.title
+                if job_posting.contact
+                  .contact= job_posting.contact
                 ul
-                  if location
+                  if job_posting.location
                     li.icon-location
-                      = location
-                  if employment_type
+                      = job_posting.location
+                  if job_posting.employment_type
                     li.icon-tie
-                      = employment_type
-                  if compensation
+                      = job_posting.employment_type
+                  if job_posting.compensation
                     li.icon-money
-                      = compensation
+                      = job_posting.compensation
         if loadingMore
           ' Loading more data (automatically!)
         else
           a click='getMore' Load more data (manually)
 
+#frame_detail
   = outlet

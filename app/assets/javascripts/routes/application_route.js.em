@@ -1,17 +1,21 @@
 class PickwickApp.ApplicationRoute extends Ember.Route
-  remembered_scroll: 0
   events:
-#    goToJobPosting: (job_posting) ->
-#      @remembered_scroll = $('.infinite-scroll-box').scrollTop()
-#      @transitionTo "job_posting", job_posting
+    goToJobPosting: (job_posting) ->
+      if job_posting
+        @send "showDetail"
+      @transitionTo "job_posting", job_posting
+
+    goToJobPostingsFromMenu: ->
+      @controller.set "menuVisible", false
+      @controller.set "detailVisible", false
+      @transitionTo "job_postings"
+      @controller.pushBody()
 
     backToJobPostings: ->
-      @transitionTo "job_postings.index"
-
-      remembered_scroll = @remembered_scroll
-      setTimeout (->
-        $('.infinite-scroll-box').scrollTo(remembered_scroll, 0)
-      ), 100
+      @controller.set "menuVisible", false
+      @controller.set "detailVisible", false
+      @transitionTo "job_postings"
+      @controller.pushBody()
 
     toggleMenu: ->
       @controller.toggleProperty "menuVisible"
@@ -19,12 +23,21 @@ class PickwickApp.ApplicationRoute extends Ember.Route
 
     showMenu: ->
       @controller.set "menuVisible", true
+      @controller.set "detailVisible", false
       @controller.pushBody()
 
     hideMenu: ->
       @controller.set "menuVisible", false
+      @controller.set "detailVisible", false
       @controller.pushBody()
 
-    goToJobPostingsFromMenu: ->
-      @send "toggleMenu"
-      @transitionTo "job_postings.index"
+    showDetail: ->
+      @controller.set "detailVisible", true
+      @controller.set "menuVisible", false
+      @controller.pushBody()
+
+    hideDetail: ->
+      @controller.set "detailVisible", false
+      @controller.set "menuVisible", false
+      @controller.pushBody()
+

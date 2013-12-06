@@ -10,7 +10,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route
       perPage = @controller.get("perPage")
       items = undefined
       items = @fetchPage(nextPage, perPage)
-      @controller.send('gotMore',items, nextPage)
+      @controller.send('gotMore', items, nextPage)
 
   fetchPage: (page, perPage) ->
     items = Em.A([])
