@@ -3,7 +3,7 @@ header
     i.icon-chevron-left
     | zpět
 
-section.infinite-scroll-box
+section.infinite-scroll-box.infinite-scroll-detail
   .main.job_posting_detail
     h1 = title
     if contact

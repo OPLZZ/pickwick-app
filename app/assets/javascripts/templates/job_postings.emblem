@@ -4,7 +4,7 @@
       i.icon-chevron-left
         ' upravit vyhledávání
 
-  .infinite-scroll-box
+  .infinite-scroll-box.infinite-scroll-list
     .row
       .col
         .row-fluid

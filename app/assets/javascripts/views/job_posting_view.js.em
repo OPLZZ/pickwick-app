@@ -2,6 +2,7 @@
 
 class PickwickApp.JobPostingView extends Ember.View with PickwickApp.TouchScroll
   templateName: 'job_posting'
+  touch_scroll_element: '.infinite-scroll-detail'
   swipeOptions:
     direction: Em.OneGestureDirection.Right
     cancelPeriod: 80
@@ -9,5 +10,4 @@ class PickwickApp.JobPostingView extends Ember.View with PickwickApp.TouchScroll
 
   swipeEnd: (recognizer, evt) ->
     direction = recognizer.get("swipeDirection")
-    console.log("OUTING DETAIL")
     @get("controller").send "backToJobPostings" if direction is Em.OneGestureDirection.Right

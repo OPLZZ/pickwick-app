@@ -2,6 +2,7 @@ class PickwickApp.ApplicationRoute extends Ember.Route
   events:
     goToJobPosting: (job_posting) ->
       if job_posting
+        $('.infinite-scroll-detail').scrollTo({top: 0, left: 0}, {duration:0})
         @send "showDetail"
       @transitionTo "job_posting", job_posting
 
@@ -14,7 +15,6 @@ class PickwickApp.ApplicationRoute extends Ember.Route
     backToJobPostings: ->
       @controller.set "menuVisible", false
       @controller.set "detailVisible", false
-      @transitionTo "job_postings"
       @controller.pushBody()
 
     toggleMenu: ->

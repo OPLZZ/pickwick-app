@@ -13,7 +13,5 @@ class PickwickApp.SearchMenuView extends Ember.View
   swipeEnd: (recognizer, evt) ->
     direction = recognizer.get("swipeDirection")
 
-    console.log(@get("controller"))
-    console.log(direction)
     if direction is Em.OneGestureDirection.Left
       @get("controller").send "hideMenu"
