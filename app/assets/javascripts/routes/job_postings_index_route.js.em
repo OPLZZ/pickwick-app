@@ -1,3 +1,5 @@
 class PickwickApp.JobPostingsIndexRoute extends Em.Route
   model: ->
-    @get('store').findAll('job_posting')
+    unless @get('job_postings_cache')
+      @set('job_postings_cache', @get('store').findAll('job_posting'))
+    @get('job_postings_cache')
