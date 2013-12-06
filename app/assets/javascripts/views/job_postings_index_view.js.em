@@ -1,14 +1,11 @@
 # for more details see: http://emberjs.com/guides/views/
 
-class PickwickApp.JobPostingsIndexView extends Ember.View with InfiniteScroll.ViewMixin
+class PickwickApp.JobPostingsIndexView extends Ember.View with InfiniteScroll.ViewMixin, PickwickApp.TouchScroll
   templateName: 'job_postings_index'
   swipeOptions:
     direction: Em.OneGestureDirection.Left | Em.OneGestureDirection.Right
-    cancelPeriod: 100
-    swipeThreshold: 10
-
-  touchMove: (event) ->
-    #event.preventDefault()
+    cancelPeriod: 80
+    swipeThreshold: 80
 
   swipeEnd: (recognizer, evt) ->
     direction = recognizer.get("swipeDirection")

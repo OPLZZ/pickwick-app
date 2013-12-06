@@ -1,14 +1,11 @@
 # for more details see: http://emberjs.com/guides/views/
 
-class PickwickApp.JobPostingView extends Ember.View
+class PickwickApp.JobPostingView extends Ember.View with PickwickApp.TouchScroll
   templateName: 'job_posting'
   swipeOptions:
     direction: Em.OneGestureDirection.Right
-    cancelPeriod: 100
-    swipeThreshold: 10
-
-  touchMove: (event) ->
-    event.preventDefault()
+    cancelPeriod: 80
+    swipeThreshold: 80
 
   swipeEnd: (recognizer, evt) ->
     direction = recognizer.get("swipeDirection")

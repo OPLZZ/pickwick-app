@@ -4,8 +4,8 @@ class PickwickApp.SearchMenuView extends Ember.View
   templateName: 'search_menu'
   swipeOptions:
     direction: Em.OneGestureDirection.Left
-    cancelPeriod: 100
-    swipeThreshold: 10
+    cancelPeriod: 80
+    swipeThreshold: 80
 
   touchMove: (event) ->
     #event.preventDefault()
