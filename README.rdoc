@@ -1,5 +1,32 @@
+== Instalation
+
+clone repo
+
+`bundle install`
+
+`rake db:create`
+
+`rake db:migrate`
+
+`rake db:seed`
+
+`rails s`
+
+open browser at http://127.0.0.1:3000
+
+== Build
+
+`rake build`
 
 
 == Good tool for testing Ember.js
 
 https://github.com/tildeio/ember-extension
+
+== Icons 
+http://icomoon.io/ 
+Brankic 1979
+
+== Super bootstrap of Ember.js with animations
+http://blangslet.com/post/55590279372/ember-js-mobile-animations-and-touch-gestures
+https://github.com/blangslet/ember.js-mobile-animations-gestures
