@@ -8,7 +8,8 @@ class PickwickApp.SearchMenuView extends Ember.View
     swipeThreshold: 200
 
   touchMove: (event) ->
-    #event.preventDefault()
+    console.log(@search_menu)
+    event.preventDefault()
 
   swipeEnd: (recognizer, evt) ->
     direction = recognizer.get("swipeDirection")

@@ -3,7 +3,11 @@ class JobPostingsController < ApplicationController
 
   # GET /job_postings
   def index
-    @job_postings = JobPosting.all
+    if params[:query]
+      @job_postings = JobPosting.where('title like ?', "%#{params[:query]}%")
+    else
+      @job_postings = JobPosting.all
+    end
     render json: @job_postings
   end
 

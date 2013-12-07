@@ -1,6 +1,8 @@
 class PickwickApp.ApplicationController extends Em.Controller
   menuVisible: false
   detailVisible: false
+  search_query: ''
+
   pushBody: ->
     if @get("menuVisible")
       return $(".ember-application").addClass("push-right")
