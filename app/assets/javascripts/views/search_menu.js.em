@@ -7,6 +7,8 @@ class PickwickApp.SearchMenuView extends Ember.View
     cancelPeriod: 80
     swipeThreshold: 200
 
+  didInsertElement: ->
+    $('textarea').autoGrow()
   touchMove: (event) ->
     event.preventDefault()
 

@@ -3,6 +3,7 @@
 #= require handlebars
 #= require ember
 #= require ember-data
+#= require vendor/autogrow.textarea
 #= require vendor/ember-geolocation
 #= require vendor/scroll-to
 #= require vendor/ember-animated-outlet
@@ -25,3 +26,4 @@ PickwickApp.normalizeTouchEvent = (event) ->
   if (!event.pageY)
       event.pageY = event.originalEvent.pageY
   return event
+
