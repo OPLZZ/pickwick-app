@@ -141,3 +141,56 @@ body
 
 .note
   margin-top: 50px
+
+input[type='text'], textarea, select, label
+  background: white
+  border: none
+  -webkit-appearance: none
+  -webkit-box-shadow: none
+  box-shadow: none
+  outline: 0
+  line-height: 26px
+  min-height: 26px
+  padding: 8px 12px
+  border-radius: 0px
+input[type='text']:focus, select:focus, textarea:focus
+  -webkit-box-shadow: none
+  box-shadow: none
+  outline: 0
+
+label
+  display: block
+
+.form-group input[type='text'], textarea, select
+  border-bottom: 1px solid #ddd
+
+.form-group
+  margin-bottom: 10px
+select
+  min-height: 43px
+
+.select-chevron
+  position: relative
+.select-chevron:after
+  position: absolute
+  top: 10px
+  right: 20px
+  z-index: 1000
+  font-family: 'icomoon'
+  speak: none
+  font-size: 30px
+  font-style: normal
+  font-weight: normal
+  font-variant: normal
+  text-transform: none
+  line-height: 1
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  content: "\e631"
+  color: #ddd
+
+.btn-success
+  display: block
+  width: 100%
+  font-size: 150%
+  padding: 12px
