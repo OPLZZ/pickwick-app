@@ -13,7 +13,13 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       @controller.pushBody()
 
     searchJobPostingsFromMenu: ->
-      @controllerFor('job_postings').send('search', { query: @controller.search_query })
+      $('#search_query_text_box').blur()
+      @controllerFor('job_postings').send('search', {
+        query: @controller.search_query
+        location: @controller.search_location
+        person_about: @controller.person_about
+        person_education: @controller.person_education
+      })
       @send('goToJobPostingsFromMenu')
 
     backToJobPostings: ->
