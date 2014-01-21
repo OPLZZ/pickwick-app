@@ -1,1 +1,8 @@
-' please select job posting
+header
+  a.pull-left click="backToJobPostings"
+    i.icon-chevron-left
+    | zpět
+
+section.infinite-scroll-box.infinite-scroll-detail
+  .main.job_posting_detail
+    | please select job
