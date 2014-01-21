@@ -1,8 +1,8 @@
 # http://emberjs.com/guides/models/using-the-store/
 
-DS.RESTAdapter.reopen(
-  host: 'http://pickwick-app.herokuapp.com'
-)
+#DS.RESTAdapter.reopen(
+#  host: 'http://pickwick-app.herokuapp.com'
+#)
 
 class PickwickApp.Adapter extends DS.RESTAdapter
   serializer: DS.RESTSerializer

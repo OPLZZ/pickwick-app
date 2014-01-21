@@ -6,21 +6,27 @@
 
   InfiniteScroll.ControllerMixin = Ember.Mixin.create({
     loadingMore: false,
+    noMoreItems: false,
+    recordsCount: -1,
     page: InfiniteScroll.PAGE,
     perPage: InfiniteScroll.PER_PAGE,
 
     actions: {
       getMore: function(){
+        if (this.get('noMoreItems')) return;
         if (this.get('loadingMore')) return;
+        console.log("MORE")
 
         this.set('loadingMore', true);
         this.get('target').send('getMore');
       },
 
-      gotMore: function(items, nextPage){
-        this.set('loadingMore', false);
-        this.pushObjects(items);
-        this.set('page', nextPage);
+      resetNoMore: function(){
+        this.set('recordsCount', 0);
+        this.set('noMoreItems', false);
+      },
+      noMore: function(){
+        this.set('noMoreItems', true);
       }
     }
   });
