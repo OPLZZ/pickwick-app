@@ -27,6 +27,7 @@ section.infinite-scroll-box.infinite-scroll-detail
         li.icon-money
           = compensation
     = description
+
     #detail_map
 
 .detail_contact
@@ -40,5 +41,5 @@ section.infinite-scroll-box.infinite-scroll-detail
         i.icon-pencil
 
     .col-sm-4.col.center
-      a click='' href="mailto:info@damepraci.eu&amp;subject=nevim.cz"
+      a click='' href="mailto:info@damepraci.eu?subject=nevim.cz"
         i.icon-forward
