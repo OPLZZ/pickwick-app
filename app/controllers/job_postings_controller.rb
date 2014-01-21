@@ -3,12 +3,16 @@ class JobPostingsController < ApplicationController
 
   # GET /job_postings
   def index
+    from  = params[:from]  || 0
+    limit = params[:limit] || 10
+
     if params[:query]
       @job_postings = JobPosting.where('title like ?', "%#{params[:query]}%")
     else
-      @job_postings = JobPosting.all
+      @job_postings = JobPosting
     end
-    render json: @job_postings
+
+    render json: @job_postings.offset(from).limit(limit)
   end
 
   # GET /job_postings/1
