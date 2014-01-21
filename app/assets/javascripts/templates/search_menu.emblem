@@ -1,7 +1,7 @@
 .menu class=controller.menuVisible:visible
 
   h3 
-    a.pull-right click="goToJobPostingsFromMenu"
+    a.pull-right.back_button click="goToJobPostingsFromMenu"
         | zpět
         i.icon-chevron-right
 

@@ -1,7 +1,10 @@
 header
-  a.pull-left click="backToJobPostings"
+  a.pull-left.back_button click="backToJobPostings"
     i.icon-chevron-left
     | zpět
+
+  a.pull-right
+    i.icon-heart
 
 section.infinite-scroll-box.infinite-scroll-detail
   .main.job_posting_detail
@@ -25,3 +28,17 @@ section.infinite-scroll-box.infinite-scroll-detail
           = compensation
     = description
     #detail_map
+
+.detail_contact
+  .row
+    .col-sm-4.col.center
+      a click='' href="tel:123456789"
+        i.icon-phone
+
+    .col-sm-4.col.center
+      a click='' href="mailto:info@damepraci.eu"
+        i.icon-pencil
+
+    .col-sm-4.col.center
+      a click='' href="mailto:info@damepraci.eu&amp;subject=nevim.cz"
+        i.icon-forward

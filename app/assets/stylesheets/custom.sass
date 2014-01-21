@@ -10,6 +10,9 @@
   #frame_detail
     left: 200%
 
+.center
+  text-align: center
+
 #frame_index
   -webkit-transition: all 0.3s ease
   -moz-transition: all 0.3s ease
@@ -71,11 +74,9 @@
     [class^="icon-"]:before, [class*=" icon-"]:before
       margin-left: 10px
 
-header
+header, .detail_contact
   border-radius: 0px
   height: 48px
-  top: 0
-  left: 0
   width: 100%
   color: #444
   font-size: 1.5em
@@ -83,7 +84,6 @@ header
   margin: 0
   font-weight: 300
   background: #F7F8F8
-  border-bottom: 1px solid #B3B3B3
   a
     cursor: pointer
     color: #777
@@ -93,6 +93,16 @@ header
       text-decoration: none
     [class^="icon-"]:before, [class*=" icon-"]:before
       margin-right: 10px
+
+header
+  top: 0
+  left: 0
+  border-bottom: 1px solid #B3B3B3
+
+.detail_contact
+  bottom: 0px
+  position: absolute
+  border-top: 1px solid #B3B3B3
 
 .push-right
   left: 100%
