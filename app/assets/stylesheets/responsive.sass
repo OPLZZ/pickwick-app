@@ -1,0 +1,36 @@
+@media all and (min-width: 800px)
+  #frame_index
+    width: 40%
+  #frame_detail
+    width: 60%
+  .menu
+    width: 60%
+
+  #frame_index
+    a.pull-left
+      opacity: 0
+
+  .menu
+    left: 0%
+  #frame_index
+    left: 60%
+  #frame_detail
+    left: 100%
+
+
+  .push-left
+    #frame_index
+      left: 0%
+      a.pull-left
+        opacity: 1.0
+    #frame_detail
+      left: 40%
+
+  .push-right
+    #frame_index
+      left: 60%
+    #frame_detail
+      left: 100%
+
+  a.pull-right, #frame_detail a.pull-left
+    display: none
