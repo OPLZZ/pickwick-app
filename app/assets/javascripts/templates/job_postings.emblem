@@ -3,6 +3,9 @@
     a.pull-left click="toggleMenu"
       i.icon-chevron-left
         ' upravit vyhledávání
+    a.pull-right click="showBookmarks"
+      ' oblíbené
+      i.icon-star
 
   .infinite-scroll-box.infinite-scroll-list
     .row
@@ -12,6 +15,13 @@
             each job_posting in controller
               .job_posting.list click="goToJobPosting job_posting"
                 i.icon-chevron-right.link_to_detail style="float:right"
+
+                .pull-right
+                  if job_posting.is_liked
+                    i class="icon-star"
+                  else
+                    i class="icon-star-empty"
+
                 .title= job_posting.title
                 if job_posting.contact
                   .contact= job_posting.contact

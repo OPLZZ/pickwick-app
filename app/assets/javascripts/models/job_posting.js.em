@@ -8,3 +8,4 @@ class PickwickApp.JobPosting extends DS.Model
   compensation:    DS.attr 'string'
   contact:         DS.attr 'string'
   url:             DS.attr 'string'
+  is_liked:         DS.attr 'boolean'
