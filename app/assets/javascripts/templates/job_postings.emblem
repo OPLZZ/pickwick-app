@@ -5,7 +5,7 @@
         ' upravit vyhledávání
     if likedVisible
       a.pull-right click="goFromLikedJobPostings"
-        ' zpět na výsledky
+        ' zpět
         i.icon-reply
     else
       a.pull-right click="goToLikedJobPostings"
