@@ -1,6 +1,6 @@
 # for more details see: http://emberjs.com/guides/views/
 
-class PickwickApp.JobPostingView extends Ember.View with PickwickApp.TouchScroll
+class PickwickApp.JobPostingView extends Ember.View
   templateName: 'job_posting'
   touch_scroll_element: '.infinite-scroll-detail'
   swipeOptions:

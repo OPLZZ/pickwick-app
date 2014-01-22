@@ -1,5 +1,5 @@
 class PickwickApp.ApplicationRoute extends Ember.Route
-  events:
+  actions:
     goToJobPosting: (job_posting) ->
       if job_posting
         $('.infinite-scroll-detail').scrollTo({top: 0, left: 0}, {duration:0})

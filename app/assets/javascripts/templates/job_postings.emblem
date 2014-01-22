@@ -13,7 +13,7 @@
         i.icon-star
 
   .infinite-scroll-box.infinite-scroll-list
-    .row
+    .row.infinite-scroll-content
       .col
         .row-fluid
           .list-group.m-b-small

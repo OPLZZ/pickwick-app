@@ -11,7 +11,6 @@ class JobPostingsController < ApplicationController
     else
       @job_postings = JobPosting
     end
-    sleep(1)
     render json: @job_postings.offset(from).limit(limit)
   end
 
