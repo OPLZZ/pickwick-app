@@ -9,8 +9,6 @@ class PickwickApp.SearchMenuView extends Ember.View
 
   didInsertElement: ->
     $('textarea').autoGrow()
-  touchMove: (event) ->
-    event.preventDefault()
 
   swipeEnd: (recognizer, evt) ->
     direction = recognizer.get("swipeDirection")
