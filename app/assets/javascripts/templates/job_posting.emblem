@@ -11,7 +11,6 @@ header
 
 section.infinite-scroll-box.infinite-scroll-detail
   .main.job_posting_detail
-    .map_replacement
     h1 = title
     if contact
       h2
