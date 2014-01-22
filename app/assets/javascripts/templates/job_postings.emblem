@@ -3,9 +3,14 @@
     a.pull-left click="toggleMenu"
       i.icon-chevron-left
         ' upravit vyhledávání
-    a.pull-right click="showBookmarks"
-      ' oblíbené
-      i.icon-star
+    if likedVisible
+      a.pull-right click="goFromLikedJobPostings"
+        ' zpět na výsledky
+        i.icon-reply
+    else
+      a.pull-right click="goToLikedJobPostings"
+        ' oblíbené
+        i.icon-star
 
   .infinite-scroll-box.infinite-scroll-list
     .row
@@ -13,36 +18,64 @@
         .row-fluid
           .list-group.m-b-small
             each job_posting in controller
-              .job_posting.list click="goToJobPosting job_posting"
-                i.icon-chevron-right.link_to_detail style="float:right"
 
-                .pull-right
-                  if job_posting.is_liked
-                    i class="icon-star"
-                  else
-                    i class="icon-star-empty"
+              if likedVisible
+                if job_posting.is_liked
+                  .job_posting.list click="goToJobPosting job_posting"
+                    i.icon-chevron-right.link_to_detail style="float:right"
 
-                .title= job_posting.title
-                if job_posting.contact
-                  .contact= job_posting.contact
-                ul
-                  if job_posting.location
-                    li.icon-location
-                      = job_posting.location
-                  if job_posting.employment_type
-                    li.icon-tie
-                      = job_posting.employment_type
-                  if job_posting.compensation
-                    li.icon-money
-                      = job_posting.compensation
+                    .pull-right
+                      if job_posting.is_liked
+                        i class="icon-star"
+                      else
+                        i class="icon-star-empty"
 
-        if noMoreItems
-          ' No more data
-        else
-          if loadingMore
-            ' Loading more data (automatically!)
+                    .title= job_posting.title
+                    if job_posting.contact
+                      .contact= job_posting.contact
+                    ul
+                      if job_posting.location
+                        li.icon-location
+                          = job_posting.location
+                      if job_posting.employment_type
+                        li.icon-tie
+                          = job_posting.employment_type
+                      if job_posting.compensation
+                        li.icon-money
+                          = job_posting.compensation
+              else
+                .job_posting.list click="goToJobPosting job_posting"
+                  i.icon-chevron-right.link_to_detail style="float:right"
+
+                  .pull-right
+                    if job_posting.is_liked
+                      i class="icon-star"
+                    else
+                      i class="icon-star-empty"
+
+                  .title= job_posting.title
+                  if job_posting.contact
+                    .contact= job_posting.contact
+                  ul
+                    if job_posting.location
+                      li.icon-location
+                        = job_posting.location
+                    if job_posting.employment_type
+                      li.icon-tie
+                        = job_posting.employment_type
+                    if job_posting.compensation
+                      li.icon-money
+                        = job_posting.compensation
+
+
+        unless likedVisible
+          if noMoreItems
+            ' No more data
           else
-            a click='getMore' Load more data (manually)
+            if loadingMore
+              ' Loading more data (automatically!)
+            else
+              a click='getMore' Load more data (manually)
 
 #frame_detail
   = outlet

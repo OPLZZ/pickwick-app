@@ -15,6 +15,7 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       @controller.pushBody()
 
     searchJobPostingsFromMenu: ->
+      @controllerFor('job_postings').set "likedVisible", false
       $('#search_query_text_box').blur()
       @controllerFor('job_postings').send('search', {
         query: @controller.search_query
@@ -23,6 +24,21 @@ class PickwickApp.ApplicationRoute extends Ember.Route
         person_education: @controller.person_education
       })
       @send('goToJobPostingsFromMenu')
+
+    goFromLikedJobPostings: ->
+      @controllerFor('job_postings').send('back_from_liked')
+      @controllerFor('job_postings').set "likedVisible", false
+
+      list_scroll_top = @list_scroll_top
+      scrool = ->
+        $('.infinite-scroll-list').scrollTo({top: list_scroll_top, left: 0}, {duration:0})
+      window.setTimeout(scrool,50)
+
+
+    goToLikedJobPostings: ->
+      @list_scroll_top = $('.infinite-scroll-list').scrollTop()
+      @controllerFor('job_postings').send('show_liked')
+      @controllerFor('job_postings').set "likedVisible", true
 
     backToJobPostings: ->
       @controller.set "menuVisible", false
