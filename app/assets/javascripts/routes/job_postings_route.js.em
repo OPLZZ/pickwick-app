@@ -52,7 +52,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
     }
 
     if @get('geolocation_object') == undefined
-      geolocation = Em.GeoLocation.create({autoUpdate: true})
+      @set('geolocation_object', Em.GeoLocation.create({autoUpdate: true}))
 
     if @get('geolocation_object') != undefined
       args.longitude = @get('geolocation_object').longitude
