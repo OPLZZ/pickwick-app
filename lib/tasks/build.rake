@@ -6,15 +6,22 @@ task :build => [:'assets:clean', :'assets:precompile'] do
 
   puts "Assets build"
   assets_dir = Rails.root.join("public","assets")
-  build_dir = Rails.root.join("build")
+  build_dir = Rails.root.join("..","pickwick-app-phonegap")
   build_assets_dir = File.join(build_dir, "assets")
 
+  def remove_cache_id_text(text)
+    text.gsub(/-[a-z0-9]{32}/, "")
+  end
 
   #CLEANUP
-  puts "Deleting old #{build_dir}"
-  FileUtils.rm_rf(build_dir)
-  puts "Cteating new #{build_dir}"
-  FileUtils.mkdir_p(build_dir)
+  # puts "Deleting old #{build_dir}"
+  # FileUtils.rm_rf(build_dir)
+  # puts "Cteating new #{build_dir}"
+  # FileUtils.mkdir_p(build_dir)
+  puts "Deleting old #{build_assets_dir}"
+  FileUtils.rm_rf(build_assets_dir)
+  puts "Cteating new #{build_assets_dir}"
+  FileUtils.mkdir_p(build_assets_dir)
 
   puts "Creating assets build directory #{build_assets_dir}"
   FileUtils.mkdir_p(build_assets_dir)
@@ -24,21 +31,21 @@ task :build => [:'assets:clean', :'assets:precompile'] do
   #JAVASCRIPTS
   javascript = Dir[File.join(assets_dir,"*.js")].sort{|a,b| File.mtime(b) <=> File.mtime(a)}.first
   puts "Found javascript: #{javascript}"
-  javascript_to = File.join(build_assets_dir, File.basename(javascript))
-  puts "CP: #{File.basename(javascript)}"
+  javascript_to = File.join(build_assets_dir, remove_cache_id_text(File.basename(javascript)))
+  puts "CP: #{File.basename(javascript)} -> #{File.basename(javascript_to)}"
   FileUtils.cp(javascript, javascript_to)
   puts "Changing endpoint url: http://127.0.0.1:3000 -> #{main_url}"
   jsdata = File.open(javascript_to,"r:UTF-8").read.gsub("\"http://127.0.0.1:3000\"","\"#{main_url}\"")
-  File.open(javascript_to, "w:UTF-8").write(jsdata)
+  File.open(javascript_to, "w:UTF-8").write(remove_cache_id_text(jsdata))
 
   puts "----"
 
   #TEMPLATES
   templates = Dir[File.join(assets_dir,"templates","*.js")].sort{|a,b| File.mtime(b) <=> File.mtime(a)}.first
   puts "Found templates: #{templates}"
-  templates_to = File.join(build_assets_dir, "templates", File.basename(templates))
+  templates_to = File.join(build_assets_dir, "templates", remove_cache_id_text(File.basename(templates)))
   FileUtils.mkdir(File.join(build_assets_dir, "templates"))
-  puts "CP: #{File.basename(templates)}"
+  puts "CP: #{File.basename(templates)} -> #{File.basename(templates_to)}"
   FileUtils.cp(templates, templates_to)
 
   puts "----"
@@ -46,12 +53,12 @@ task :build => [:'assets:clean', :'assets:precompile'] do
   #CSS
   css = Dir[File.join(assets_dir,"*.css")].sort{|a,b| File.mtime(b) <=> File.mtime(a)}.first
   puts "Found css: #{css}"
-  css_to = File.join(build_assets_dir, File.basename(css))
-  puts "CP: #{File.basename(css)}"
+  css_to = File.join(build_assets_dir, remove_cache_id_text(File.basename(css)))
+  puts "CP: #{File.basename(css)} -> #{File.basename(css_to)}"
   FileUtils.copy(css, css_to)
   puts "Changing assets directory from /assets/ -> assets/"
   cssdata = File.open(css_to,"r:UTF-8").read.gsub("/assets/","./")
-  File.open(css_to, "w:UTF-8").write(cssdata)
+  File.open(css_to, "w:UTF-8").write(remove_cache_id_text(cssdata))
 
   puts "----"
 
@@ -60,8 +67,8 @@ task :build => [:'assets:clean', :'assets:precompile'] do
   assets = Dir[File.join(assets_dir,"*.{svg,ttf,woff,eot,png,jpg,gif,ico}")]
   puts "Cteating new Assets in #{build_assets_dir}"
   assets.each do |asset|
-    to = File.join(build_assets_dir, File.basename(asset))
-    puts "CP: #{File.basename(asset)}"
+    to = File.join(build_assets_dir, remove_cache_id_text(File.basename(asset)))
+    puts "CP: #{File.basename(asset)} -> #{File.basename(to)}"
     FileUtils.cp(asset, to)
   end
 
@@ -76,7 +83,7 @@ task :build => [:'assets:clean', :'assets:precompile'] do
   sleep(2)
   index_content = Net::HTTP.get(URI('http://127.0.0.1:3001'))
   index = File.join(build_dir,"index.html")
-  File.open(index, "w:UTF-8").write(index_content.gsub("/assets/","assets/"))
+  File.open(index, "w:UTF-8").write(remove_cache_id_text(index_content.gsub("/assets/","assets/")))
   puts "Written #{index}"
 
   `kill -9 #{File.read(pid_file)}`
