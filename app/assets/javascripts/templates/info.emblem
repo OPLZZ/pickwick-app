@@ -1,0 +1,19 @@
+.menu.info class=controller.infoVisible:visible
+
+  h3
+    a.pull-right click="goToMenuFromInfo"
+        | zavřít
+        i.icon-cancel2
+
+    ' O projektu
+
+  section.infinite-scroll-box
+    .row.bottom-padding
+      .col
+        ' Ahoj jak se mate???
+        ' 
+        br
+        hr
+        p kasjhgfsdjgfjhasdg jafhsdg jhs
+        br
+        img src="assets/grant_logos.png" title="logos"

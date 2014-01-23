@@ -1,5 +1,6 @@
 class PickwickApp.ApplicationController extends Em.Controller
   menuVisible:   false
+  infoVisible:   false
   detailVisible: false
   search_query: ''
   search_location: "Aktuální pozice"

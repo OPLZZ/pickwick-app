@@ -4,7 +4,6 @@
     a.pull-right.back_button click="goToJobPostingsFromMenu"
         | zpět
         i.icon-chevron-right
-
     ' Vyhledávání
 
   section.infinite-scroll-box
@@ -44,4 +43,11 @@
           br
           button.btn.btn-success click='searchJobPostingsFromMenu'
             ' vyhledat
-
+        br
+        br
+        br
+        br
+        br
+        .center
+          a click='goToInfoFromMenu'
+            ' informace o projektu

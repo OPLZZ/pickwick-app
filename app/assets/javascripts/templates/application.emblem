@@ -1,4 +1,6 @@
 
+view 'info'
+
 view 'search_menu'
 
 = outlet
