@@ -41,7 +41,6 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
         @get('job_posting_cache').pushObject(item)
 
   fetchPage: (page) ->
-    geolocation = Em.GeoLocation.create({autoUpdate: false})
     app_controller = @controllerFor('application')
     args = {
       limit:            10
@@ -50,9 +49,14 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
       location:         app_controller.search_location
       person_about:     app_controller.person_about
       person_education: app_controller.person_education
-      longitude:    geolocation.longitude
-      latitude:     geolocation.latitude
     }
+
+    if @get('geolocation_object') == undefined
+      geolocation = Em.GeoLocation.create({autoUpdate: true})
+
+    if @get('geolocation_object') != undefined
+      args.longitude = @get('geolocation_object').longitude
+      args.latitude  = @get('geolocation_object').latitude
 
     ccc  = @
     cont = @controller
