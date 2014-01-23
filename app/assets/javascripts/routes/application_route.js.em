@@ -23,6 +23,11 @@ class PickwickApp.ApplicationRoute extends Ember.Route
         person_about: @controller.person_about
         person_education: @controller.person_education
       })
+      localStorage["search_query"]     = @controller.search_query
+      localStorage["search_location"]  = @controller.search_location
+      localStorage["person_about"]     = @controller.person_about
+      localStorage["person_education"] = @controller.person_education
+
       @send('goToJobPostingsFromMenu')
 
     goFromLikedJobPostings: ->

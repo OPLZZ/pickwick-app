@@ -10,6 +10,15 @@ class PickwickApp.SearchMenuView extends Ember.View
   didInsertElement: ->
     $('textarea').autoGrow()
 
+    if localStorage["search_query"] != undefined
+      @controller.controllerFor('application').set('search_query', localStorage["search_query"])
+    if localStorage["search_location"] != undefined
+      @controller.controllerFor('application').set('search_location', localStorage["search_location"])
+    if localStorage["person_about"] != undefined
+      @controller.controllerFor('application').set('person_about', localStorage["person_about"])
+    if localStorage["person_education"] != undefined
+      @controller.controllerFor('application').set('person_education', localStorage["person_education"])
+
   swipeEnd: (recognizer, evt) ->
     direction = recognizer.get("swipeDirection")
 
