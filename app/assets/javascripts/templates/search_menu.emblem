@@ -5,7 +5,7 @@
         | zpět
         i.icon-chevron-right
 
-    ' Vylepšení vyhledávání
+    ' Vyhledávání
 
   section.infinite-scroll-box
     .row.bottom-padding
@@ -43,5 +43,5 @@
 
           br
           button.btn.btn-success click='searchJobPostingsFromMenu'
-            .icon-magnifier vyhledat
+            ' vyhledat
 

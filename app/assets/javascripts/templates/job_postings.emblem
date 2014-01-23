@@ -1,8 +1,8 @@
 #frame_index
   header
     a.pull-left click="toggleMenu"
-      i.icon-chevron-left
-        ' upravit vyhledávání
+      .icon-magnifier
+        ' vyhledat
     if likedVisible
       a.pull-right click="goFromLikedJobPostings"
         ' zpět
