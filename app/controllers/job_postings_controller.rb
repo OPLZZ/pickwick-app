@@ -11,6 +11,16 @@ class JobPostingsController < ApplicationController
     from  = params[:from]  || 0
     limit = params[:limit] || 10
 
+    #geo parsing
+    geo = {:latitude=>"50.07908", :longitude=>"14.43323"}
+    if params[:location] == "Aktuální pozice"
+      #choose longtitude and latitude from request
+      geo = {:latitude=>params[:latitude], :longitude=>params[:longitude]}
+    elsif params[:location] != "Aktuální pozice" && JobPosting::LOCATIONS.has_key?(params[:location])
+      #get geolocation from name of city
+      geo = JobPosting::LOCATIONS[params[:location]]
+    end
+
     if params[:query]
       @job_postings = JobPosting.where('title like ?', "%#{params[:query]}%")
     else
