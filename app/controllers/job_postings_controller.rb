@@ -1,5 +1,10 @@
 class JobPostingsController < ApplicationController
   before_action :set_job_posting, only: [:show, :edit, :update, :destroy]
+  before_filter :set_access_control_headers
+
+  def set_access_control_headers
+    headers['Access-Control-Allow-Origin'] = '*'
+  end
 
   # GET /job_postings
   def index
