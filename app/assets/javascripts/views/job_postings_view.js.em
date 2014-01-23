@@ -17,5 +17,8 @@ class PickwickApp.JobPostingsView extends Ember.View with InfiniteScroll.ViewMix
 
   didInsertElement: ->
     @setupInfiniteScrollListener()
+    if Object.keys(JSON.parse(localStorage["liked_jobs"])).length > 0
+      @controller.set('hasLikedJobs', true)
+
   willDestroyElement: ->
     @teardownInfiniteScrollListener()

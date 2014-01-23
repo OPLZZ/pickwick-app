@@ -2,7 +2,7 @@ class PickwickApp.JobPostingsController extends Ember.ArrayController with Infin
   perPage: 10
   page: 1
   likedVisible:  false
-
+  hasLikedJobs:  false
   search: () ->
     @set("page", 0)
     @set('recordsCount', -1)

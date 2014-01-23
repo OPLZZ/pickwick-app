@@ -8,9 +8,10 @@
         ' zpět
         i.icon-reply
     else
-      a.pull-right click="goToLikedJobPostings"
-        ' oblíbené
-        i.icon-star
+      if hasLikedJobs
+        a.pull-right click="goToLikedJobPostings"
+          ' oblíbené
+          i.icon-star
 
   .infinite-scroll-box.infinite-scroll-list
     .row.infinite-scroll-content
