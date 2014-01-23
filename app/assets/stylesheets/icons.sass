@@ -180,3 +180,15 @@
 .icon-star-empty:before
   content: "\e634"
 
+.icon-refresh:before
+  content: "\e635"
+
+@-webkit-keyframes rotation
+  from
+    -webkit-transform: rotate(0deg)
+  to
+    -webkit-transform: rotate(359deg)
+
+.icon-refresh
+  display: inline-block
+  -webkit-animation: rotation 1s infinite linear

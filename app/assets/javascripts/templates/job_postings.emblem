@@ -70,12 +70,14 @@
 
         unless likedVisible
           if noMoreItems
-            ' No more data
+            ' Došli jste na konec výsledků
           else
             if loadingMore
-              ' Loading more data (automatically!)
+              i.icon-refresh
+              ' 
+              ' Načítání dat
             else
-              a click='getMore' Load more data (manually)
+              a click='getMore' Klikněte pro načtení dalších výsledků
 
 #frame_detail
   = outlet
