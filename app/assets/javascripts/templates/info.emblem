@@ -5,15 +5,31 @@
         | zavřít
         i.icon-cancel2
 
-    ' O projektu
+    ' Informace o projektu
 
   section.infinite-scroll-box
     .row.bottom-padding
       .col
-        ' Ahoj jak se mate???
-        ' 
         br
-        hr
-        p kasjhgfsdjgfjhasdg jafhsdg jhs
         br
-        img src="assets/grant_logos.png" title="logos"
+        img src="assets/logo-grand-horizontal.png" title="logos"
+        br
+        br
+        h4 Identifikační údaje projektu
+        
+        b Název
+        p Využití mezinárodních zkušeností s business ontologiemi pro návrh a vývoj platformy propojení nezaměstnaných s poskytovali přímých nabídek práce prostřednictvím hyperlokálních služeb")
+        
+        b Registrační číslo
+        p CZ.1.04/5.1.01/77.00440
+
+        b Název příjemce
+        p Univerzita Karlova v Praze
+
+        p Cílem projektu je formou mezinárodní spolupráce přenést zahraniční know-how do podmínek České republiky a přispět tak ke zvýšení zaměstnatelnosti cílové skupiny projektu.
+
+        p Projekt je financován z Evropského sociálního fondu prostřednictvím Operačního programu Lidské zdroje a zaměstnanost a ze státního rozpočtu ČR.
+
+        p Projekt damepraci.cz pomocí souborů cookie shromažďuje statistické údaje o návštěvnících a zaznamenává informace o vašich předvolbách při procházení webu. Naším cílem při používání souborů cookie je vylepšit možnosti, které mají k dispozici návštěvníci našeho webu.
+
+
