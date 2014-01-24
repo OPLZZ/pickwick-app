@@ -15,11 +15,10 @@ class PickwickApp.JobPostingView extends Ember.View
   jobPostingDidChange:(->
     job_posting_object = @get('controller.content')
 
-    console.log(job_posting_object)
     if job_posting_object != undefined && $('#detail_map').length > 0
-      job_posting_location = new google.maps.LatLng(-34.397, 150.644)
+      job_posting_location = new google.maps.LatLng(job_posting_object.get('location_coordinates_lat'), job_posting_object.get('location_coordinates_lon'))
       mapOptions = {
-        zoom: 8,
+        zoom: 15,
         center: job_posting_location,
         panControl: false,
         zoomControl: false,
