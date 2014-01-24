@@ -32,12 +32,15 @@
                         i class="icon-star-empty"
 
                     .title= job_posting.title
-                    if job_posting.contact
-                      .contact= job_posting.contact
+                    if job_posting.employer_company
+                      .contact= job_posting.employer_company
+                    else
+                      if job_posting.employer_name
+                        .contact= job_posting.employer_name
                     ul
-                      if job_posting.location
+                      if job_posting.location_city
                         li.icon-location
-                          = job_posting.location
+                          = job_posting.location_city
                       if job_posting.employment_type
                         li.icon-tie
                           = job_posting.employment_type
@@ -55,12 +58,15 @@
                       i class="icon-star-empty"
 
                   .title= job_posting.title
-                  if job_posting.contact
-                    .contact= job_posting.contact
+                  if job_posting.employer_company
+                    .contact= job_posting.employer_company
+                  else
+                    if job_posting.employer_name
+                      .contact= job_posting.employer_name
                   ul
-                    if job_posting.location
+                    if job_posting.location_city
                       li.icon-location
-                        = job_posting.location
+                        = job_posting.location_city
                     if job_posting.employment_type
                       li.icon-tie
                         = job_posting.employment_type

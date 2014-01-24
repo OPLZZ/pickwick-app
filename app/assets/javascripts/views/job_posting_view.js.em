@@ -15,11 +15,6 @@ class PickwickApp.JobPostingView extends Ember.View
   jobPostingDidChange:(->
     job_posting_object = @get('controller.content')
 
-    $('.detail_contact').find('a').unbind('click')
-    $('.detail_contact').find('a').click ->
-      url = $(this).attr("href")
-      window.open(url, '_self')
-
     console.log(job_posting_object)
     if job_posting_object != undefined && $('#detail_map').length > 0
       job_posting_location = new google.maps.LatLng(-34.397, 150.644)
