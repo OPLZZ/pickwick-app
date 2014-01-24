@@ -6,7 +6,7 @@ task :build => [:'assets:clean', :'assets:precompile'] do
 
   puts "Assets build"
   assets_dir = Rails.root.join("public","assets")
-  build_dir = Rails.root.join("..","pickwick-app-phonegap")
+  build_dir = Rails.root.join("..","pickwick-app-ios","www")
   build_assets_dir = File.join(build_dir, "assets")
 
   def remove_cache_id_text(text)
@@ -58,6 +58,8 @@ task :build => [:'assets:clean', :'assets:precompile'] do
   FileUtils.copy(css, css_to)
   puts "Changing assets directory from /assets/ -> assets/"
   cssdata = File.open(css_to,"r:UTF-8").read.gsub("/assets/","./")
+  #add fix for IOS screen
+  cssdata += "body{padding-top:20px; background: #f7f8f8}.menu,#frame_detail,#frame_index{top:17px}"
   File.open(css_to, "w:UTF-8").write(remove_cache_id_text(cssdata))
 
   puts "----"
@@ -83,7 +85,10 @@ task :build => [:'assets:clean', :'assets:precompile'] do
   sleep(2)
   index_content = Net::HTTP.get(URI('http://127.0.0.1:3001'))
   index = File.join(build_dir,"index.html")
-  File.open(index, "w:UTF-8").write(remove_cache_id_text(index_content.gsub("/assets/","assets/")))
+  index_data = remove_cache_id_text(index_content.gsub("/assets/","assets/"))
+  #change maps key for IOS
+  index_data = index_data.gsub("AIzaSyBKXAGbk3fM-unZ22tqViYaXhriHvxnmek", "AIzaSyCBDWqE5Ve4mVv_4H84x7Ay2HjB0hjgoQA")
+  File.open(index, "w:UTF-8").write(index_data)
   puts "Written #{index}"
 
   `kill -9 #{File.read(pid_file)}`
