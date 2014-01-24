@@ -44,7 +44,7 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
       window.open(url, '_self')
 
     showMap: ->
-      url = "geo:#{@get('content.location_coordinates_lat')},#{@get('content.location_coordinates_lon')}"
+      url = "map:#{@get('content.location_coordinates_lat')},#{@get('content.location_coordinates_lon')}"
       console.log(url)
       window.open(url, '_self')
 
