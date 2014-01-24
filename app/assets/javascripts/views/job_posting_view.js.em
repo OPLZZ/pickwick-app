@@ -21,6 +21,7 @@ class PickwickApp.JobPostingView extends Ember.View
         zoom: 15,
         center: job_posting_location,
         panControl: false,
+        draggable: false,
         zoomControl: false,
         zoomControlOptions: {
           style: google.maps.ZoomControlStyle.SMALL
@@ -32,7 +33,6 @@ class PickwickApp.JobPostingView extends Ember.View
       }
 
       map = new google.maps.Map(document.getElementById('detail_map'), mapOptions)
-
       marker = new google.maps.Marker({
           position: job_posting_location,
           map: map,
