@@ -42,7 +42,7 @@
 
           br
           button.btn.btn-success click='searchJobPostingsFromMenu'
-            ' vyhledat
+            ' Vyhledat
         br
         br
         br

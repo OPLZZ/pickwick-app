@@ -3,11 +3,13 @@ header
     i.icon-chevron-left
     | zpět
 
-  a.pull-right click="setLikeDislike"
-    if is_liked
-      i class="icon-star"
-    else
-      i class="icon-star-empty"
+  if title
+    a.pull-right click="setLikeDislike"
+      if is_liked
+        i class="icon-star"
+      else
+        i class="icon-star-empty"
+    .three_column_header Detail pozice
 
 section.infinite-scroll-box.infinite-scroll-detail
   .main.job_posting_detail
@@ -22,29 +24,30 @@ section.infinite-scroll-box.infinite-scroll-detail
     if url
       a href= url
         = url
-    ul.job_posting
-      li.icon-location
-        = location_city
-        if location_street
-          ' ,
-          = location_street
-
-      if employment_type
-        li.icon-tie
-          = employment_type
-
-      if compensation
-        li.icon-money
-          = compensation
-      if contact_name
-        li.icon-profile
-          = contact_name
-          if contact_phone
+    if title
+      ul.job_posting
+        li.icon-location
+          = location_city
+          if location_street
             ' ,
-            = contact_phone
-          if contact_email
-            ' ,
-            = contact_email
+            = location_street
+
+        if employment_type
+          li.icon-tie
+            = employment_type
+
+        if compensation
+          li.icon-money
+            = compensation
+        if contact_name
+          li.icon-profile
+            = contact_name
+            if contact_phone
+              ' ,
+              = contact_phone
+            if contact_email
+              ' ,
+              = contact_email
     = description
 
     #detail_map
@@ -72,6 +75,7 @@ section.infinite-scroll-box.infinite-scroll-detail
     else
       .col-sm-3.col.center
 
-    .col-sm-3.col.center
-      a.col-sm-4.col-offset-3.col click='forwardJob'
-        i.icon-forward
+    if title
+      .col-sm-3.col.center
+        a.col-sm-4.col-offset-3.col click='forwardJob'
+          i.icon-forward

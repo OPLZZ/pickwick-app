@@ -16,7 +16,7 @@
 
 # for more details see: http://emberjs.com/guides/application/
 window.PickwickApp = Ember.Application.create(
-  rootElement: 'body'
+  rootElement: '#application'
 )
 
 PickwickApp.normalizeTouchEvent = (event) ->

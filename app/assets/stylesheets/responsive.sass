@@ -1,3 +1,6 @@
+.three_column_header
+  display: none
+
 @media all and (min-width: 800px)
   #frame_index
     width: 50%
@@ -31,6 +34,44 @@
       left: 50%
     #frame_detail
       left: 100%
+
+  a.back_button
+    display: none
+
+@media all and (min-width: 1200px)
+  #frame_index
+    width: 30%
+  #frame_detail
+    width: 40%
+  .menu
+    width: 30%
+
+  #frame_index
+    a.pull-left
+      opacity: 0
+  .three_column_header
+    display: block
+  .menu
+    left: 0%
+  #frame_index
+    left: 30%
+  #frame_detail
+    left: 60%
+
+
+  .push-left
+    #frame_index
+      left: 30%
+      a.pull-left
+        opacity: 0
+    #frame_detail
+      left: 60%
+
+  .push-right
+    #frame_index
+      left: 30%
+    #frame_detail
+      left: 60%
 
   a.back_button
     display: none

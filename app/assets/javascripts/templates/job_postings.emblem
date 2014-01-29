@@ -1,8 +1,9 @@
 #frame_index
   header
+    .three_column_header Výsledky vyhledávání
     a.pull-left click="toggleMenu"
       .icon-magnifier
-        ' vyhledat
+        ' Vyhledat
     if likedVisible
       a.pull-right click="goFromLikedJobPostings"
         ' zpět
@@ -12,7 +13,6 @@
         a.pull-right click="goToLikedJobPostings"
           ' oblíbené
           i.icon-star
-
   .infinite-scroll-box.infinite-scroll-list
     .row.infinite-scroll-content
       .col

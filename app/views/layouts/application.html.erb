@@ -42,7 +42,20 @@
 </head>
 <body>
 
-<%= yield %>
+<div id='main_container'>
+  <div id="web_header">
+    <%= yield %>
+  </div>
 
+  <div id="application_container">
+    <div id="application">
+    </div>
+  </div>
+
+  <div id="web_footer">
+    <%= render template: 'root/footer' %>
+  </div>
+
+</div>
 </body>
 </html>

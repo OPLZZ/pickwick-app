@@ -11,8 +11,8 @@ class PickwickApp.ApplicationController extends Em.Controller
   educations: Em.A(['nechci uvádět', 'základní škola', 'střední škola s maturitou', 'vysoká škola'])
 
   pushBody: ->
-    $("body").removeClass "push-right"
-    $("body").removeClass "push-left"
+    $('.ember-application').removeClass "push-right"
+    $(".ember-application").removeClass "push-left"
     if @get("menuVisible")
       return $(".ember-application").addClass("push-right")
     else if @get("detailVisible")
