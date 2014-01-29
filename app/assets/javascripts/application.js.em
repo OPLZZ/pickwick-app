@@ -19,6 +19,10 @@ window.PickwickApp = Ember.Application.create(
   rootElement: '#application'
 )
 
+$(document).ready ->
+  unless navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)
+    $('body').addClass('desktop')
+
 PickwickApp.normalizeTouchEvent = (event) ->
   if (!event.touches)
     event.touches = event.originalEvent.touches
