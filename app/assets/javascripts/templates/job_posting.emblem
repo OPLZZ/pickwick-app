@@ -14,11 +14,11 @@ header
 section.infinite-scroll-box.infinite-scroll-detail
   .main.job_posting_detail
     h1 = title
-    if employer_company
+    if employer.company
       h2
-        = employer_company
+        = employer.company
     else
-      if job_posting.employer_name
+      if job_posting.employer.name
         h2
           = employer_name
     if url
@@ -27,48 +27,48 @@ section.infinite-scroll-box.infinite-scroll-detail
     if title
       ul.job_posting
         li.icon-location
-          = location_city
-          if location_street
+          = location.city
+          if location.street
             ' ,
-            = location_street
+            = location.street
 
         if employment_type
           li.icon-tie
-            = employment_type
+            = employment_type_translated
 
         if compensation
           li.icon-money
             = compensation
-        if contact_name
+        if contact.name
           li.icon-profile
-            = contact_name
-            if contact_phone
+            = contact.name
+            if contact.phone
               ' ,
-              = contact_phone
-            if contact_email
+              = contact.phone
+            if contact.email
               ' ,
-              = contact_email
+              = contact.email
     = description
 
     #detail_map
 
 .detail_contact
   .row
-    if contact_phone
+    if contact.phone
       .col-sm-3.col.center
         a.col-sm-4.col-offset-3.col click='callPhone'
           i.icon-phone
     else
       .col-sm-3.col.center
 
-    if location_coordinates_lat
+    if location.coordinates.lat
       .col-sm-3.col.center
         a.col-sm-4.col-offset-3.col click='showMap'
           i.icon-compass
     else
       .col-sm-3.col.center
 
-    if contact_email
+    if contact.email
       .col-sm-3.col.center
         a.col-sm-4.col-offset-3.col click='sendMail'
           i.icon-pencil

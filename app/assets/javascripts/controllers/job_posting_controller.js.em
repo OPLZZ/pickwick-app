@@ -2,38 +2,39 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
 
   actions:
     callPhone: ->
-      url = "tel:#{@get('content.contact_phone')}"
+      url = "tel:#{@get('content.contact.phone')}"
       console.log(url)
       window.open(url, '_self')
 
     sendMail: ->
-      url = "mailto:#{@get('content.contact_email')}"
+      url = "mailto:#{@get('content.contact.email')}"
       console.log(url)
       window.open(url, '_self')
 
     forwardJob: ->
 
       body = "#{@get('content.title')}\n"
+      body += "#{employment_type_translated}\n"
 
-      if @get('content.employer_company')
-        body += "#{@get('content.employer_company')}\n"
+      if @get('content.employer.company')
+        body += "#{@get('content.employer.company')}\n"
       else
-        if @get('content.employer_name')
-          body += "#{@get('content.employer_name')}\n"
+        if @get('content.employer.name')
+          body += "#{@get('content.employer.name')}\n"
       if @get('content.url')
         body += "#{@get('content.url')} \n"
 
-      body += "#{@get('content.location_city')} #{@get('content.location_street')}\n"
+      body += "#{@get('content.location.city')} #{@get('content.location.street')}\n"
 
       if @get('content.compensation')
         body += "#{@get('content.compensation')} \n"
 
-      if @get('content.contact_name')
-        body += "#{@get('content.contact_name')}\n"
-      if @get('content.contact_phone')
-        body += "#{@get('content.contact_phone')}\n"
-      if @get('content.contact_email')
-        body += "#{@get('content.contact_email')}\n"
+      if @get('content.contact.name')
+        body += "#{@get('content.contact.name')}\n"
+      if @get('content.contact.phone')
+        body += "#{@get('content.contact.phone')}\n"
+      if @get('content.contact.email')
+        body += "#{@get('content.contact.email')}\n"
 
       body += "\n\n-------\n"
       body += @get('content.description')
@@ -44,7 +45,7 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
       window.open(url, '_self')
 
     showMap: ->
-      url = "http://maps.apple.com?ll=#{@get('content.location_coordinates_lat')},#{@get('content.location_coordinates_lon')}&z=15"
+      url = "http://maps.apple.com?ll=#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}&z=15"
       console.log(url)
       window.open(url, '_self')
 

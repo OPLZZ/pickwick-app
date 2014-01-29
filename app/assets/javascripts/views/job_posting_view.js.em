@@ -16,7 +16,7 @@ class PickwickApp.JobPostingView extends Ember.View
     job_posting_object = @get('controller.content')
 
     if job_posting_object != undefined && $('#detail_map').length > 0
-      job_posting_location = new google.maps.LatLng(job_posting_object.get('location_coordinates_lat'), job_posting_object.get('location_coordinates_lon'))
+      job_posting_location = new google.maps.LatLng(job_posting_object.get('location.coordinates.lat'), job_posting_object.get('location.coordinates.lon'))
       mapOptions = {
         zoom: 15,
         center: job_posting_location,

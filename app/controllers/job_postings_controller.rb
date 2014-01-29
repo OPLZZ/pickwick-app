@@ -6,16 +6,6 @@ class JobPostingsController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
   end
 
-  def flat_hash(hash, k = [])
-    return {k => hash} unless hash.is_a?(Hash)
-    hash.inject({}){ |h, v| h.merge! flat_hash(v[-1], k + [v[0]]) }
-  end
-
-  def join_keys(hash)
-    hash.inject({}){|h,(k,v)| h.merge!({k.join("_") => v })}
-  end
-
-
   # GET /job_postings
   def index
     from  = params[:from]  || 0
@@ -414,7 +404,7 @@ class JobPostingsController < ApplicationController
     output = JSON.parse(test_output)
     #render json: @job_postings.offset(from).limit(limit)
 
-    render json: output["vacancies"].collect{|v| join_keys(flat_hash(v))}
+    render json: output["vacancies"]
   end
 
   # GET /job_postings/1

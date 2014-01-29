@@ -29,10 +29,8 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
       @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
       for id, item of JSON.parse(localStorage["liked_jobs"])
         item.id = id
-        #load record from hash into store
-        this.get('store').pushPayload('job_posting', {job_postings: [item] })
         #push object to list of liked jobs
-        @get('job_posting_cache').pushObject(this.get('store').find("job_posting", id))
+        @get('job_posting_cache').pushObject(PickwickApp.JobPosting.create(item))
 
     back_from_liked: ->
       @controller.set('loadingMore', false)
@@ -60,21 +58,11 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
 
     ccc  = @
     cont = @controller
-    @get('store').find('job_posting', args).then((job_posting) ->
-      ccc.get('job_posting_cache').pushObjects(job_posting.toArray())
-      #set liked status from local storage
-      if localStorage["liked_jobs"] == undefined
-        liked_jobs    = {}
-      else
-        liked_jobs    = JSON.parse(localStorage["liked_jobs"])
-      for job_posting in ccc.get('job_posting_cache')
-        if liked_jobs[job_posting.id] != undefined
-          job_posting.set("is_liked", true)
 
-      cont.set('loadingMore', false)
-      cont.set('page', page + 1)
-      cont.get('length')
-      if cont.get('recordsCount') == cont.get('length')
-        cont.set('noMoreItems', true)
-      cont.set('recordsCount', cont.get('length'))
-    )
+    $.ajax(
+      method: 'GET'
+      dataType: 'json'
+      url: "job_postings"
+    ).done (data) ->
+      postings = data.job_postings.map (job_data) -> PickwickApp.JobPosting.create(job_data)
+      ccc.get('job_posting_cache').pushObjects(postings)

@@ -1,6 +1,5 @@
 #frame_index
   header
-    .three_column_header Výsledky vyhledávání
     a.pull-left click="toggleMenu"
       .icon-magnifier
         ' Vyhledat
@@ -13,6 +12,7 @@
         a.pull-right click="goToLikedJobPostings"
           ' oblíbené
           i.icon-star
+    .three_column_header Výsledky vyhledávání
   .infinite-scroll-box.infinite-scroll-list
     .row.infinite-scroll-content
       .col
@@ -32,18 +32,18 @@
                         i class="icon-star-empty"
 
                     .title= job_posting.title
-                    if job_posting.employer_company
-                      .contact= job_posting.employer_company
+                    if job_posting.employer.company
+                      .contact= job_posting.employer.company
                     else
-                      if job_posting.employer_name
+                      if job_posting.employer.name
                         .contact= job_posting.employer_name
                     ul
-                      if job_posting.location_city
+                      if job_posting.location.city
                         li.icon-location
-                          = job_posting.location_city
+                          = job_posting.location.city
                       if job_posting.employment_type
                         li.icon-tie
-                          = job_posting.employment_type
+                          = job_posting.employment_type_translated
                       if job_posting.compensation
                         li.icon-money
                           = job_posting.compensation
@@ -58,18 +58,18 @@
                       i class="icon-star-empty"
 
                   .title= job_posting.title
-                  if job_posting.employer_company
-                    .contact= job_posting.employer_company
+                  if job_posting.employer.company
+                    .contact= job_posting.employer.company
                   else
-                    if job_posting.employer_name
-                      .contact= job_posting.employer_name
+                    if job_posting.employer.name
+                      .contact= job_posting.employer.name
                   ul
-                    if job_posting.location_city
+                    if job_posting.location.city
                       li.icon-location
-                        = job_posting.location_city
+                        = job_posting.location.city
                     if job_posting.employment_type
                       li.icon-tie
-                        = job_posting.employment_type
+                        = job_posting.employment_type_translated
                     if job_posting.compensation
                       li.icon-money
                         = job_posting.compensation
