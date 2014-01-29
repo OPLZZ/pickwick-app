@@ -13,32 +13,38 @@ class PickwickApp.JobPostingView extends Ember.View
     @get("controller").send "backToJobPostings" if direction is Em.OneGestureDirection.Right
 
   jobPostingDidChange:(->
+
+    $('.job_posting.list').removeClass('active')
     job_posting_object = @get('controller.content')
+    if job_posting_object != undefined
+      $(".job_posting.list[data-id=#{job_posting_object.id}]").addClass('active')
 
-    if job_posting_object != undefined && $('#detail_map').length > 0
-      job_posting_location = new google.maps.LatLng(job_posting_object.get('location.coordinates.lat'), job_posting_object.get('location.coordinates.lon'))
-      mapOptions = {
-        zoom: 15,
-        center: job_posting_location,
-        panControl: false,
-        draggable: false,
-        zoomControl: false,
-        zoomControlOptions: {
-          style: google.maps.ZoomControlStyle.SMALL
-        },
-        mapTypeControl: false,
-        scaleControl: false,
-        streetViewControl: false,
-        overviewMapControl: false
-      }
+      if $('#detail_map').length > 0 && job_posting_object.get('location.coordinates') && job_posting_object.get('location.coordinates.lat')
 
-      map = new google.maps.Map(document.getElementById('detail_map'), mapOptions)
-      marker = new google.maps.Marker({
-          position: job_posting_location,
-          map: map,
-          title:job_posting_object.get('title')
-      })
+        job_posting_location = new google.maps.LatLng(job_posting_object.get('location.coordinates.lat'), job_posting_object.get('location.coordinates.lon'))
+        mapOptions = {
+          zoom: 15,
+          center: job_posting_location,
+          panControl: false,
+          draggable: false,
+          zoomControl: false,
+          zoomControlOptions: {
+            style: google.maps.ZoomControlStyle.SMALL
+          },
+          mapTypeControl: false,
+          scaleControl: false,
+          streetViewControl: false,
+          overviewMapControl: false
+        }
 
-      console.log(mapOptions)
+        map = new google.maps.Map(document.getElementById('detail_map'), mapOptions)
+        marker = new google.maps.Marker({
+            position: job_posting_location,
+            map: map,
+            title:job_posting_object.get('title')
+        })
+        $('#detail_map').show()
+      else
+        $('#detail_map').hide()
 
   ).observes('controller.content')

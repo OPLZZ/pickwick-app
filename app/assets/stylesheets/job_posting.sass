@@ -3,10 +3,20 @@
   &.list
     cursor: pointer
     border-bottom: 1px solid #ddd
-    margin-top: 10px
+    padding-top: 10px
+    padding-left: 10px
+    padding-right: 10px
     padding-bottom: 5px
     min-height: 75px
-
+  &.active
+    background: #f7f8f8
+    .link_to_detail
+      &:before
+        color: #000
+    [class^="icon-"], [class*=" icon-"] 
+      color: #999
+      &:before
+        color: #999
   .title
     font-weight: bold
     &:first-letter

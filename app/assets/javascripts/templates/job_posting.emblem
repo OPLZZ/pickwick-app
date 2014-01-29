@@ -48,7 +48,7 @@ section.infinite-scroll-box.infinite-scroll-detail
             if contact.email
               ' ,
               = contact.email
-    = description
+    == description_with_brs
 
     #detail_map
 

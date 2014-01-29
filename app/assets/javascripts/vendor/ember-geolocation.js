@@ -126,8 +126,8 @@ Ember.GeoLocation = Ember.Object.extend({
       (navigator.geolocation ? navigator.geolocation :
         (window.google || {}).gears ? google.gears.factory.create('beta.geolocation') : null);
 
-    this.latitude  = 0
-    this.longitude = 0
+    this.latitude  = -99999
+    this.longitude = -99999
 
     if (get(this, 'autoUpdate')) {
       Ember.run.next(this, 'autoUpdateDidChange');
