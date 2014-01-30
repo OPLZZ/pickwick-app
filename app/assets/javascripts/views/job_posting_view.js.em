@@ -14,6 +14,7 @@ class PickwickApp.JobPostingView extends Ember.View
     @get("controller").send "backToJobPostings" if direction is Em.OneGestureDirection.Right
 
   jobPostingDidChange:(->
+    $('#detail_map').hide()
 
     $('.job_posting.list').removeClass('active')
     job_posting_object = @get('controller.content')
@@ -53,8 +54,5 @@ class PickwickApp.JobPostingView extends Ember.View
           PickwickApp.google_map.setCenter(job_posting_location)
           PickwickApp.google_map.setZoom(15)
           PickwickApp.google_marker.setPosition(job_posting_location)
-
-      else
-        $('#detail_map').hide()
 
   ).observes('controller.content')
