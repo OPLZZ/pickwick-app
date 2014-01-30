@@ -21,7 +21,7 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       @controller.set "infoVisible", false
 
     goToInfoFromMenu: ->
-      $('.menu.info').css('z-index', 2)
+      $('.menu.info').css('z-index', 2000)
       @controller.set "infoVisible", true
 
 
