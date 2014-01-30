@@ -17,11 +17,11 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       @controller.pushBody()
 
     goToMenuFromInfo: ->
-      $('.menu.info').css('z-index', 0)
+      $('.ember-application').removeClass "push-info"
       @controller.set "infoVisible", false
 
     goToInfoFromMenu: ->
-      $('.menu.info').css('z-index', 2000)
+      $('.ember-application').addClass "push-info"
       @controller.set "infoVisible", true
 
 

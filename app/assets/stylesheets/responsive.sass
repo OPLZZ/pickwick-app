@@ -1,25 +1,40 @@
 .three_column_header
   display: none
 
-@media all and (min-width: 800px)
+.push-info
   #frame_index
+    display: none
+  .menu
+    left: 100%
+  .menu.info
+    left: 0%
+
+@media all and (min-width: 800px)
+
+  .menu.info
+    left: 100%
+
+  .push-info
+    #frame_index
+      display: block
+    .menu.info
+      left: 50%
+    .menu
+      left: 100%
+
+  #frame_index
+    left: 0%
     width: 50%
   #frame_detail
+    left: 100%
     width: 50%
   .menu
     width: 50%
+    left: 50%
 
   #frame_index
     a.pull-left
       opacity: 0
-
-  .menu
-    left: 0%
-  #frame_index
-    left: 50%
-  #frame_detail
-    left: 100%
-
 
   .push-left
     #frame_index
@@ -28,22 +43,34 @@
         opacity: 1.0
     #frame_detail
       left: 50%
+    .menu
+      left: 100%
 
   .push-right
     #frame_index
-      left: 50%
+      left: 0%
     #frame_detail
-      left: 100%
+      left: 50%
+    .menu
+      left: 50%
+    &.push-info
+      .menu
+        left: 100%
+      .menu.info
+        left: 50%
 
   a.back_button
     display: none
 
 @media all and (min-width: 1200px)
   #frame_index
+    left: 30%
     width: 30%
   #frame_detail
+    left: 60%
     width: 40%
   .menu
+    left: 0%
     width: 30%
 
   #frame_index
@@ -51,6 +78,7 @@
       display: none
   .three_column_header
     display: block
+  /*testt*/
   .menu
     left: 0%
   #frame_index
@@ -66,12 +94,16 @@
         opacity: 0
     #frame_detail
       left: 60%
+    .menu
+      left: 0%
 
   .push-right
     #frame_index
       left: 30%
     #frame_detail
       left: 60%
+    .menu
+      left: 0%
 
   a.back_button
     display: none

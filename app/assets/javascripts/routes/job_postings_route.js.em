@@ -149,13 +149,14 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
       else
         liked_jobs    = JSON.parse(localStorage["liked_jobs"])
 
-      for item in @get('cache_for_search')
-        #fix liked jobs
-        if liked_jobs[item.id] != undefined
-          item.set("is_liked", true)
-        else
-          item.set("is_liked", false)
-        @get('job_posting_cache').pushObject(item)
+      if @get('cache_for_search') != undefined
+        for item in @get('cache_for_search')
+          #fix liked jobs
+          if liked_jobs[item.id] != undefined
+            item.set("is_liked", true)
+          else
+            item.set("is_liked", false)
+          @get('job_posting_cache').pushObject(item)
 
 
 

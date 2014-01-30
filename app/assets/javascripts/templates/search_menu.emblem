@@ -45,9 +45,6 @@
             ' Vyhledat
         br
         br
-        br
-        br
-        br
         .center
           a click='goToInfoFromMenu'
             ' informace o projektu

@@ -76,7 +76,11 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
       if liked_jobs && Object.keys(liked_jobs).length > 0
         @controllerFor('job_postings').set('hasLikedJobs', true)
       else
+        #there are no liked jobs
         @controllerFor('job_postings').set('hasLikedJobs', false)
-        @controllerFor('job_postings').send('back_from_liked')
         @controllerFor('job_postings').set "likedVisible", false
+
+        #if showing liked page redirect back to results
+        if @controllerFor('job_postings').get('likedVisible')
+          @controllerFor('job_postings').send('back_from_liked')
 
