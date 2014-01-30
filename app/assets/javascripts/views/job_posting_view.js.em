@@ -37,13 +37,14 @@ class PickwickApp.JobPostingView extends Ember.View
           overviewMapControl: false
         }
 
+        $('#detail_map').show()
+
         map = new google.maps.Map(document.getElementById('detail_map'), mapOptions)
         marker = new google.maps.Marker({
             position: job_posting_location,
             map: map,
             title:job_posting_object.get('title')
         })
-        $('#detail_map').show()
       else
         $('#detail_map').hide()
 
