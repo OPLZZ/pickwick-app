@@ -27,7 +27,7 @@ jQuery.fn.autoGrow = function(){
       }
 
       if (linesCount >= rowsDefault) {
-        obj.rows = linesCount+1;
+        obj.rows = linesCount;
       } else {
         obj.rows = rowsDefault;
       }
