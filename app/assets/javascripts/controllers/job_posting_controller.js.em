@@ -14,7 +14,7 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
     forwardJob: ->
 
       body = "#{@get('content.title')}\n"
-      body += "#{employment_type_translated}\n"
+      body += "#{@get('content.employment_type_translated')}\n"
 
       if @get('content.employer.company')
         body += "#{@get('content.employer.company')}\n"
@@ -45,7 +45,7 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
       window.open(url, '_self')
 
     showMap: ->
-      url = "http://maps.apple.com?ll=#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}&z=15"
+      url = "maps:q=#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}"
       console.log(url)
       window.open(url, '_self')
 
