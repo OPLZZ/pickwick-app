@@ -4,8 +4,6 @@ class PickwickApp.SearchMenuView extends Ember.View
   templateName: 'search_menu'
   swipeOptions:
     direction: Em.OneGestureDirection.Left
-    cancelPeriod: 80
-    swipeThreshold: 200
 
   didInsertElement: ->
     $('textarea').autoGrow()
