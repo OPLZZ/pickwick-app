@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-desc "Start the Redis server"
+desc "Build web app"
 task :build_web => [:'assets:clean', :'assets:precompile'] do
 
   puts "Assets build"
@@ -29,7 +29,9 @@ task :build_web => [:'assets:clean', :'assets:precompile'] do
   puts "CP: #{File.basename(javascript)} -> #{File.basename(javascript_to)}"
   FileUtils.cp(javascript, javascript_to)
   jsdata = File.open(javascript_to,"r:UTF-8").read
-  File.open(javascript_to, "w:UTF-8").write(jsdata)
+  File.open(javascript_to, "w:UTF-8") do |fw|
+    fw.write(jsdata)
+  end
 
   puts "----"
 
@@ -51,7 +53,9 @@ task :build_web => [:'assets:clean', :'assets:precompile'] do
   FileUtils.copy(css, css_to)
   puts "Changing assets directory from /assets/ -> assets/"
   cssdata = File.open(css_to,"r:UTF-8").read.gsub("/assets/","./")
-  File.open(css_to, "w:UTF-8").write(cssdata)
+  File.open(css_to, "w:UTF-8") do |fw|
+    fw.write(cssdata)
+  end
 
   puts "----"
 
@@ -77,7 +81,9 @@ task :build_web => [:'assets:clean', :'assets:precompile'] do
   index_content = Net::HTTP.get(URI('http://127.0.0.1:3001'))
   index = File.join(build_dir,"index.html")
   index_data = index_content.force_encoding('utf-8').gsub("/assets/","assets/")
-  File.open(index, "w:UTF-8").write(index_data)
+  File.open(index, "w:UTF-8") do |fw|
+    fw.write(index_data)
+  end
   puts "Written #{index}"
 
   `kill -9 #{File.read(pid_file)}`
