@@ -1,0 +1,8 @@
+objc[13238]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-01-30 15:03:06.165 Pickwick[13238:80b] Cannot find executable for CFBundle 0xa680170 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-01-30 15:03:06.182 Pickwick[13238:80b] Cannot find executable for CFBundle 0xa5361c0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-01-30 15:03:06.244 Pickwick[13238:80b] Multi-tasking -> Device: YES, App: YES
+2014-01-30 15:03:06.253 Pickwick[13238:80b] Unlimited access to network resources
+2014-01-30 15:03:06.263 Pickwick[13238:80b] Fix applied for database locations?: YES
+2014-01-30 15:03:06.565 Pickwick[13238:80b] Resetting plugins due to page load.
+2014-01-30 15:03:07.490 Pickwick[13238:80b] Finished load of: file:///Users/bartas/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/55617AB3-CB8C-47A7-AC33-D5B570601807/Pickwick.app/www/index.html#/job_postings

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C99DF78D-CDE9-45A3-9CCA-E345C1E6B928</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Pickwick</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FA57B45D-2A3A-4AC1-A99A-311C3FE154E0</key>
+		<string>ssh://github.com/OPLZZ/pickwick-app.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>build/mobiles/platforms/ios/Pickwick.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FA57B45D-2A3A-4AC1-A99A-311C3FE154E0</key>
+		<string>../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/OPLZZ/pickwick-app.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FA57B45D-2A3A-4AC1-A99A-311C3FE154E0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FA57B45D-2A3A-4AC1-A99A-311C3FE154E0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>pickwick-app</string>
+		</dict>
+	</array>
+</dict>
+</plist>
