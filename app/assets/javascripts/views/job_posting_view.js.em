@@ -1,12 +1,13 @@
 # for more details see: http://emberjs.com/guides/views/
 
+PickwickApp.google_map = undefined
+PickwickApp.google_marker = undefined
+
 class PickwickApp.JobPostingView extends Ember.View
   templateName: 'job_posting'
   touch_scroll_element: '.infinite-scroll-detail'
   swipeOptions:
     direction: Em.OneGestureDirection.Right
-    cancelPeriod: 80
-    swipeThreshold: 200
 
   swipeEnd: (recognizer, evt) ->
     direction = recognizer.get("swipeDirection")
@@ -22,29 +23,36 @@ class PickwickApp.JobPostingView extends Ember.View
       if $('#detail_map').length > 0 && job_posting_object.get('location.coordinates') && job_posting_object.get('location.coordinates.lat')
 
         job_posting_location = new google.maps.LatLng(job_posting_object.get('location.coordinates.lat'), job_posting_object.get('location.coordinates.lon'))
-        mapOptions = {
-          zoom: 15,
-          center: job_posting_location,
-          panControl: false,
-          draggable: false,
-          zoomControl: false,
-          zoomControlOptions: {
-            style: google.maps.ZoomControlStyle.SMALL
-          },
-          mapTypeControl: false,
-          scaleControl: false,
-          streetViewControl: false,
-          overviewMapControl: false
-        }
 
         $('#detail_map').show()
 
-        map = new google.maps.Map(document.getElementById('detail_map'), mapOptions)
-        marker = new google.maps.Marker({
-            position: job_posting_location,
-            map: map,
-            title:job_posting_object.get('title')
-        })
+        if PickwickApp.google_map == undefined
+          mapOptions = {
+            zoom: 15,
+            center: job_posting_location,
+            panControl: false,
+            draggable: false,
+            zoomControl: false,
+            zoomControlOptions: {
+              style: google.maps.ZoomControlStyle.SMALL
+            },
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            overviewMapControl: false
+          }
+
+
+          PickwickApp.google_map = new google.maps.Map(document.getElementById('detail_map'), mapOptions)
+          PickwickApp.google_marker = new google.maps.Marker({
+              position: job_posting_location,
+              map: PickwickApp.google_map,
+              title:job_posting_object.get('title')
+          })
+        else
+          PickwickApp.google_map.setCenter(job_posting_location)
+          PickwickApp.google_marker.setPosition(job_posting_location)
+
       else
         $('#detail_map').hide()
 
