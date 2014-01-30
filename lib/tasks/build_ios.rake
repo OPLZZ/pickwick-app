@@ -1,12 +1,10 @@
 # -*- encoding : utf-8 -*-
-desc "Start the Redis server"
-task :build => [:'assets:clean', :'assets:precompile'] do
-
-  main_url = "http://pickwick-app.herokuapp.com"
+desc "Build IOS app"
+task :build_ios => [:'assets:clean', :'assets:precompile'] do
 
   puts "Assets build"
   assets_dir = Rails.root.join("public","assets")
-  build_dir = Rails.root.join("..","pickwick-app-ios","www")
+  build_dir = Rails.root.join("build","mobiles","www")
   build_assets_dir = File.join(build_dir, "assets")
 
   def remove_cache_id_text(text)
@@ -14,10 +12,6 @@ task :build => [:'assets:clean', :'assets:precompile'] do
   end
 
   #CLEANUP
-  # puts "Deleting old #{build_dir}"
-  # FileUtils.rm_rf(build_dir)
-  # puts "Cteating new #{build_dir}"
-  # FileUtils.mkdir_p(build_dir)
   puts "Deleting old #{build_assets_dir}"
   FileUtils.rm_rf(build_assets_dir)
   puts "Cteating new #{build_assets_dir}"
@@ -34,9 +28,12 @@ task :build => [:'assets:clean', :'assets:precompile'] do
   javascript_to = File.join(build_assets_dir, remove_cache_id_text(File.basename(javascript)))
   puts "CP: #{File.basename(javascript)} -> #{File.basename(javascript_to)}"
   FileUtils.cp(javascript, javascript_to)
-  puts "Changing endpoint url: http://127.0.0.1:3000 -> #{main_url}"
-  jsdata = File.open(javascript_to,"r:UTF-8").read.gsub("\"http://127.0.0.1:3000\"","\"#{main_url}\"")
-  File.open(javascript_to, "w:UTF-8").write(remove_cache_id_text(jsdata))
+  jsdata = File.open(javascript_to,"r:UTF-8").read
+  puts "Changing assets directory from /assets/ -> assets/"
+  jsdata = jsdata.gsub("/assets/","./assets/")
+  File.open(javascript_to, "w:UTF-8") do |fw|
+    fw.write(remove_cache_id_text(jsdata))
+  end
 
   puts "----"
 
@@ -60,7 +57,9 @@ task :build => [:'assets:clean', :'assets:precompile'] do
   cssdata = File.open(css_to,"r:UTF-8").read.gsub("/assets/","./")
   #add fix for IOS screen
   cssdata += "body{padding-top:20px; background: #f7f8f8}.menu,#frame_detail,#frame_index{top:17px}"
-  File.open(css_to, "w:UTF-8").write(remove_cache_id_text(cssdata))
+  File.open(css_to, "w:UTF-8") do |fw|
+    fw.write(remove_cache_id_text(cssdata))
+  end
 
   puts "----"
 
@@ -82,21 +81,35 @@ task :build => [:'assets:clean', :'assets:precompile'] do
 
   `rails s -p 3001 -e production -d --pid #{pid_file}`
   puts "Waiting 5 seconds for server too boot"
-  sleep(2)
-  index_content = Net::HTTP.get(URI('http://127.0.0.1:3001'))
+  sleep(5)
+  index_content = Net::HTTP.get(URI('http://127.0.0.1:3001')).force_encoding('utf-8')
   index = File.join(build_dir,"index.html")
   index_data = remove_cache_id_text(index_content.gsub("/assets/","assets/"))
   #change maps key for IOS
-  index_data = index_data.gsub("AIzaSyBKXAGbk3fM-unZ22tqViYaXhriHvxnmek", "AIzaSyCBDWqE5Ve4mVv_4H84x7Ay2HjB0hjgoQA")
-  File.open(index, "w:UTF-8").write(index_data)
+  puts "removing key for Google maps"
+  index_data = index_data.gsub("key=AIzaSyAifbyRu4X-ueEl2Tj5EBhNR0ZescDBXa4&amp;", "")
+  puts "adding main phonegap.js javascript"
+  index_data = index_data.gsub("</title>", "</title>\n<script type='text/javascript' src='phonegap.js'></script>")
+  File.open(index, "w:UTF-8") do |fw|
+    fw.write(index_data)
+  end
   puts "Written #{index}"
 
   `kill -9 #{File.read(pid_file)}`
   File.delete(pid_file)
   puts "Killed production server"
-  `open #{index}`
 
   puts "----"
 
-  puts "FINISHED"
+  puts "FINISHED BUILD"
+
+  puts "Waiting 5 seconds after build"
+  sleep(5)
+
+  puts "Starting IOS Build"
+  ios_dir = Rails.root.join("build","mobiles")
+  puts "cd #{ios_dir} && phonegap build ios"
+  system "cd #{ios_dir} && phonegap build ios"
+
+  puts "FINISHED IOS Build"
 end
