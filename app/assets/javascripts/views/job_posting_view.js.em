@@ -51,6 +51,7 @@ class PickwickApp.JobPostingView extends Ember.View
           })
         else
           PickwickApp.google_map.setCenter(job_posting_location)
+          PickwickApp.google_map.setZoom(15)
           PickwickApp.google_marker.setPosition(job_posting_location)
 
       else
