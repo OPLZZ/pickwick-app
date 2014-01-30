@@ -19,5 +19,3 @@
 .DS_Store
 .ruby-version
 
-#build directory of application
-/build
