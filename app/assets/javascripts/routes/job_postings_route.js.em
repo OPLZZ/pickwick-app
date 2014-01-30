@@ -189,6 +189,12 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
         if @get('geolocation_object') != undefined
           if @get('geolocation_object').latitude != -99999
             args.location = "#{@get('geolocation_object').latitude},#{@get('geolocation_object').longitude}"
+            #remeber last geolocation into local storage :D
+            localStorage['last_geolocation'] = args.location
+
+          #if there is no data for loaction try cached location
+          else if localStorage['last_geolocation'] != undefined && localStorage['last_geolocation'] != "undefined"
+            args.location = localStorage['last_geolocation']
 
       #has location setted to city
       else
