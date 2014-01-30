@@ -30,3 +30,9 @@ Brankic 1979
 == Super bootstrap of Ember.js with animations
 http://blangslet.com/post/55590279372/ember-js-mobile-animations-and-touch-gestures
 https://github.com/blangslet/ember.js-mobile-animations-gestures
+
+
+== Building application
+
+web application will be generated to build/web/index.html 
+`RAILS_ENV=production rake build_web`
