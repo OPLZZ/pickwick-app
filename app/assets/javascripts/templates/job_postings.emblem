@@ -21,7 +21,7 @@
 
             if likedVisible
               if job_posting.is_liked
-                .job_posting.list click="goToJobPosting job_posting" data-id=job_posting.id
+                .job_posting.list.gtm_view_liked_detail click="goToJobPosting job_posting" data-id=job_posting.id
                   i.icon-chevron-right.link_to_detail style="float:right"
 
                   .pull-right
@@ -49,7 +49,7 @@
                         = job_posting.compensation
             else
               .job_posting.list click="goToJobPosting job_posting" data-id=job_posting.id
-                i.icon-chevron-right.link_to_detail style="float:right"
+                i.icon-chevron-right.link_to_detail.gtm_view_detail style="float:right"
 
                 .pull-right
                   if job_posting.is_liked

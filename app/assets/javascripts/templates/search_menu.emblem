@@ -41,7 +41,7 @@
               Ember.TextField valueBinding="controller.person_education" id='person_education_box' placeholder="dosažené vzdělání"
 
           br
-          button.btn.btn-success click='searchJobPostingsFromMenu'
+          button.btn.btn-success.gtm_perform_search click='searchJobPostingsFromMenu'
             ' Vyhledat
         br
         br

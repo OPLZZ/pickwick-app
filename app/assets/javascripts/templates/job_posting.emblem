@@ -4,10 +4,11 @@ header
     | zpět
 
   if title
-    a.pull-right click="setLikeDislike"
-      if is_liked
+    if is_liked
+      a.pull-right.gtm_set_liked click="setLikeDislike"
         i class="icon-star"
-      else
+    else
+      a.pull-right.gtm_remove_liked click="setLikeDislike"
         i class="icon-star-empty"
     .three_column_header Detail pozice
 
@@ -56,26 +57,26 @@ section.infinite-scroll-box.infinite-scroll-detail
   .row
     if contact.phone
       .col-sm-3.col.center
-        a.col-sm-4.col-offset-3.col click='callPhone'
+        a.col-sm-4.col-offset-3.col.gtm_contact_phone click='callPhone'
           i.icon-phone
     else
       .col-sm-3.col.center
 
     if location.coordinates.lat
       .col-sm-3.col.center
-        a.col-sm-4.col-offset-3.col click='showMap'
+        a.col-sm-4.col-offset-3.col.gtm_contact_map click='showMap'
           i.icon-compass
     else
       .col-sm-3.col.center
 
     if contact.email
       .col-sm-3.col.center
-        a.col-sm-4.col-offset-3.col click='sendMail'
+        a.col-sm-4.col-offset-3.col.gtm_contact_mail click='sendMail'
           i.icon-pencil
     else
       .col-sm-3.col.center
 
     if title
       .col-sm-3.col.center
-        a.col-sm-4.col-offset-3.col click='forwardJob'
+        a.col-sm-4.col-offset-3.col.gtm_job_forward click='forwardJob'
           i.icon-forward
