@@ -168,6 +168,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
     cont.set('loadingError', false)
 
     if search
+      cont.set('urlForLoadMore', undefined)
 
       #build arguments for search
       args = {
@@ -205,6 +206,10 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
       data: args
     ).done( (data) ->
       postings = data.vacancies.map (job_data) -> PickwickApp.JobPosting.create(job_data)
+      if data.links && data.links.next
+        cont.set('urlForLoadMore', data.links.next)
+      else
+        cont.set('noMoreItems', true)
 
       #set liked status from local storage
       if localStorage["liked_jobs"] == undefined
@@ -221,13 +226,6 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
       #stop loading more
       cont.set('loadingMore', false)
 
-      #if nothing was added show no more items
-      cont.get('length')
-      if cont.get('recordsCount') == cont.get('length')
-        cont.set('noMoreItems', true)
-
-      #update number of items
-      cont.set('recordsCount', cont.get('length'))
     ).error (error)->
 
       #show loading error
