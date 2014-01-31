@@ -1,109 +1,109 @@
+#frame_index
+  left: 0px
+#frame_detail
+  left: 100%
+#frame_liked
+  top: 100%
+#frame_info
+  left: -100%
+#frame_menu
+  left: -100%
+
+.push-liked #frame_liked
+  top: 0
+.push-detail #frame_detail
+  left: 0
+.push-menu #frame_menu
+  left: 0
+.push-info #frame_info
+  left: 0
+
+
 .three_column_header
   display: none
 
-.push-info
-  #frame_index, #frame_liked
-    display: none
-  .menu
-    left: 100%
-  .menu.info
-    left: 0%
 
 @media all and (min-width: 800px)
-
-  .menu.info
-    left: 100%
-
-  .push-info
-    #frame_index, #frame_liked
-      display: block
-    .menu.info
-      left: 50%
-    .menu
-      left: 100%
-
-  #frame_index, #frame_liked
-    left: 0%
+  #frame_index,#frame_detail,#frame_liked,#frame_info,#frame_menu
     width: 50%
+
+  #frame_index
+    left: 0px
   #frame_detail
-    left: 100%
-    width: 50%
-  .menu
-    width: 50%
     left: 50%
+  #frame_liked
+    top: 100%
+    left: 0px
+  #frame_info
+    left: 100%
+  #frame_menu
+    left: 50%
+
+  .push-liked #frame_liked
+    top: 0
+  .push-detail #frame_detail
+    left: 50%
+  .push-detail #frame_menu
+    left: 100%
+  .push-menu #frame_menu
+    left: 50%
+  .push-info #frame_info
+    left: 50%
+
 
   #frame_index, #frame_liked
     a.pull-left
       opacity: 0
 
-  .push-left
+  .push-detail
     #frame_index, #frame_liked
-      left: 0%
       a.pull-left
         opacity: 1.0
-    #frame_detail
-      left: 50%
-    .menu
-      left: 100%
-
-  .push-right
-    #frame_index, #frame_liked
-      left: 0%
-    #frame_detail
-      left: 50%
-    .menu
-      left: 50%
-    &.push-info
-      .menu
-        left: 100%
-      .menu.info
-        left: 50%
 
   a.back_button
     display: none
 
 @media all and (min-width: 1200px)
-  #frame_index, #frame_liked
-    left: 30%
+  #frame_index,#frame_liked,#frame_info,#frame_menu
     width: 30%
   #frame_detail
-    left: 60%
     width: 40%
-  .menu
-    left: 0%
-    width: 30%
 
-  #frame_index, #frame_liked
-    a.pull-left
-      display: none
-  .three_column_header
-    display: block
-  /*testt*/
-  .menu
-    left: 0%
   #frame_index
     left: 30%
   #frame_detail
     left: 60%
+  #frame_liked
+    top: 100%
+    left: 30%
+  #frame_info
+    left: -30%
+  #frame_menu
+    left: 0%
+
+  .push-liked #frame_liked
+    top: 0
+  .push-detail #frame_detail
+    left: 60%
+  .push-detail #frame_menu
+    left: 0%
+  .push-menu #frame_menu
+    left: 0%
+  .push-info #frame_info
+    left: 0%
+
+  .three_column_header
+    display: inline-block
 
 
-  .push-left
+  #frame_index, #frame_liked
+    a.pull-left
+      display: none
+
+  .push-detail
     #frame_index, #frame_liked
-      left: 30%
       a.pull-left
         opacity: 0
-    #frame_detail
-      left: 60%
-    .menu
-      left: 0%
-
-  .push-right
-    #frame_index, #frame_liked
-      left: 30%
-    #frame_detail
-      left: 60%
-    .menu
-      left: 0%
 
   a.back_button
     display: none

@@ -1,10 +1,10 @@
 #frame_index
   header
-    a.pull-left click="toggleMenu"
+    a.pull-left click="goToMenu"
       .icon-magnifier
         ' Vyhledat
     if hasLikedJobs
-      a.pull-right click="goToLikedJobs"
+      a.pull-right click="goToLiked"
         ' oblíbené
         i.icon-star
     .three_column_header Výsledky vyhledávání
@@ -28,6 +28,8 @@
               ' Načítání dat
             else
               a click='getMore' Klikněte pro načtení dalších výsledků
+
+render 'liked_jobs'
 
 #frame_detail
   = outlet

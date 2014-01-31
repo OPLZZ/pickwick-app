@@ -1,7 +1,7 @@
-.menu class=controller.menuVisible:visible
+#frame_menu
 
-  h3 
-    a.pull-right.back_button click="goToJobPostingsFromMenu"
+  header
+    a.pull-right.back_button click="backFromMenu"
         | zpět
         i.icon-chevron-right
     ' Vyhledávání
@@ -41,10 +41,10 @@
               Ember.TextField valueBinding="controller.person_education" id='person_education_box' placeholder="dosažené vzdělání"
 
           br
-          button.btn.btn-success.gtm_perform_search click='searchJobPostingsFromMenu'
+          button.btn.btn-success.gtm_perform_search click='searchFromMenu'
             ' Vyhledat
         br
         br
         .center
-          a click='goToInfoFromMenu'
+          a click='goToInfo'
             ' informace o projektu

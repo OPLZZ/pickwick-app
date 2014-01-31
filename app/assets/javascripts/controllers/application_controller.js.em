@@ -23,9 +23,15 @@ class PickwickApp.ApplicationController extends Em.Controller
       @person_education = localStorage["person_education"]
 
   pushBody: ->
-    $('.ember-application').removeClass "push-right"
-    $(".ember-application").removeClass "push-left"
+    $(".ember-application").removeClass "push-detail"
+    $(".ember-application").removeClass "push-info"
+    $(".ember-application").removeClass "push-liked"
+    $(".ember-application").removeClass "push-menu"
     if @get("menuVisible")
-      return $(".ember-application").addClass("push-right")
-    else if @get("detailVisible")
-      return $(".ember-application").addClass("push-left")
+      $(".ember-application").addClass("push-menu")
+    if @get("detailVisible")
+      $(".ember-application").addClass("push-detail")
+    if @get("infoVisible")
+      $(".ember-application").addClass("push-info")
+    if @get("likedVisible")
+      $(".ember-application").addClass("push-liked")

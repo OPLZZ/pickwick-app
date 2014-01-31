@@ -1,8 +1,6 @@
 
-view 'info'
+= outlet
 
 view 'search_menu'
 
-= outlet
-
-render 'liked_jobs'
+view 'info'
