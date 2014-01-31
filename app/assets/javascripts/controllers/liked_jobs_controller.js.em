@@ -3,10 +3,13 @@ class PickwickApp.LikedJobsController extends Ember.ArrayController with Infinit
   liked_jobs: Em.A([])
   init: ->
     if localStorage["liked_jobs"] != undefined
-      job_postings = JSON.parse(localStorage["liked_jobs"]).map (job_data)-> PickwickApp.JobPosting.create(job_data)
-      for job in job_postings
-        @addItem(job)
-      @notifyJobPostingController
+      try
+        job_postings = JSON.parse(localStorage["liked_jobs"]).map (job_data)-> PickwickApp.JobPosting.create(job_data)
+        for job in job_postings
+          @addItem(job)
+        @notifyJobPostingController
+      catch error
+        console.log("Not loaded any liked jobs - no existing cache")
 
   hasItem: (propName, value) ->
     try
