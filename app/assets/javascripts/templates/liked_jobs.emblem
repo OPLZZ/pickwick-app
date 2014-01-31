@@ -1,0 +1,16 @@
+#frame_liked
+  header
+    a.pull-left click="goToMenu"
+      .icon-magnifier
+        ' Vyhledat
+    a.pull-right click="goToIndex"
+      ' zpět
+      i.icon-reply
+    .three_column_header Oblíbené
+  .infinite-scroll-box.infinite-scroll-list
+    .row.infinite-scroll-content
+      .row-fluid
+        .list-group.m-b-small
+          each job in liked_jobs
+            render 'job_list' job
+
