@@ -23,6 +23,12 @@ $(document).ready ->
   unless navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)
     $('body').addClass('desktop')
 
+  #problem with 20 pixels for bottom bar in safari on IOS
+  console.log(navigator.userAgent)
+  if (navigator.userAgent.match(/iPad;.*CPU.*OS 7_\d/i))
+    $('html').addClass('ipad ios7')
+    $('#application_container').css('height', "#{$(window).height() - 21}px !important")
+
 PickwickApp.normalizeTouchEvent = (event) ->
   if (!event.touches)
     event.touches = event.originalEvent.touches
