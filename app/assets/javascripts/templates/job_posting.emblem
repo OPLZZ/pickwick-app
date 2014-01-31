@@ -5,11 +5,12 @@ header
 
   if title
     if is_liked
-      a.pull-right.gtm_set_liked click="setLikeDislike"
+      a.pull-right.gtm_set_liked click="setDislike"
         i class="icon-star"
     else
-      a.pull-right.gtm_remove_liked click="setLikeDislike"
+      a.pull-right.gtm_remove_liked click="setLike"
         i class="icon-star-empty"
+
     .three_column_header Detail pozice
 
 section.infinite-scroll-box.infinite-scroll-detail

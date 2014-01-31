@@ -1,5 +1,5 @@
 class PickwickApp.JobPostingController extends Ember.ObjectController
-
+  needs: ["likedJobs"]
   actions:
     callPhone: ->
       url = "tel:#{@get('content.contact.phone')}"
@@ -50,37 +50,17 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
       window.open(url, '_self')
 
 
-
-    setLikeDislike: ->
-      if localStorage["liked_jobs"] == undefined
-        liked_jobs    = {}
-      else
-        liked_jobs    = JSON.parse(localStorage["liked_jobs"])
-
+    setLike: ->
       job_posting = @get('content')
-      if job_posting.get("is_liked") == true
-        job_posting.set("is_liked", false)
+      liked_jobs = @controllers.likedJobs
+      liked_jobs.addItem(job_posting)
+      #let ember know that function is found and called
+      return false
 
-        # delete data from local Storage
-        if localStorage["liked_jobs"] != undefined
-          delete liked_jobs[job_posting.id]
-
-      else
-        job_posting.set("is_liked", true)
-        # add job posting to local Storage
-        liked_jobs[job_posting.id] = job_posting
-
-      localStorage["liked_jobs"]    = JSON.stringify(liked_jobs)
-
-      #set hasLikedJobs for know if there are any liked jobs
-      if liked_jobs && Object.keys(liked_jobs).length > 0
-        @controllerFor('job_postings').set('hasLikedJobs', true)
-      else
-        #there are no liked jobs
-        @controllerFor('job_postings').set('hasLikedJobs', false)
-        @controllerFor('job_postings').set "likedVisible", false
-
-        #if showing liked page redirect back to results
-        if @controllerFor('job_postings').get('likedVisible')
-          @controllerFor('job_postings').send('back_from_liked')
+    setDislike: ->
+      job_posting = @get('content')
+      liked_jobs = @controllers.likedJobs
+      liked_jobs.removeItem('id', job_posting.id)
+      #let ember know that function is found and called
+      return false
 

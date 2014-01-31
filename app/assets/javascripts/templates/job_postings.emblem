@@ -4,7 +4,7 @@
       .icon-magnifier
         ' Vyhledat
     if hasLikedJobs
-      a.pull-right click="goToLikedJobPostings"
+      a.pull-right click="goToLikedJobs"
         ' oblíbené
         i.icon-star
     .three_column_header Výsledky vyhledávání
@@ -12,8 +12,8 @@
     .row.infinite-scroll-content
       .row-fluid
         .list-group.m-b-small
-          each job_posting in controller
-            render 'job_list' job_posting
+          each job in controller
+            render 'job_list' job
 
         if loadingError
           ' Problém s načtením dat z internetu

@@ -13,34 +13,30 @@
 .center
   text-align: center
 
+#frame_index, #frame_detail, #frame_liked
+  -webkit-transition: all 0.3s ease
+  -moz-transition: all 0.3s ease
+  transition: all 0.3s ease
+  width: 100%
+  position: absolute
+  top: 0px
+  bottom: 0px
+  z-index: 2
+  background-color: #fff
+  padding: 0px
+  border-right: 1px solid #dddddd
+
 #frame_index
-  -webkit-transition: all 0.3s ease
-  -moz-transition: all 0.3s ease
-  transition: all 0.3s ease
   left: 0px
-  width: 100%
-  position: absolute
-  top: 0px
-  bottom: 0px
-  z-index: 2
-  background-color: #fff
-  padding: 0px
-  border-right: 1px solid #dddddd
-
-
 #frame_detail
-  -webkit-transition: all 0.3s ease
-  -moz-transition: all 0.3s ease
-  transition: all 0.3s ease
   left: 100%
-  width: 100%
-  position: absolute
-  top: 0px
-  bottom: 0px
-  z-index: 2
-  background-color: #fff
-  padding: 0px
-  border-right: 1px solid #dddddd
+#frame_liked
+  top: 100%
+
+.push-liked #frame_liked
+  top: 0%
+.push-left.push-liked #frame_liked
+  left: 100%
 
 .menu
   &.visible

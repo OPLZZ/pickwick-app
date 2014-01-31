@@ -1,4 +1,4 @@
-.job_posting.list click="goToJobPosting job_posting" data-id=id
+.job_posting.list click="goToJobPosting job" data-id=id
   i.icon-chevron-right.link_to_detail.gtm_view_detail style="float:right"
 
   .pull-right

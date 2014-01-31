@@ -127,54 +127,21 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
       @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
       @fetchPage(true)
 
-    show_liked: ->
-      @set('cache_for_search', Em.A([]))
-      for item in @get('job_posting_cache')
-        @get('cache_for_search').pushObject(item)
-
-      @controller.set('loadingMore', true)
-      @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
-      for id, item of JSON.parse(localStorage["liked_jobs"])
-        item.id = id
-        #push object to list of liked jobs
-        @get('job_posting_cache').pushObject(PickwickApp.JobPosting.create(item))
-
-    back_from_liked: ->
-      @controller.set('loadingMore', false)
-      @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
-
-      #get liked status from local storage
-      if localStorage["liked_jobs"] == undefined
-        liked_jobs    = {}
-      else
-        liked_jobs    = JSON.parse(localStorage["liked_jobs"])
-
-      if @get('cache_for_search') != undefined
-        for item in @get('cache_for_search')
-          #fix liked jobs
-          if liked_jobs[item.id] != undefined
-            item.set("is_liked", true)
-          else
-            item.set("is_liked", false)
-          @get('job_posting_cache').pushObject(item)
-
-
-
   fetchPage: (search) ->
     app_controller = @controllerFor('application')
-    cont = @controllerFor('job_postings')
-    ccc  = @
+    controller = @controllerFor('job_postings')
+    liked_jobs = @controllerFor('liked_jobs')
 
     #hide error
-    cont.set('loadingError', false)
+    controller.set('loadingError', false)
 
     if search
-      cont.set('urlForLoadMore', undefined)
+      controller.set('urlForLoadMore', undefined)
 
       #build arguments for search
       args = {
         token: "59a3b1a51c80c8db71c9a881d8b23c6e2b41727c"
-        per_page: cont.get('perPage')
+        per_page: controller.get('perPage')
       }
 
       if app_controller.search_query.length > 0
@@ -204,7 +171,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
 
       url = "http://pickwick-api.dev.vhyza.eu/vacancies"
     else
-      url = cont.get('urlForLoadMore')
+      url = controller.get('urlForLoadMore')
 
     $.ajax(
       method: 'GET'
@@ -214,26 +181,29 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
     ).done( (data) ->
       postings = data.vacancies.map (job_data) -> PickwickApp.JobPosting.create(job_data)
       if data.links && data.links.next
-        cont.set('urlForLoadMore', data.links.next)
+        controller.set('urlForLoadMore', data.links.next)
       else
-        cont.set('noMoreItems', true)
+        controller.set('noMoreItems', true)
 
-      #set liked status from local storage
-      if localStorage["liked_jobs"] == undefined
-        liked_jobs    = {}
-      else
-        liked_jobs    = JSON.parse(localStorage["liked_jobs"])
+
+
       for job_posting in postings
-        if liked_jobs[job_posting.id] != undefined
+        liked = liked_jobs.hasItem('id', job_posting.id)
+        if liked != undefined && liked.is_liked == true
           job_posting.set("is_liked", true)
+          #recreate object in liked jobs from search (update attributes)
+          liked_jobs.removeItem('id', job_posting.id)
+          #add it again
+          liked_jobs.addItem(job_posting)
 
-      #add downloaded job postings to array
-      ccc.get('job_posting_cache').pushObjects(postings)
+        controller.addItem(job_posting)
+
+
 
       #stop loading more
-      cont.set('loadingMore', false)
+      controller.set('loadingMore', false)
 
     ).error (error)->
 
       #show loading error
-      cont.set('loadingError', true)
+      controller.set('loadingError', true)
