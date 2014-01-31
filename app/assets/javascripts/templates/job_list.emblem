@@ -1,0 +1,26 @@
+.job_posting.list click="goToJobPosting job_posting" data-id=id
+  i.icon-chevron-right.link_to_detail.gtm_view_detail style="float:right"
+
+  .pull-right
+    if is_liked
+      i class="icon-star"
+    else
+      i class="icon-star-empty"
+
+  .title= title
+  if employer.company
+    .contact= employer.company
+  else
+    if employer.name
+      .contact= employer.name
+  ul
+    if location.city
+      li.icon-location
+        = location.city
+        = distance_text
+    if employment_type
+      li.icon-tie
+        = employment_type_translated
+    if compensation
+      li.icon-money
+        = compensation

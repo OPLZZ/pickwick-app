@@ -3,92 +3,31 @@
     a.pull-left click="toggleMenu"
       .icon-magnifier
         ' Vyhledat
-    if likedVisible
-      a.pull-right click="goFromLikedJobPostings"
-        ' zpět
-        i.icon-reply
-    else
-      if hasLikedJobs
-        a.pull-right click="goToLikedJobPostings"
-          ' oblíbené
-          i.icon-star
+    if hasLikedJobs
+      a.pull-right click="goToLikedJobPostings"
+        ' oblíbené
+        i.icon-star
     .three_column_header Výsledky vyhledávání
   .infinite-scroll-box.infinite-scroll-list
     .row.infinite-scroll-content
       .row-fluid
         .list-group.m-b-small
           each job_posting in controller
-
-            if likedVisible
-              if job_posting.is_liked
-                .job_posting.list.gtm_view_liked_detail click="goToJobPosting job_posting" data-id=job_posting.id
-                  i.icon-chevron-right.link_to_detail style="float:right"
-
-                  .pull-right
-                    if job_posting.is_liked
-                      i class="icon-star"
-                    else
-                      i class="icon-star-empty"
-
-                  .title= job_posting.title
-                  if job_posting.employer.company
-                    .contact= job_posting.employer.company
-                  else
-                    if job_posting.employer.name
-                      .contact= job_posting.employer_name
-                  ul
-                    if job_posting.location.city
-                      li.icon-location
-                        = job_posting.location.city
-                        = job_posting.distance_text
-                    if job_posting.employment_type
-                      li.icon-tie
-                        = job_posting.employment_type_translated
-                    if job_posting.compensation
-                      li.icon-money
-                        = job_posting.compensation
-            else
-              .job_posting.list click="goToJobPosting job_posting" data-id=job_posting.id
-                i.icon-chevron-right.link_to_detail.gtm_view_detail style="float:right"
-
-                .pull-right
-                  if job_posting.is_liked
-                    i class="icon-star"
-                  else
-                    i class="icon-star-empty"
-
-                .title= job_posting.title
-                if job_posting.employer.company
-                  .contact= job_posting.employer.company
-                else
-                  if job_posting.employer.name
-                    .contact= job_posting.employer.name
-                ul
-                  if job_posting.location.city
-                    li.icon-location
-                      = job_posting.location.city
-                      = job_posting.distance_text
-                  if job_posting.employment_type
-                    li.icon-tie
-                      = job_posting.employment_type_translated
-                  if job_posting.compensation
-                    li.icon-money
-                      = job_posting.compensation
+            render 'job_list' job_posting
 
         if loadingError
-          ' Problém s načtení dat z internetu
+          ' Problém s načtením dat z internetu
           a click='tryAgain' Zkusit znovu
         else
-          unless likedVisible
-            if noMoreItems
-              ' Došli jste na konec výsledků
+          if noMoreItems
+            ' Došli jste na konec výsledků
+          else
+            if loadingMore
+              i.icon-refresh
+              ' 
+              ' Načítání dat
             else
-              if loadingMore
-                i.icon-refresh
-                ' 
-                ' Načítání dat
-              else
-                a click='getMore' Klikněte pro načtení dalších výsledků
+              a click='getMore' Klikněte pro načtení dalších výsledků
 
 #frame_detail
   = outlet
