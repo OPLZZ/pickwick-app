@@ -36,3 +36,8 @@ https://github.com/blangslet/ember.js-mobile-animations-gestures
 
 web application will be generated to build/web/index.html 
 `RAILS_ENV=production rake build_web`
+
+
+== Running Andrid emulator
+Need to create simulator device
+`android create avd --name pickwick_test --target 1`
