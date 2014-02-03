@@ -56,7 +56,7 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
   puts "Changing assets directory from /assets/ -> assets/"
   cssdata = File.open(css_to,"r:UTF-8").read.gsub("/assets/","./")
   #add fix for IOS screen
-  cssdata += "body{padding-top:20px; background: #f7f8f8}.menu,#frame_detail,#frame_index{top:17px}"
+  cssdata += "body{padding-top:20px; background: #f7f8f8}#frame_info,#frame_menu,#frame_detail,#frame_index{top:17px}.push-liked #frame_liked{top:17px}"
   File.open(css_to, "w:UTF-8") do |fw|
     fw.write(remove_cache_id_text(cssdata))
   end
