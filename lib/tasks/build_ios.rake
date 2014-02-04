@@ -4,7 +4,7 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
 
   puts "Assets build"
   assets_dir = Rails.root.join("public","assets")
-  build_dir = Rails.root.join("build","mobiles","www")
+  build_dir = Rails.root.join("build","ios","www")
   build_assets_dir = File.join(build_dir, "assets")
 
   def remove_cache_id_text(text)
@@ -107,7 +107,7 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
   sleep(5)
 
   puts "Starting IOS Build"
-  ios_dir = Rails.root.join("build","mobiles")
+  ios_dir = Rails.root.join("build","ios")
   puts "cd #{ios_dir} && phonegap build ios"
   system "cd #{ios_dir} && phonegap build ios"
 
