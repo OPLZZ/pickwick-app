@@ -20,7 +20,7 @@ window.PickwickApp = Ember.Application.create(
 )
 
 $(document).ready ->
-  unless navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)
+  unless navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|KFSOWI/i)
     $('body').addClass('desktop')
 
   #problem with 20 pixels for bottom bar in safari on IOS
