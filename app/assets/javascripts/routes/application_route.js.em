@@ -15,7 +15,6 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       @controller.pushBody()
 
     backFromMenu: ->
-      @transitionTo "job_postings"
       @controller.set "menuVisible", false
       @controller.pushBody()
 

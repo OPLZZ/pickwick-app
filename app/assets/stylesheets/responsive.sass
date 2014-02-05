@@ -24,44 +24,24 @@
 
 
 @media all and (min-width: 800px)
-  #frame_index,#frame_detail,#frame_liked,#frame_info,#frame_menu
+
+  #frame_index, #frame_detail, #frame_liked, #frame_info, #frame_menu
     width: 50%
 
   #frame_index
-    left: 0px
-  #frame_detail
+    left: 0%
+  #frame_detail, .push-detail #frame_detail
     left: 50%
+    a.pull-left
+      display: none
   #frame_liked
     top: 100%
-    left: 0px
   #frame_info
-    left: 100%
+    left: -100%
   #frame_menu
-    left: 50%
-
-  .push-liked #frame_liked
-    top: 0
-  .push-detail #frame_detail
-    left: 50%
-  .push-detail #frame_menu
-    left: 100%
-  .push-menu #frame_menu
-    left: 50%
-  .push-info #frame_info
-    left: 50%
+    left: -100%
 
 
-  #frame_index, #frame_liked
-    a.pull-left
-      opacity: 0
-
-  .push-detail
-    #frame_index, #frame_liked
-      a.pull-left
-        opacity: 1.0
-
-  a.back_button
-    display: none
 
 @media all and (min-width: 1200px)
   #frame_index,#frame_liked,#frame_info,#frame_menu

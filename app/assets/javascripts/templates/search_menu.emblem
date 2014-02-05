@@ -22,7 +22,7 @@
           .row.form-group
             Ember.TextArea valueBinding="controller.person_about" id='person_about_box' rows='1' placeholder='Něco o sobě'
 
-          .row.form-group
+          .row.form-group style="display:none"
             Ember.TextField valueBinding="controller.person_education" id='person_education_box' placeholder="Dosažené vzdělání"
 
           br

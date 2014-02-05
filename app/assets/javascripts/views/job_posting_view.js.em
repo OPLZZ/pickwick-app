@@ -18,18 +18,18 @@ class PickwickApp.JobPostingView extends Ember.View
 
   jobPostingDidChange:(->
 
-    #fix - open detail if loading from url
-    app = @controller.controllers.application
-    app.set "detailVisible", true
-    app.pushBody()
-
     $('#detail_map').hide()
 
     $('.job_posting.list').removeClass('active')
     job_posting_object = @get('controller.content')
 
-
     if job_posting_object != undefined
+
+      #fix - open detail if loading from url
+      app = @controller.controllers.application
+      app.set "detailVisible", true
+      app.pushBody()
+
       $(".job_posting.list[data-id=#{job_posting_object.id}]").addClass('active')
 
       if $('#detail_map').length > 0 && job_posting_object.get('location.coordinates') && job_posting_object.get('location.coordinates.lat')
