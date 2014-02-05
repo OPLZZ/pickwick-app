@@ -13,9 +13,16 @@
       .row-fluid
         if loadingSimilar
           .center.info-similar
-            ' Nenašli jsme žádné výsledky,
+            ' Pro 
+            b= searchQuery
+            '  jsme nic nenašli,
             br
-            ' pokusili jsme se pro vás najít podobné.
+            ' můžete
+            a click="goToMenu" style="display:inline"
+              ' upravit vyhledávání,
+            br
+            ' nebo si prohlédnout ostatní nabídky.
+
         .list-group.m-b-small
           each job in controller
             render 'job_list' job

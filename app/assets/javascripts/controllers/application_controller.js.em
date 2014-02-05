@@ -4,8 +4,8 @@ class PickwickApp.ApplicationController extends Em.Controller
   likedVisible:  false
   detailVisible: false
   search_query: ''
-  search_location: "Aktuální pozice"
-  locations: Em.A(["Aktuální pozice","Praha","Brno","Břeclav","Cheb","Chomutov","Děčín","Frýdek-Místek","Havlíčkův Brod","Havířov","Hodonín","Hradec Králové","Jablonec nad Nisou","Jihlava","Karlovy Vary","Karviná","Kladno","Kolín","Krnov","Kroměříž","Liberec","Litoměřice","Litvínov","Mladá Boleslav","Most","Nový Jičín","Olomouc","Opava","Orlová","Ostrava","Pardubice","Plzeň","Prostějov","Písek","Přerov","Příbram","Sokolov","Teplice","Trutnov","Tábor","Třebíč","Třinec","Uherské Hradiště","Valašské Meziříčí","Vsetín","Zlín","Znojmo","Ústí nad Labem","Česká Lípa","České Budějovice","Český Těšín","Šumperk"])
+  search_location: "Aktuální poloha"
+  locations: Em.A(["Aktuální poloha","Praha","Brno","Břeclav","Cheb","Chomutov","Děčín","Frýdek-Místek","Havlíčkův Brod","Havířov","Hodonín","Hradec Králové","Jablonec nad Nisou","Jihlava","Karlovy Vary","Karviná","Kladno","Kolín","Krnov","Kroměříž","Liberec","Litoměřice","Litvínov","Mladá Boleslav","Most","Nový Jičín","Olomouc","Opava","Orlová","Ostrava","Pardubice","Plzeň","Prostějov","Písek","Přerov","Příbram","Sokolov","Teplice","Trutnov","Tábor","Třebíč","Třinec","Uherské Hradiště","Valašské Meziříčí","Vsetín","Zlín","Znojmo","Ústí nad Labem","Česká Lípa","České Budějovice","Český Těšín","Šumperk"])
 
   person_about: ''
   person_education: ''

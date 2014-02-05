@@ -51,3 +51,4 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       @controller.set "infoVisible", false
       @controller.set "detailVisible", false
       @controller.pushBody()
+      $('#search_query_text_box').focus()

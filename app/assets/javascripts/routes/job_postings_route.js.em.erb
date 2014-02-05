@@ -152,14 +152,16 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
       }
 
       if similar == false
+        controller.set 'searchQuery', ''
         args.preference =  "#{app_controller.person_about} #{app_controller.person_education}"
         if app_controller.search_query.length > 0
           args.query = app_controller.search_query
       else
+        controller.set 'searchQuery', app_controller.search_query
         args.preference = "#{app_controller.search_query} #{app_controller.person_about} #{app_controller.person_education}"
 
       #has location setted to geo
-      if app_controller.search_location == "Aktuální pozice"
+      if app_controller.search_location == "Aktuální poloha"
         if @get('geolocation_object') == undefined
           @set('geolocation_object', Em.GeoLocation.create({autoUpdate: true}))
 

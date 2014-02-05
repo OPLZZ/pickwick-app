@@ -14,7 +14,7 @@
         form.col
 
           .row.form-group
-            Ember.TextField valueBinding="controller.search_query" id='search_query_text_box' placeholder='název pozice'
+            Ember.TextField valueBinding="controller.search_query" id='search_query_text_box' placeholder='Název pozice'
 
           .row.form-group.select-chevron
             view Ember.Select content=locations value=search_location id='search_location_box'
@@ -23,7 +23,7 @@
             Ember.TextArea valueBinding="controller.person_about" id='person_about_box' rows='1' placeholder='Něco o sobě'
 
           .row.form-group
-            Ember.TextField valueBinding="controller.person_education" id='person_education_box' placeholder="dosažené vzdělání"
+            Ember.TextField valueBinding="controller.person_education" id='person_education_box' placeholder="Dosažené vzdělání"
 
           br
           button.btn.btn-success.gtm_perform_search click='searchFromMenu'
