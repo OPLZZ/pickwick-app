@@ -11,23 +11,29 @@
   .infinite-scroll-box.infinite-scroll-list
     .row.infinite-scroll-content
       .row-fluid
+        if loadingSimilar
+          .center.info-similar
+            ' Nenašli jsme žádné výsledky,
+            br
+            ' pokusili jsme se pro vás najít podobné.
         .list-group.m-b-small
           each job in controller
             render 'job_list' job
 
-        if loadingError
-          ' Problém s načtením dat z internetu
-          a click='tryAgain' Zkusit znovu
-        else
-          if noMoreItems
-            ' Došli jste na konec výsledků
+        .center.info-loading
+          if loadingError
+            ' Problém s načtením dat z internetu
+            a click='tryAgain' Zkusit znovu
           else
-            if loadingMore
-              i.icon-refresh
-              ' 
-              ' Načítání dat
+            if noMoreItems
+              ' Došli jste na konec výsledků
             else
-              a click='getMore' Klikněte pro načtení dalších výsledků
+              if loadingMore
+                i.icon-refresh
+                ' 
+                ' Načítání dat
+              else
+                a click='getMore' Klikněte pro načtení dalších výsledků
 
 render 'liked_jobs'
 

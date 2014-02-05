@@ -3,6 +3,7 @@ class PickwickApp.JobPostingsController extends Ember.ArrayController with Infin
   urlForLoadMore: undefined
   loadingError:  false
   hasLikedJobs:  false
+  loadingSimilar: true
   actions: 
     search: () ->
       @set("page", 0)

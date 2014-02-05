@@ -1,5 +1,5 @@
 class PickwickApp.JobPostingController extends Ember.ObjectController
-  needs: ["likedJobs"]
+  needs: ["likedJobs", 'application']
   actions:
     callPhone: ->
       url = "tel:#{@get('content.contact.phone')}"
