@@ -10,7 +10,9 @@ clone repo
 
 `rake db:seed`
 
-`rails s`
+You need to get token from api.damepraci.cz
+
+`PICKWICK_TOKEN=xxxxxxx rails s`
 
 open browser at http://127.0.0.1:3000
 
@@ -38,6 +40,6 @@ web application will be generated to build/web/index.html
 `RAILS_ENV=production rake build_web`
 
 
-== Running Andrid emulator
+== Running Android emulator
 Need to create simulator device
 `android create avd --name pickwick_test --target 1`

@@ -105,7 +105,6 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
 
   model: ->
     @set('job_posting_cache', Em.A([]))
-    @fetchPage(true)
     @get('job_posting_cache')
 
   actions:
@@ -124,10 +123,18 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
     search: ->
       @controller.set('loadingMore', true)
       @controller.set('noMoreItems', false)
+      @controller.set('loadingSimilar', false)
       @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
       @fetchPage(true)
 
-  fetchPage: (search) ->
+    search_similar: ->
+      @controller.set('loadingMore', true)
+      @controller.set('noMoreItems', false)
+      @controller.set('loadingSimilar', true)
+      @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
+      @fetchPage(true, true)
+
+  fetchPage: (search, similar = false) ->
     app_controller = @controllerFor('application')
     controller = @controllerFor('job_postings')
     liked_jobs = @controllerFor('liked_jobs')
@@ -140,14 +147,16 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
 
       #build arguments for search
       args = {
-        token: "59a3b1a51c80c8db71c9a881d8b23c6e2b41727c"
+        token: "<%= ENV['PICKWICK_TOKEN'] %>"
         per_page: controller.get('perPage')
       }
 
-      if app_controller.search_query.length > 0
-        args.query = app_controller.search_query
-
-      args.preference =  "#{app_controller.search_query} #{app_controller.person_about} #{app_controller.person_education}"
+      if similar == false
+        args.preference =  "#{app_controller.person_about} #{app_controller.person_education}"
+        if app_controller.search_query.length > 0
+          args.query = app_controller.search_query
+      else
+        args.preference = "#{app_controller.search_query} #{app_controller.person_about} #{app_controller.person_education}"
 
       #has location setted to geo
       if app_controller.search_location == "Aktuální pozice"
@@ -179,29 +188,30 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
       url: url
       data: args
     ).done( (data) ->
-      postings = data.vacancies.map (job_data) -> PickwickApp.JobPosting.create(job_data)
-      if data.links && data.links.next
-        controller.set('urlForLoadMore', data.links.next)
+      if data.total == 0
+        controller.send('search_similar')
       else
-        controller.set('noMoreItems', true)
+        postings = data.vacancies.map (job_data) -> PickwickApp.JobPosting.create(job_data)
+        if data.links && data.links.next
+          controller.set('urlForLoadMore', data.links.next)
+        else
+          controller.set('noMoreItems', true)
+
+        for job_posting in postings
+          liked = liked_jobs.hasItem('id', job_posting.id)
+          if liked != undefined && liked.is_liked == true
+            job_posting.set("is_liked", true)
+            #recreate object in liked jobs from search (update attributes)
+            liked_jobs.removeItem('id', job_posting.id)
+            #add it again
+            liked_jobs.addItem(job_posting)
+
+          controller.addItem(job_posting)
 
 
 
-      for job_posting in postings
-        liked = liked_jobs.hasItem('id', job_posting.id)
-        if liked != undefined && liked.is_liked == true
-          job_posting.set("is_liked", true)
-          #recreate object in liked jobs from search (update attributes)
-          liked_jobs.removeItem('id', job_posting.id)
-          #add it again
-          liked_jobs.addItem(job_posting)
-
-        controller.addItem(job_posting)
-
-
-
-      #stop loading more
-      controller.set('loadingMore', false)
+        #stop loading more
+        controller.set('loadingMore', false)
 
     ).error (error)->
 
