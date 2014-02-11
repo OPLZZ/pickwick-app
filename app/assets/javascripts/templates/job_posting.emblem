@@ -5,7 +5,7 @@ header
 
   if title
     if is_liked
-      a.pull-right.gtm_set_liked click="setDislike"
+      a.pull-right.liked.gtm_set_liked click="setDislike"
         i class="icon-star"
     else
       a.pull-right.gtm_remove_liked click="setLike"
@@ -16,6 +16,7 @@ header
 section.infinite-scroll-box.infinite-scroll-detail
   .main.job_posting_detail
     h1 = title
+
     if employer.company
       h2
         = employer.company
@@ -23,6 +24,17 @@ section.infinite-scroll-box.infinite-scroll-detail
       if job_posting.employer.name
         h2
           = employer_name
+
+    if is_liked
+      a.contact_link.gtm_set_liked click="setDislike"
+        i class="icon-star"
+        '   Odebrat z oblíbených
+    else
+      a.contact_link.gtm_remove_liked click="setLike"
+        i class="icon-star-empty"
+        '   Přidat do oblíbených
+
+
     if url
       a href= url
         = url
@@ -50,34 +62,30 @@ section.infinite-scroll-box.infinite-scroll-detail
             if contact.email
               ' ,
               = contact.email
-    == description_with_brs
+
+    .detail_text
+      == description_with_brs
+
+    .row
+      if contact.phone
+        a.contact_link.gtm_contact_phone click='callPhone'
+          i.icon-phone
+          '   Zavolat
+
+      if contact.email
+        a.contact_link.gtm_contact_mail click='sendMail'
+          i.icon-envelope
+          '   Poslat mail
+
+      if location.coordinates.lat
+        a.contact_link.gtm_contact_map click='showMap'
+          i.icon-map
+          '   Zobrazit na mapě
+
+      if title
+        a.contact_link.gtm_job_forward click='forwardJob'
+          i.icon-share
+          '   Sdílet mailem
 
     #detail_map click='showMap'
 
-.detail_contact
-  .row
-    if contact.phone
-      .col-sm-3.col.center
-        a.col-sm-4.col-offset-3.col.gtm_contact_phone click='callPhone'
-          i.icon-phone
-    else
-      .col-sm-3.col.center
-
-    if location.coordinates.lat
-      .col-sm-3.col.center
-        a.col-sm-4.col-offset-3.col.gtm_contact_map click='showMap'
-          i.icon-map
-    else
-      .col-sm-3.col.center
-
-    if contact.email
-      .col-sm-3.col.center
-        a.col-sm-4.col-offset-3.col.gtm_contact_mail click='sendMail'
-          i.icon-envelope
-    else
-      .col-sm-3.col.center
-
-    if title
-      .col-sm-3.col.center
-        a.col-sm-4.col-offset-3.col.gtm_job_forward click='forwardJob'
-          i.icon-share

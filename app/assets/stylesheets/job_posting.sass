@@ -16,7 +16,7 @@
     [class^="icon-"], [class*=" icon-"] 
       color: #999
       &:before
-        color: #999
+        color: #F9B233
   .title
     font-weight: bold
     &:first-letter
@@ -40,11 +40,20 @@
       line-height: 1
   [class^="icon-"], [class*=" icon-"] 
     &:before
-      color: #ddd
+      color: #F9B233
       margin-right: 5px
       top: 1px
       position: relative
+  .link_to_detail
+    &:before
+      color: #ccc
 
+.liked
+  .icon-star
+    color: #F9B233
+    &:hover
+      color: #C18729
+ 
 .job_posting_detail
   margin: 20px
   h1
@@ -67,3 +76,47 @@
       font-size: 14px
       line-height: 20px
       list-style: none
+
+  .detail_text
+    margin-bottom: 25px
+.contact_link
+  display: inline-block
+  width: 100%
+  padding: 5px 10px
+  margin-bottom: 8px
+  font-weight: 500
+  line-height: 1.428571429
+  text-align: left
+  white-space: nowrap
+  vertical-align: middle
+  cursor: pointer
+  color: white
+  border: 1px solid transparent
+  border-radius: 4px
+  &:focus
+    outline: thin dotted #333
+    outline: 5px auto -webkit-focus-ring-color
+    outline-offset: -2px
+  &:hover, &:focus
+    color: #fff
+    text-decoration: none
+  &:active, &.active
+    background-image: none
+    outline: 0
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
+  &.disabled, &[disabled]
+    pointer-events: none
+    cursor: default
+    opacity: 0.65
+    filter: alpha(opacity = 65)
+    -webkit-box-shadow: none
+    box-shadow: none
+  background-color: #5cb85c
+  border-color: #5cb85c
+  &:hover, &:focus, &:active, &.active
+    background-color: #4cae4c
+    border-color: #449d44
+  &.disabled:hover, &[disabled]:hover
+    background-color: #5cb85c
+    border-color: #5cb85c

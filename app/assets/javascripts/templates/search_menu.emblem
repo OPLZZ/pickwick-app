@@ -12,18 +12,26 @@
       .col
 
         form.col
-
+          .row
+            label for="search_query_text_box"
+              ' Název pozice
           .row.form-group
-            Ember.TextField valueBinding="controller.search_query" id='search_query_text_box' placeholder='Název pozice'
+            Ember.TextField valueBinding="controller.search_query" id='search_query_text_box' name='search_query_text_box' placeholder='např. hlídač korálového útesu'
 
+          .row
+            label for="search_location_box"
+              ' Kde byste rádi pracovali
           .row.form-group.select-chevron
-            view Ember.Select content=locations value=search_location id='search_location_box'
+            view Ember.Select content=locations value=search_location id='search_location_box' name="search_location_box"
 
+          .row
+            label for="person_about_box"
+              ' Umíte, zvládáte, baví vás
           .row.form-group
-            Ember.TextArea valueBinding="controller.person_about" id='person_about_box' rows='1' placeholder='Něco o sobě'
+            Ember.TextArea valueBinding="controller.person_about" id='person_about_box' name='person_about_box' rows='1' placeholder='např. mám řidičský průkaz a mluvím anglicky'
 
           .row.form-group style="display:none"
-            Ember.TextField valueBinding="controller.person_education" id='person_education_box' placeholder="Dosažené vzdělání"
+            Ember.TextField valueBinding="controller.person_education" id='person_education_box' name="person_education_box" placeholder="Dosažené vzdělání"
 
           br
           button.btn.btn-success.gtm_perform_search click='searchFromMenu'

@@ -4,10 +4,10 @@
       .icon-magnifier
         ' Vyhledat
     if hasLikedJobs
-      a.pull-right click="goToLiked"
+      a.pull-right.liked click="goToLiked"
         ' oblíbené
         i.icon-star
-    .three_column_header Výsledky vyhledávání
+    .three_column_header Výsledky
   .infinite-scroll-box.infinite-scroll-list
     .row.infinite-scroll-content
       .row-fluid
