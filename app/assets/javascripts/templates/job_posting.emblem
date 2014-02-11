@@ -52,7 +52,7 @@ section.infinite-scroll-box.infinite-scroll-detail
               = contact.email
     == description_with_brs
 
-    #detail_map
+    #detail_map click='showMap'
 
 .detail_contact
   .row

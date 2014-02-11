@@ -34,33 +34,14 @@ class PickwickApp.JobPostingView extends Ember.View
 
       if $('#detail_map').length > 0 && job_posting_object.get('location.coordinates') && job_posting_object.get('location.coordinates.lat')
 
-        job_posting_location = new google.maps.LatLng(job_posting_object.get('location.coordinates.lat'), job_posting_object.get('location.coordinates.lon'))
+        job_posting_location = "#{job_posting_object.get('location.coordinates.lat')},#{job_posting_object.get('location.coordinates.lon')}"
 
         $('#detail_map').show()
+        zoom = 12
 
-        mapOptions = {
-          zoom: 15,
-          center: job_posting_location,
-          panControl: false,
-          draggable: false,
-          zoomControl: false,
-          zoomControlOptions: {
-            style: google.maps.ZoomControlStyle.SMALL
-          },
-          mapTypeControl: false,
-          scaleControl: false,
-          streetViewControl: false,
-          overviewMapControl: false
-        }
+        if job_posting_object.distance && job_posting_object.distance < 10
+          zoom = 15
 
-        if PickwickApp.google_map != undefined
-          PickwickApp.google_marker = null
-          PickwickApp.google_map = null
+        $('#detail_map').html("<img src='http://maps.googleapis.com/maps/api/staticmap?ll=#{job_posting_location}&zoom=#{zoom}&size=640x350&maptype=roadmap&markers=color:red%7Csize:big%7C#{job_posting_location}&sensor=false'>")
 
-        PickwickApp.google_map = new google.maps.Map(document.getElementById('detail_map'), mapOptions)
-        PickwickApp.google_marker = new google.maps.Marker({
-            position: job_posting_location,
-            map: PickwickApp.google_map,
-            title:job_posting_object.get('title')
-        })
   ).observes('controller.content')
