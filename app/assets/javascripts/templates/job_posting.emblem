@@ -75,7 +75,7 @@ section.infinite-scroll-box.infinite-scroll-detail
       if contact.email
         a.contact_link.gtm_contact_mail click='sendMail'
           i.icon-envelope
-          '   Poslat mail
+          '   Kontaktovat e-mailem
 
       if location.coordinates.lat
         a.contact_link.gtm_contact_map click='showMap'
@@ -85,7 +85,7 @@ section.infinite-scroll-box.infinite-scroll-detail
       if title
         a.contact_link.gtm_job_forward click='forwardJob'
           i.icon-share
-          '   Sdílet mailem
+          '   Sdílet e-mailem
 
     #detail_map click='showMap'
 
