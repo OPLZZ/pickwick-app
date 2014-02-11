@@ -11,6 +11,47 @@ class PickwickApp.ApplicationController extends Em.Controller
   person_education: ''
   educations: Em.A(['nechci uvádět', 'základní škola', 'střední škola s maturitou', 'vysoká škola'])
 
+  currentPathDidChange:( ->
+    path = @get('currentPath')
+
+    $(".ember-application").removeClass "push-detail"
+    $(".ember-application").removeClass "push-info"
+    $(".ember-application").removeClass "push-liked"
+    $(".ember-application").removeClass "push-menu"
+
+    if path == "job_postings.index"
+      @detailVisible = false
+      @infoVisible = false
+      @menuVisible = false
+      @likedVisible = false
+
+    if path == "job_postings.job_posting"
+      @detailVisible = true
+
+    if path == "job_postings.search"
+      @menuVisible = true
+      @infoVisible = false
+
+    if path == "job_postings.info"
+      @menuVisible = false
+      @infoVisible = true
+
+    if path == "job_postings.liked"
+      @likedVisible = true
+
+    if @menuVisible
+      $(".ember-application").addClass("push-menu")
+    if @detailVisible
+      $(".ember-application").addClass("push-detail")
+    if @infoVisible
+      $(".ember-application").addClass("push-info")
+    if @likedVisible
+      $(".ember-application").addClass("push-liked")
+
+    @pushBody()
+
+  ).observes('currentPath')
+
   init: ->
     #fill search for first time
     if localStorage["search_query"] != undefined
@@ -21,17 +62,3 @@ class PickwickApp.ApplicationController extends Em.Controller
       @person_about = localStorage["person_about"]
     if localStorage["person_education"] != undefined
       @person_education = localStorage["person_education"]
-
-  pushBody: ->
-    $(".ember-application").removeClass "push-detail"
-    $(".ember-application").removeClass "push-info"
-    $(".ember-application").removeClass "push-liked"
-    $(".ember-application").removeClass "push-menu"
-    if @get("menuVisible")
-      $(".ember-application").addClass("push-menu")
-    if @get("detailVisible")
-      $(".ember-application").addClass("push-detail")
-    if @get("infoVisible")
-      $(".ember-application").addClass("push-info")
-    if @get("likedVisible")
-      $(".ember-application").addClass("push-liked")

@@ -4,19 +4,12 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       if job_posting
         $('.infinite-scroll-detail').scrollTo({top: 0, left: 0}, {duration:0})
       @transitionTo "job_posting", job_posting
-      @controller.set "menuVisible", false
-      @controller.set "infoVisible", false
-      @controller.set "detailVisible", true
-      @controller.pushBody()
 
     backFromDetail: ->
       @transitionTo "job_postings"
-      @controller.set "detailVisible", false
-      @controller.pushBody()
 
     backFromMenu: ->
-      @controller.set "menuVisible", false
-      @controller.pushBody()
+      @transitionTo "job_postings"
 
     searchFromMenu: ->
       @controllerFor('job_postings').send('search')
@@ -25,29 +18,17 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       localStorage["search_location"]  = @controller.search_location
       localStorage["person_about"]     = @controller.person_about
       localStorage["person_education"] = @controller.person_education
-      @controller.set "menuVisible", false
-      @controller.set "likedVisible",  false
-      @controller.pushBody()
+      @transitionTo "job_postings"
 
     goToLiked: ->
-      @controller.set "likedVisible", true
-      @controller.pushBody()
+      @transitionTo "job_postings.liked"
 
     goToIndex: ->
-      @controller.set "likedVisible",  false
-      @controller.set "detailVisible", false
-      @controller.set "menuVisible", false
-      @controller.set "infoVisible", false
-      @controller.pushBody()
+      @transitionTo "job_postings"
 
     goToInfo: ->
-      @controller.set "menuVisible", false
-      @controller.set "infoVisible", true
-      @controller.pushBody()
+      @transitionTo "job_postings.info"
 
     goToMenu: ->
-      @controller.set "menuVisible", true
-      @controller.set "infoVisible", false
-      @controller.set "detailVisible", false
-      @controller.pushBody()
-      $('#search_query_text_box').focus()
+      @transitionTo "job_postings.search"
+
