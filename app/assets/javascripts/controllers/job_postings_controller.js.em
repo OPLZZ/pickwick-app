@@ -1,4 +1,4 @@
-class PickwickApp.JobPostingsController extends Ember.ArrayController with InfiniteScroll.ControllerMixin
+class PickwickApp.JobPostingsController extends Ember.ArrayController
   perPage: 25
   urlForLoadMore: undefined
   loadingError:  false

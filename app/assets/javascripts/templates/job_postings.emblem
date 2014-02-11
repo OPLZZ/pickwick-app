@@ -27,7 +27,7 @@
           each job in controller
             render 'job_list' job
 
-        .center.info-loading
+        .center.info-loading.in_view_postings
           if loadingError
             ' Problém s načtením dat z internetu
             a click='tryAgain' Zkusit znovu

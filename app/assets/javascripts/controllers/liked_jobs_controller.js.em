@@ -1,4 +1,4 @@
-class PickwickApp.LikedJobsController extends Ember.ArrayController with InfiniteScroll.ControllerMixin
+class PickwickApp.LikedJobsController extends Ember.ArrayController
   needs: ["jobPostings", "application"]
   liked_jobs: Em.A([])
   init: ->

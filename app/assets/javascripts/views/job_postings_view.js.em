@@ -1,11 +1,11 @@
 # for more details see: http://emberjs.com/guides/views/
 
-class PickwickApp.JobPostingsView extends Ember.View with InfiniteScroll.ViewMixin
+class PickwickApp.JobPostingsView extends Ember.View
   templateName: 'job_postings'
   scrolling_element: '.infinite-scroll-list'
 
   didInsertElement: ->
-    @setupInfiniteScrollListener()
+    @setupInView()
     if localStorage["liked_jobs"] != undefined && Object.keys(JSON.parse(localStorage["liked_jobs"])).length > 0
       @controller.set('hasLikedJobs', true)
 
@@ -13,4 +13,14 @@ class PickwickApp.JobPostingsView extends Ember.View with InfiniteScroll.ViewMix
     @controller.send('search')
 
   willDestroyElement: ->
-    @teardownInfiniteScrollListener()
+    @teardownInView()
+
+  setupInView: ->
+    controller = @controller
+    $('.in_view_postings').bind('inview', (event, isInView, visiblePartX, visiblePartY) ->
+      if (isInView)
+        controller.send('inViewShown')
+    )
+
+  teardownInView: ->
+    $('.in_view_postings').unbind('inview')

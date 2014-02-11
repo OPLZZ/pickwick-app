@@ -1,4 +1,4 @@
-class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMixin
+class PickwickApp.JobPostingsRoute extends Em.Route
 
   locations: {
     "Praha":{latitude:"50.07908", longitude:"14.43323"},
@@ -114,6 +114,12 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
     fetchPage: ->
       @fetchPage(false)
 
+    inViewShown: ->
+      return if @controller.get('noMoreItems')
+      return if @controller.get('loadingMore')
+      @controller.set('loadingMore', true)
+      @fetchPage()
+
     tryAgain: ->
       if @controllerFor('job_postings').get('urlForLoadMore') == undefined
         @fetchPage(true)
@@ -121,20 +127,22 @@ class PickwickApp.JobPostingsRoute extends Em.Route with InfiniteScroll.RouteMix
         @fetchPage(false)
 
     search: ->
-      @controller.set('loadingMore', true)
       @controller.set('noMoreItems', false)
       @controller.set('loadingSimilar', false)
       @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
       @fetchPage(true)
 
     search_similar: ->
-      @controller.set('loadingMore', true)
       @controller.set('noMoreItems', false)
       @controller.set('loadingSimilar', true)
       @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
       @fetchPage(true, true)
 
+
+
   fetchPage: (search, similar = false) ->
+    @controller.set('loadingMore', true)
+
     app_controller = @controllerFor('application')
     controller = @controllerFor('job_postings')
     liked_jobs = @controllerFor('liked_jobs')
