@@ -26,7 +26,6 @@ $(document).ready ->
     $('body').addClass('desktop')
 
   #problem with 20 pixels for bottom bar in safari on IOS
-  console.log(navigator.userAgent)
   if (navigator.userAgent.match(/iPad;.*CPU.*OS 7_\d/i))
     $('html').addClass('ipad ios7')
     $('#application_container').css('height', "#{$(window).height() - 21}px !important")

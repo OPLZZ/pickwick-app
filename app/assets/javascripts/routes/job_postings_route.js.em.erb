@@ -197,6 +197,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route
       dataType: 'json'
       url: url
       data: args
+      cache: false
     ).done( (data) ->
       if data.total == 0
         controller.send('search_similar')
@@ -217,8 +218,6 @@ class PickwickApp.JobPostingsRoute extends Em.Route
             liked_jobs.addItem(job_posting)
 
           controller.addItem(job_posting)
-
-
 
         #stop loading more
         controller.set('loadingMore', false)
