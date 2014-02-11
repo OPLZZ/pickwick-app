@@ -42,4 +42,5 @@
             br
             .center
               a click='goToInfo'
-                ' informace o projektu
+                i.icon-info
+                ' Informace o projektu
