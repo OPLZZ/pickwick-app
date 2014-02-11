@@ -66,18 +66,18 @@ section.infinite-scroll-box.infinite-scroll-detail
     if location.coordinates.lat
       .col-sm-3.col.center
         a.col-sm-4.col-offset-3.col.gtm_contact_map click='showMap'
-          i.icon-compass
+          i.icon-map
     else
       .col-sm-3.col.center
 
     if contact.email
       .col-sm-3.col.center
         a.col-sm-4.col-offset-3.col.gtm_contact_mail click='sendMail'
-          i.icon-pencil
+          i.icon-envelope
     else
       .col-sm-3.col.center
 
     if title
       .col-sm-3.col.center
         a.col-sm-4.col-offset-3.col.gtm_job_forward click='forwardJob'
-          i.icon-forward
+          i.icon-share

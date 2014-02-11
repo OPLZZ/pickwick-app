@@ -4,8 +4,6 @@
   .pull-right
     if is_liked
       i class="icon-star"
-    else
-      i class="icon-star-empty"
 
   .title= title
   if employer.company
