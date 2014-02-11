@@ -22,8 +22,54 @@
 .three_column_header
   display: none
 
+@media all and (max-width: 799px)
+
+  .not_desktop
+    header
+      position: fixed
+      z-index: 1000
+    .infinite-scroll-box
+      padding-top: 50px
+    #frame_index
+      left: 0px
+
+    #frame_liked
+      top: 0px
+      left: 0px
+      display: none
+    #frame_detail
+      left: 0px
+      display: none
+    #frame_info
+      left: 0px
+      display: none
+    #frame_menu
+      left: 0px
+      display: none
+
+    .push-liked, .push-detail, .push-menu, .push-info
+      #frame_index
+        display: none
+    .push-liked #frame_liked
+      display: block
+    .push-detail #frame_detail
+      display: block
+    .push-menu #frame_menu
+      display: block
+    .push-info #frame_info
+      display: block
+
 
 @media all and (min-width: 800px)
+
+  #application_container
+    overflow: hidden
+    position: absolute
+    top: 0px
+    bottom: 0px
+    left:  0
+    right: 0
+    width: 100%
 
   #frame_index, #frame_detail, #frame_liked, #frame_info, #frame_menu
     width: 50%

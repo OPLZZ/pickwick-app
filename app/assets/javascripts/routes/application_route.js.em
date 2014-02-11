@@ -6,13 +6,17 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       @transitionTo "job_posting", job_posting
 
     backFromDetail: ->
-      @transitionTo "job_postings"
+      if @controller.get('likedVisible')
+        @transitionTo "job_postings.liked"
+      else
+        @transitionTo "job_postings"
 
     backFromMenu: ->
       @transitionTo "job_postings"
 
     searchFromMenu: ->
       @controllerFor('job_postings').send('search')
+      @remembered_scroll = 0
       $('#search_query_text_box').blur()
       localStorage["search_query"]     = @controller.search_query
       localStorage["search_location"]  = @controller.search_location
