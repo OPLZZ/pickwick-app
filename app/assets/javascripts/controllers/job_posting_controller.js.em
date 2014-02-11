@@ -2,59 +2,63 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
   needs: ["likedJobs", 'application']
   actions:
     callPhone: ->
-      url = "tel:#{@get('content.contact.phone')}"
-      console.log(url)
-      window.open(url, '_self')
+      if confirm("Zavolat na telefonní číslo: #{@get('content.contact.phone')} ?")
+        url = "tel:#{@get('content.contact.phone')}"
+        console.log(url)
+        window.open(url, '_self')
 
     sendMail: ->
-      url = "mailto:#{@get('content.contact.email')}"
-      console.log(url)
-      window.open(url, '_self')
+      if confirm("Odeslat email na: #{@get('content.contact.email')} ?")
+        subject = "Dáme Práci: #{@get('content.title')}"
+        url = "mailto:#{@get('content.contact.email')}?subject=#{encodeURIComponent(subject)}"
+        console.log(url)
+        window.open(url, '_self')
 
     forwardJob: ->
+      if confirm("Přeposlat pracovní nabídku na email?")
+        body = "#{@get('content.title')}\n"
+        body += "#{@get('content.employment_type_translated')}\n"
 
-      body = "#{@get('content.title')}\n"
-      body += "#{@get('content.employment_type_translated')}\n"
+        if @get('content.employer.company')
+          body += "#{@get('content.employer.company')}\n"
+        else
+          if @get('content.employer.name')
+            body += "#{@get('content.employer.name')}\n"
+        if @get('content.url')
+          body += "#{@get('content.url')} \n"
 
-      if @get('content.employer.company')
-        body += "#{@get('content.employer.company')}\n"
-      else
-        if @get('content.employer.name')
-          body += "#{@get('content.employer.name')}\n"
-      if @get('content.url')
-        body += "#{@get('content.url')} \n"
+        body += "#{@get('content.location.city')} #{@get('content.location.street')}\n"
 
-      body += "#{@get('content.location.city')} #{@get('content.location.street')}\n"
+        if @get('content.compensation')
+          body += "#{@get('content.compensation')} \n"
 
-      if @get('content.compensation')
-        body += "#{@get('content.compensation')} \n"
+        if @get('content.contact.name')
+          body += "#{@get('content.contact.name')}\n"
+        if @get('content.contact.phone')
+          body += "#{@get('content.contact.phone')}\n"
+        if @get('content.contact.email')
+          body += "#{@get('content.contact.email')}\n"
 
-      if @get('content.contact.name')
-        body += "#{@get('content.contact.name')}\n"
-      if @get('content.contact.phone')
-        body += "#{@get('content.contact.phone')}\n"
-      if @get('content.contact.email')
-        body += "#{@get('content.contact.email')}\n"
+        body += "\n\n-------\n"
+        body += @get('content.description')
 
-      body += "\n\n-------\n"
-      body += @get('content.description')
-
-      subject = "Dáme práci: #{@get('content.title')}"
-      url = "mailto:?subject=#{encodeURIComponent(subject)}&body=#{encodeURIComponent(body)}"
-      console.log(url)
-      window.open(url, '_self')
+        subject = "Dáme práci: #{@get('content.title')}"
+        url = "mailto:?subject=#{encodeURIComponent(subject)}&body=#{encodeURIComponent(body)}"
+        console.log(url)
+        window.open(url, '_self')
 
     showMap: ->
-      if navigator.userAgent.match(/iPhone|iPad|iPod/i)
-        url = "maps:q=#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}"
-        window.open(url, '_self')
-      else if navigator.userAgent.match(/Macintosh|KFSOWI/i)
-        url = "http://maps.apple.com/?q=#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}"
-        window.open(url, '_blank')
-      else
-        url = "geo:#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}"
-        window.open(url, '_self')
-      console.log(url)
+      if confirm("Zobrazit pracovní pozici: #{@get('content.title')} na mapě?")
+        if navigator.userAgent.match(/iPhone|iPad|iPod/i)
+          url = "maps:q=#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}"
+          window.open(url, '_self')
+        else if navigator.userAgent.match(/Macintosh|KFSOWI/i)
+          url = "http://maps.apple.com/?q=#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}"
+          window.open(url, '_blank')
+        else
+          url = "geo:#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}"
+          window.open(url, '_self')
+        console.log(url)
 
 
     setLike: ->
