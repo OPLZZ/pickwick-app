@@ -2,10 +2,10 @@
   header
     a.pull-left click="goToMenu"
       .icon-magnifier
-        ' Vyhledat
+        ' vyhledat
     if hasLikedJobs
       a.pull-right.liked click="goToLiked"
-        ' Oblíbené
+        ' oblíbené
         i.icon-star
     .three_column_header Výsledky
   .infinite-scroll-box.infinite-scroll-list
