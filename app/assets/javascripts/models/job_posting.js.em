@@ -8,7 +8,7 @@ class PickwickApp.JobPosting extends Ember.Object
   }
 
   description_with_brs:( ->
-    @description.replace("\n", "<br /><br />")
+    $.trim(@description).replace("\n", "<br /><br />")
   ).property('description')
 
   employment_type_translated:( ->
@@ -25,3 +25,12 @@ class PickwickApp.JobPosting extends Ember.Object
     else
       " "
   ).property('distance')
+
+
+  start_date_show:( ->
+    if @start_date
+      d = new Date(Date.parse(@start_date))
+      "#{d.getDay()}. #{d.getMonth()}. #{d.getFullYear()}"
+    else
+      ""
+  ).property('start_date')

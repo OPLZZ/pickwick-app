@@ -62,6 +62,10 @@ section.infinite-scroll-box.infinite-scroll-detail
             if contact.email
               ' ,
               = contact.email
+        if start_date
+          li.icon-calendar2
+            ' datum nástupu 
+            = start_date_show
 
     .detail_text
       == description_with_brs
