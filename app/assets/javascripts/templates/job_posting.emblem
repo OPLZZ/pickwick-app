@@ -64,7 +64,7 @@ section.infinite-scroll-box.infinite-scroll-detail
               = contact.email
         if start_date
           li.icon-calendar2
-            ' datum nástupu 
+            ' nástup
             = start_date_show
 
     .detail_text
