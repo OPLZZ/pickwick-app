@@ -27,6 +27,17 @@
           each job in controller
             render 'job_list' job
 
+          if loadingOtherSimilar
+            .center.info-similar
+              ' Došli jste na konec výsledků,
+              br
+              ' můžete si však prohlédnout ostatní nabídky.
+
+          each job in controller.similar_jobs
+            render 'job_list' job
+
+
+
         .center.info-loading.in_view_postings
           if loadingError
             ' Problém s načtením dat z internetu
