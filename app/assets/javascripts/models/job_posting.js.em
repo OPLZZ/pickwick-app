@@ -7,6 +7,10 @@ class PickwickApp.JobPosting extends Ember.Object
     "part-time": 'poloviční úvazek'
   }
 
+  detail_link:( ->
+    "job_postings/#{@id}"
+  ).property('id')
+
   description_with_brs:( ->
     $.trim(@description).replace("\n", "<br /><br />")
   ).property('description')
