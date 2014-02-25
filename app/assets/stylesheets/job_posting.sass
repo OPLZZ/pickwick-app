@@ -1,4 +1,25 @@
 
+.list-group
+  a
+    display: block
+    text-decoration: none
+
+    &.active
+      background: #f7f8f8
+      .link_to_detail
+        &:before
+          color: #000
+      [class^="icon-"], [class*=" icon-"] 
+        color: #999
+        &:before
+          color: #F9B233
+
+  a:visited
+    color: #000
+
+
+
+
 .job_posting
   &.list
     cursor: pointer
@@ -8,15 +29,6 @@
     padding-right: 10px
     padding-bottom: 5px
     min-height: 75px
-  &.active
-    background: #f7f8f8
-    .link_to_detail
-      &:before
-        color: #000
-    [class^="icon-"], [class*=" icon-"] 
-      color: #999
-      &:before
-        color: #F9B233
   .title
     font-weight: bold
     &:first-letter
