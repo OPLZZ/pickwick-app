@@ -7,3 +7,5 @@ PickwickApp.Router.map ->
     @route("liked", { path: "/liked" })
     @route("info", { path: "/info" })
   )
+
+PickwickApp.Router.reopen location: "history"
