@@ -13,11 +13,17 @@ class PickwickApp.ApplicationRoute extends Ember.Route
 
     backFromMenu: ->
       @transitionTo "job_postings"
+      $('#search_query_text_box').blur()
+      $('#search_location_box').blur()
+      $('#person_about_box').blur()
 
     searchFromMenu: ->
       @controllerFor('job_postings').send('search')
       @remembered_scroll = 0
       $('#search_query_text_box').blur()
+      $('#search_location_box').blur()
+      $('#person_about_box').blur()
+
       localStorage["search_query"]     = @controller.search_query
       localStorage["search_location"]  = @controller.search_location
       localStorage["person_about"]     = @controller.person_about
@@ -35,4 +41,5 @@ class PickwickApp.ApplicationRoute extends Ember.Route
 
     goToMenu: ->
       @transitionTo "job_postings.search"
+      $('#search_query_text_box').focus()
 
