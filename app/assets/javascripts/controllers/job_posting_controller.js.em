@@ -55,9 +55,12 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
         else if navigator.userAgent.match(/Macintosh|KFSOWI/i)
           url = "http://maps.apple.com/?q=#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}"
           window.open(url, '_blank')
-        else
+        else if navigator.userAgent.match(/Android|BlackBerry|IEMobile/i)
           url = "geo:#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}"
           window.open(url, '_self')
+        else
+          url = "https://maps.google.com?q=#{@get('content.location.coordinates.lat')},#{@get('content.location.coordinates.lon')}"
+          window.open(url, '_blank')
         console.log(url)
 
 
