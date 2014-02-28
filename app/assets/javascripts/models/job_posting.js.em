@@ -15,6 +15,18 @@ class PickwickApp.JobPosting extends Ember.Object
     $.trim(@description).replace("\n", "<br /><br />")
   ).property('description')
 
+  description_preferencies:( ->
+    des = $.trim("#{@description} #{@title}").replace(/<(?:.|\n)*?>/gm, '');
+    arr = des.toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(" ").sort()
+    output = {}
+    for i in arr
+      ii = $.trim(i)
+      if ii.length > 3
+        output[ii] ||= 0
+        output[ii] += 1
+    output
+  ).property('description, title')
+
   employment_type_translated:( ->
     if @translation[@employment_type]
       @translation[@employment_type]
