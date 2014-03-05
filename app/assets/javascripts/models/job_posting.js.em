@@ -45,8 +45,7 @@ class PickwickApp.JobPosting extends Ember.Object
 
   start_date_show:( ->
     if @start_date
-      d = new Date(Date.parse(@start_date))
-      "#{d.getDay()}. #{d.getMonth()}. #{d.getFullYear()}"
+      moment(@start_date).format("D. M. YYYY")
     else
       ""
   ).property('start_date')
