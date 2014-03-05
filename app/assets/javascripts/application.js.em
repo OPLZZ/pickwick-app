@@ -3,6 +3,7 @@
 #= require handlebars
 #= require ember
 #= require ember-data
+#= require vendor/moment
 #= require vendor/autogrow.textarea
 #= require vendor/ember-geolocation
 #= require vendor/scroll-to
