@@ -20,6 +20,9 @@ window.PickwickApp = Ember.Application.create(
   rootElement: '#application'
 )
 
+window.PickwickApp.api_url_point = "http://api.damepraci.cz"
+window.PickwickApp.api_token = "59a3b1a51c80c8db71c9a881d8b23c6e2b41727c"
+
 $(document).ready ->
   if navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|KFSOWI/i)
     $('body').addClass('not_desktop')

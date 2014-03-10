@@ -7,5 +7,5 @@ class PickwickApp.JobPostingRoute extends Em.Route
       if item
         return item
 
-    $.getJSON("http://pickwick-api.dev.vhyza.eu/vacancies/#{params.id}?token=59a3b1a51c80c8db71c9a881d8b23c6e2b41727c").then (response) ->
+    $.getJSON("#{window.PickwickApp.api_url_point}/vacancies/#{params.id}?token=#{window.PickwickApp.api_token}").then (response) ->
       PickwickApp.JobPosting.create response.vacancy

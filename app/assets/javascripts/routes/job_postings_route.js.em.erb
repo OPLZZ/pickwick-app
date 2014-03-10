@@ -164,7 +164,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route
 
       #build arguments for search
       args = {
-        token: "59a3b1a51c80c8db71c9a881d8b23c6e2b41727c"
+        token: "#{window.PickwickApp.api_token}"
         per_page: controller.get('perPage')
       }
 
@@ -226,7 +226,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route
         loc = @locations[app_controller.search_location]
         args.location = "#{loc.latitude},#{loc.longitude}"
 
-      url = "http://pickwick-api.dev.vhyza.eu/vacancies"
+      url = "#{window.PickwickApp.api_url_point}/vacancies"
     else
       url = controller.get('urlForLoadMore')
 
