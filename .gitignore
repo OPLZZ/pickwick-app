@@ -19,3 +19,5 @@
 .DS_Store
 .ruby-version
 
+build/www
+build/release
