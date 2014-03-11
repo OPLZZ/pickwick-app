@@ -2,21 +2,29 @@
   left: 0px
 #frame_detail
   left: 100%
+  display: none
 #frame_liked
   top: 100%
+  display: none
 #frame_info
   left: -100%
+  display: none
 #frame_menu
   left: -100%
+  //display: none
 
 .push-liked #frame_liked
   top: 0
+  display: block
 .push-detail #frame_detail
   left: 0
+  display: block
 .push-menu #frame_menu
   left: 0
+  display: block
 .push-info #frame_info
   left: 0
+  display: block
 
 
 .three_column_header
@@ -24,7 +32,9 @@
 
 @media all and (max-width: 799px)
 
-  .not_desktop
+
+
+  .mobile_not_nice
     header
       position: relative
       z-index: 1000
