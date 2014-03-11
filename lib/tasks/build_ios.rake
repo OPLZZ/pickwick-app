@@ -5,6 +5,7 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
   puts "Assets build"
   assets_dir = Rails.root.join("public","assets")
   build_dir = Rails.root.join("build","ios","www")
+  assets_for_build_dir = Rails.root.join("assets_for_build","ios")
   build_assets_dir = File.join(build_dir, "assets")
 
   def remove_cache_id_text(text)
@@ -12,8 +13,8 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
   end
 
   #CLEANUP
-  puts "Deleting old #{build_assets_dir}"
-  FileUtils.rm_rf(build_assets_dir)
+  puts "Deleting old #{build_dir}"
+  FileUtils.rm_rf(build_dir)
   puts "Cteating new #{build_assets_dir}"
   FileUtils.mkdir_p(build_assets_dir)
 
@@ -26,7 +27,7 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
   javascript = Dir[File.join(assets_dir,"*.js")].sort{|a,b| File.mtime(b) <=> File.mtime(a)}.first
   puts "Found javascript: #{javascript}"
   javascript_to = File.join(build_assets_dir, remove_cache_id_text(File.basename(javascript)))
-  puts "CP: #{File.basename(javascript)} -> #{File.basename(javascript_to)}"
+  #puts "CP: #{File.basename(javascript)} -> #{File.basename(javascript_to)}"
   FileUtils.cp(javascript, javascript_to)
   jsdata = File.open(javascript_to,"r:UTF-8").read
   puts "Changing assets directory from /assets/ -> assets/"
@@ -42,7 +43,7 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
   puts "Found templates: #{templates}"
   templates_to = File.join(build_assets_dir, "templates", remove_cache_id_text(File.basename(templates)))
   FileUtils.mkdir(File.join(build_assets_dir, "templates"))
-  puts "CP: #{File.basename(templates)} -> #{File.basename(templates_to)}"
+  #puts "CP: #{File.basename(templates)} -> #{File.basename(templates_to)}"
   FileUtils.cp(templates, templates_to)
 
   puts "----"
@@ -51,7 +52,7 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
   css = Dir[File.join(assets_dir,"*.css")].sort{|a,b| File.mtime(b) <=> File.mtime(a)}.first
   puts "Found css: #{css}"
   css_to = File.join(build_assets_dir, remove_cache_id_text(File.basename(css)))
-  puts "CP: #{File.basename(css)} -> #{File.basename(css_to)}"
+  #puts "CP: #{File.basename(css)} -> #{File.basename(css_to)}"
   FileUtils.copy(css, css_to)
   puts "Changing assets directory from /assets/ -> assets/"
   cssdata = File.open(css_to,"r:UTF-8").read.gsub("/assets/","./")
@@ -69,7 +70,7 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
   puts "Cteating new Assets in #{build_assets_dir}"
   assets.each do |asset|
     to = File.join(build_assets_dir, remove_cache_id_text(File.basename(asset)))
-    puts "CP: #{File.basename(asset)} -> #{File.basename(to)}"
+    #puts "CP: #{File.basename(asset)} -> #{File.basename(to)}"
     FileUtils.cp(asset, to)
   end
 
@@ -101,6 +102,12 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
 
   puts "----"
 
+  puts "Copy build assets"
+  `cp #{assets_for_build_dir}/config.xml #{build_dir}/`
+
+  puts "----"
+
+
   puts "FINISHED BUILD"
 
   puts "Waiting 5 seconds after build"
@@ -110,6 +117,10 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
   ios_dir = Rails.root.join("build","ios")
   puts "cd #{ios_dir} && phonegap build ios"
   system "cd #{ios_dir} && phonegap build ios"
+
+  puts "Copy icons and screens"
+  `cp -r #{assets_for_build_dir}/res/icon/ios/* #{build_dir}/../platforms/ios/DamePraci/Resources/icons/`
+  `cp -r #{assets_for_build_dir}/res/screen/ios/* #{build_dir}/../platforms/ios/DamePraci/Resources/splash/`
 
   puts "FINISHED IOS Build"
 end

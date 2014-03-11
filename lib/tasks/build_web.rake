@@ -2,7 +2,7 @@
 require 'octokit'
 
 desc "Build web app"
-task :build_web do
+task :build_web => [:'assets:clean', :'assets:precompile'] do
   args = ENV
 
   unless (args['username'] || args['u']) && (args['password'] || args['p'])
@@ -127,7 +127,7 @@ task :build_web do
 
     puts "Packing build into build/release.tar.gz"
     release_file = "#{release_dir}/release.tar.gz"
-    `cd #{all_builds_dir} && tar -pczf #{release_file} www`
+    `cd #{all_builds_dir} && tar -pczf #{release_file} ./www`
 
     latest_commit_sha = octokit_client.commits(github_repo).first.sha
 
