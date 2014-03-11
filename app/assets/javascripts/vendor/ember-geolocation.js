@@ -196,7 +196,11 @@ Ember.GeoLocation = Ember.Object.extend({
   }.observes('autoUpdate', 'positionOptions'),
 
   locationUpdateSuccess: function(position) {
-    localStorage['last_geolocation'] = position.coords.latitude+","+position.coords.longitude
+    try {
+      localStorage['last_geolocation'] = position.coords.latitude+","+position.coords.longitude
+    } catch(e) {
+      console.log(e)
+    }
     this.setProperties({
       timestamp: position.timestamp,
       latitude: position.coords.latitude,

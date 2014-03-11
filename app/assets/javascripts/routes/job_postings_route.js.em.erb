@@ -215,7 +215,10 @@ class PickwickApp.JobPostingsRoute extends Em.Route
           if @get('geolocation_object').latitude != -99999
             args.location = "#{@get('geolocation_object').latitude},#{@get('geolocation_object').longitude}"
             #remeber last geolocation into local storage :D
-            localStorage['last_geolocation'] = args.location
+            try
+              localStorage['last_geolocation'] = args.location
+            catch e
+              console.log(e)
 
           #if there is no data for loaction try cached location
           else if localStorage['last_geolocation'] != undefined && localStorage['last_geolocation'] != "undefined"
