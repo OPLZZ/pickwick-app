@@ -8,6 +8,7 @@ class PickwickApp.SearchMenuView extends Ember.View
   didInsertElement: ->
     $('textarea').autoGrow()
 
+    <% if Rails.env != "build_ios" %>
     $('.click_on_textarea').click ->
       console.log("clicked od textarea")
       $(this).find("textarea").focus()
@@ -19,7 +20,7 @@ class PickwickApp.SearchMenuView extends Ember.View
     $('.click_on_select').click ->
       console.log("clicked od select")
       $(this).find('select').focus()
-
+    <% end %>
 
   swipeEnd: (recognizer, evt) ->
     direction = recognizer.get("swipeDirection")
