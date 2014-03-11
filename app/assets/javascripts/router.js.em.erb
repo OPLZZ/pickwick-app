@@ -8,4 +8,6 @@ PickwickApp.Router.map ->
     @route("info", { path: "/info" })
   )
 
-PickwickApp.Router.reopen location: "history"
+<% if Rails.env == "build_www" %>
+  PickwickApp.Router.reopen location: "history"
+<% end %>
