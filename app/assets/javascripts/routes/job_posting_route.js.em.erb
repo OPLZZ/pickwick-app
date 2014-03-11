@@ -1,9 +1,12 @@
 class PickwickApp.JobPostingRoute extends Em.Route
 
   model: (params) ->
-    cache = @controllerFor('job_postings').get('job_posting_cache')
+    cache = @controllerFor('job_postings')
     if cache != undefined
-      item = cache.findProperty('id', params.id)
+      item = cache.hasItem('id', params.id)
+      if item
+        return item
+      item = cache.hasSimilarItem('id', params.id)
       if item
         return item
 
