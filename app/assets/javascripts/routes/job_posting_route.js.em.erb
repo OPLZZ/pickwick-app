@@ -10,5 +10,14 @@ class PickwickApp.JobPostingRoute extends Em.Route
       if item
         return item
 
+    liked_jobs = @controllerFor('liked_jobs')
     $.getJSON("#{window.PickwickApp.api_url_point}/vacancies/#{params.id}?token=#{window.PickwickApp.api_token}").then (response) ->
-      PickwickApp.JobPosting.create response.vacancy
+      job = PickwickApp.JobPosting.create response.vacancy
+      liked = liked_jobs.hasItem('id', job.id)
+      if liked != undefined && liked.is_liked == true
+        job.set("is_liked", true)
+        #recreate object in liked jobs from search (update attributes)
+        liked_jobs.removeItem('id', job.id)
+        #add it again
+        liked_jobs.addItem(job)
+      job
