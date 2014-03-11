@@ -208,7 +208,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route
 
       #has location setted to geo
       if app_controller.search_location == "Aktuální poloha"
-        if @get('geolocation_object') == undefined
+        if @get('geolocation_object') == undefined && app_controller.enabled_geolocation == true
           @set('geolocation_object', Em.GeoLocation.create({autoUpdate: true}))
 
         if @get('geolocation_object') != undefined

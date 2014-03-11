@@ -7,6 +7,7 @@ class PickwickApp.ApplicationController extends Em.Controller
   remembered_scroll: 0
   remembered_scroll_liked: 0
   search_query: ''
+  enabled_geolocation: false
   search_location: "Aktuální poloha"
   locations: Em.A(["Aktuální poloha","Praha","Brno","Břeclav","Cheb","Chomutov","Děčín","Frýdek-Místek","Havlíčkův Brod","Havířov","Hodonín","Hradec Králové","Jablonec nad Nisou","Jihlava","Karlovy Vary","Karviná","Kladno","Kolín","Krnov","Kroměříž","Liberec","Litoměřice","Litvínov","Mladá Boleslav","Most","Nový Jičín","Olomouc","Opava","Orlová","Ostrava","Pardubice","Plzeň","Prostějov","Písek","Přerov","Příbram","Sokolov","Teplice","Trutnov","Tábor","Třebíč","Třinec","Uherské Hradiště","Valašské Meziříčí","Vsetín","Zlín","Znojmo","Ústí nad Labem","Česká Lípa","České Budějovice","Český Těšín","Šumperk"])
 
@@ -82,3 +83,12 @@ class PickwickApp.ApplicationController extends Em.Controller
       @person_about = localStorage["person_about"]
     if localStorage["person_education"] != undefined
       @person_education = localStorage["person_education"]
+
+    <% if Rails.env == "build_ios" %>
+    controller = @
+    onDeviceReady = ->
+      controller.enabled_geolocation = true
+    document.addEventListener("deviceready", onDeviceReady, false)
+    <% else %>
+      @enabled_geolocation = true
+    <% end %>
