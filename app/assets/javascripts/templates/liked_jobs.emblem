@@ -2,7 +2,7 @@
   header
     a.pull-left click="goToMenu"
       .icon-magnifier
-        ' Vyhledat
+        ' vyhledat
     a.pull-right click="goToIndex"
       ' zpět
       i.icon-reply
