@@ -1,12 +1,14 @@
 linkTo 'job_posting' id class='gtm_view_detail'
   .job_posting.list
     if is_liked
-      .liked_badge
-        i class="icon-star"
+      .new_badge
+        .badge_container
+          i class="icon-star"
     else
       if is_new
-        .new_badge.rotated
-          span nový
+        .new_badge
+          .badge_container
+            span nový
     .arrow_to_detail
       i.icon-chevron-right.link_to_detail
 
