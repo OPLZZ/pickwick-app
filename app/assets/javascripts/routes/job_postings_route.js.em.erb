@@ -132,6 +132,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route
       @controller.set('loadingSimilar', false)
       @controller.set('loadingOtherSimilar', false)
       @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
+      @controller.get('similar_jobs').replace(0, @controller.get('similar_jobs').get('length'), Em.A([]))
       @fetchPage(true)
 
     search_similar: ->
@@ -139,6 +140,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route
       @controller.set('loadingSimilar', true)
       @controller.set('loadingOtherSimilar', false)
       @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
+      @controller.get('similar_jobs').replace(0, @controller.get('similar_jobs').get('length'), Em.A([]))
       @fetchPage(true, true)
 
     search_other_similar: ->
