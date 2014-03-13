@@ -128,6 +128,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route
         @fetchPage(false)
 
     search: ->
+      @controller.set('searchQuery', @controllerFor('application').search_query)
       @controller.set('noMoreItems', false)
       @controller.set('loadingSimilar', false)
       @controller.set('loadingOtherSimilar', false)
