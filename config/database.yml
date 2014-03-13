@@ -23,3 +23,22 @@ production:
   database: db/development.sqlite3
   pool: 5
   timeout: 5000
+
+
+build_web:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+
+build_ios:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+
+build_android:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
