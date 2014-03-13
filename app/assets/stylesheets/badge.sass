@@ -1,0 +1,43 @@
+.list-group a.active, .list-group a
+
+  .liked_badge
+    width: 0
+    height: 0
+    border-top: 40px solid #f9b233
+    border-left: 40px solid transparent
+    padding-top: -10px
+    right: 0px
+    top: 0px
+    position: absolute
+    [class^="icon-"]:before, [class*=" icon-"]:before
+      color: white
+      top: -35px
+      position: relative
+      display: block
+      right: 19px
+      color: white
+      font-size: 15px
+
+
+  .new_badge
+    width: 0
+    height: 0
+    border-top: 40px solid #f9b233
+    border-left: 40px solid transparent
+    padding-top: -10px
+    right: 0px
+    top: 0px
+    position: absolute
+
+    span
+      top: -43px
+      position: relative
+      -moz-transform: rotate(-45deg)
+      -webkit-transform: rotate(45deg)
+      -o-transform: rotate(-45deg)
+      -ms-transform: rotate(-45deg)
+      transform: rotate(-45deg)
+      display: block
+      right: 23px
+      color: white
+      font-size: 12px

@@ -49,3 +49,10 @@ class PickwickApp.JobPosting extends Ember.Object
     else
       ""
   ).property('start_date')
+
+  is_new:( ->
+    if @created_at
+      moment(@created_at) > moment().subtract('days', 2)
+    else
+      false
+  ).property('created_at')

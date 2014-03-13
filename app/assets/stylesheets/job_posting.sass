@@ -22,6 +22,7 @@
 
 .job_posting
   &.list
+    position: relative
     cursor: pointer
     border-bottom: 1px solid #ddd
     padding-top: 10px
@@ -36,8 +37,23 @@
   .contact
     color: #555
 
-  .link_to_detail
-    font-size: 60px
+  .arrow_to_detail
+    position: absolute
+    right: 0px
+    top: 0px
+    bottom: 0px
+    width: 30px
+    i
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+      width: 100%
+      height: 60px
+      margin: auto
+      font-size: 60px
+      line-height: 60px
   ul
     margin-top: 4px
     margin-bottom: 4px
@@ -65,7 +81,7 @@
     color: #F9B233
     &:hover
       color: #C18729
- 
+
 .job_posting_detail
   margin: 20px
   h1
