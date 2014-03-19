@@ -4,7 +4,7 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
 
   puts "Assets build"
   assets_dir = Rails.root.join("public","assets")
-  build_dir = Rails.root.join("build","ios","www")
+  build_dir = Rails.root.join("build","build_ios","www")
   assets_for_build_dir = Rails.root.join("assets_for_build","ios")
   build_assets_dir = File.join(build_dir, "assets")
 
@@ -114,13 +114,15 @@ task :build_ios => [:'assets:clean', :'assets:precompile'] do
   sleep(5)
 
   puts "Starting IOS Build"
-  ios_dir = Rails.root.join("build","ios")
+  ios_dir = Rails.root.join("build","build_ios")
   puts "cd #{ios_dir} && phonegap build ios"
+  #system "cd #{ios_dir} && phonegap build ios"
   system "cd #{ios_dir} && phonegap build ios"
 
   puts "Copy icons and screens"
   `cp -r #{assets_for_build_dir}/res/icon/ios/* #{build_dir}/../platforms/ios/DamePraci/Resources/icons/`
   `cp -r #{assets_for_build_dir}/res/screen/ios/* #{build_dir}/../platforms/ios/DamePraci/Resources/splash/`
+  `cp -r #{assets_for_build_dir}/config.xml #{build_dir}/../`
 
   puts "FINISHED IOS Build"
 end
