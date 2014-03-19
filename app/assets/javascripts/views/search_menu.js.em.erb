@@ -9,11 +9,14 @@ class PickwickApp.SearchMenuView extends Ember.View
     $('textarea').autoGrow()
 
     <% if Rails.env == "build_ios" %>
+    remembered_placeholder = $('#frame_menu textarea').attr('placeholder')
     $('.click_on_textarea').focusin ->
       $('#frame_menu form.col').css('padding-bottom', "20px")
       $('#frame_menu .infinite-scroll-box').scrollTo({top: 20, left: 0}, {duration:0})
+      $('#frame_menu textarea').attr('placeholder', '')
     $('.click_on_textarea').focusout ->
       $('#frame_menu form.col').css('padding-bottom', "10px")
+      $('#frame_menu textarea').attr('placeholder', remembered_placeholder)
     <% end %>
     $('.click_on_textarea').click ->
       console.log("clicked od textarea")
