@@ -7,6 +7,7 @@ class PickwickApp.ApplicationController extends Em.Controller
   geolocation_object:  undefined
   remembered_scroll: 0
   remembered_scroll_liked: 0
+  remembered_window_scroll: 0
   search_query: ''
   enabled_geolocation: true
   search_location: "Aktuální poloha"
@@ -18,27 +19,20 @@ class PickwickApp.ApplicationController extends Em.Controller
 
   currentPathDidChange:( ->
     path = @get('currentPath')
+    if @saved_previous_path != undefined
+      if @saved_previous_path == "job_postings.index" && (path == "job_postings.job_posting" || path == "job_postings.liked" || path == "job_postings.search" )
+        @remembered_scroll = $('#frame_index .infinite-scroll-box').scrollTop()
+        @remembered_window_scroll = $(window).scrollTop()
+
+      if @saved_previous_path == "job_postings.liked" && path == "job_postings.job_posting"
+        @remembered_scroll_liked = $('#frame_liked .infinite-scroll-box').scrollTop()
+        @remembered_window_scroll = $(window).scrollTop()
+
     $(".ember-application").removeClass "push-detail"
     $(".ember-application").removeClass "push-info"
     $(".ember-application").removeClass "push-liked"
     $(".ember-application").removeClass "push-menu"
 
-    if @saved_previous_path != undefined
-      if @saved_previous_path == "job_postings.index" && (path == "job_postings.job_posting" || path == "job_postings.liked" || path == "job_postings.search" )
-        @remembered_scroll = $(window).scrollTop()
-      if (@saved_previous_path == "job_postings.job_posting" || @saved_previous_path == "job_postings.liked" || @saved_previous_path == "job_postings.search") && path == "job_postings.index"
-        $(window).scrollTop(@remembered_scroll)
-
-      if @saved_previous_path == "job_postings.liked" && path == "job_postings.job_posting"
-        @remembered_scroll_liked = $(window).scrollTop()
-      if @saved_previous_path == "job_postings.job_posting" && path == "job_postings.liked"
-        $(window).scrollTop(@remembered_scroll_liked)
-
-      #return scroll to TOP
-      if path == "job_postings.job_posting" || path == "job_postings.search" || path == "job_postings.info"
-        $(window).scrollTop(0)
-
-    @saved_previous_path = path
 
     if path == "job_postings.index"
       @detailVisible = false
@@ -70,6 +64,19 @@ class PickwickApp.ApplicationController extends Em.Controller
     if @likedVisible
       $(".ember-application").addClass("push-liked")
 
+    if @saved_previous_path != undefined
+      if (@saved_previous_path == "job_postings.job_posting" || @saved_previous_path == "job_postings.liked" || @saved_previous_path == "job_postings.search") && path == "job_postings.index"
+        $('#frame_index .infinite-scroll-box').scrollTop(@remembered_scroll)
+        $(window).scrollTop(@remembered_window_scroll)
+      if @saved_previous_path == "job_postings.job_posting" && path == "job_postings.liked"
+        $('#frame_liked .infinite-scroll-box').scrollTop(@remembered_scroll_liked)
+        $(window).scrollTop(@remembered_window_scroll)
+      #return scroll to TOP
+      if path == "job_postings.job_posting" || path == "job_postings.search" || path == "job_postings.info"
+        $(window).scrollTop(0)
+
+    #save current path to previous
+    @saved_previous_path = path
     @pushBody()
 
   ).observes('currentPath')
