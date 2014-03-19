@@ -4,6 +4,7 @@ class PickwickApp.ApplicationController extends Em.Controller
   likedVisible:  false
   detailVisible: false
   saved_previous_path: undefined
+  geolocation_object:  undefined
   remembered_scroll: 0
   remembered_scroll_liked: 0
   search_query: ''
@@ -84,10 +85,12 @@ class PickwickApp.ApplicationController extends Em.Controller
     if localStorage["person_education"] != undefined
       @person_education = localStorage["person_education"]
 
-    <% if Rails.env == "build_ios" %>
+    <% if Rails.env == "build_ios" || Rails.env == "build_android" %>
     controller = @
     controller.enabled_geolocation = false
     onDeviceReady = ->
       controller.enabled_geolocation = true
+      #on device ready ask for geolocation!
+      controller.set('geolocation_object', Em.GeoLocation.create({autoUpdate: true}))
     document.addEventListener("deviceready", onDeviceReady, false)
     <% end %>
