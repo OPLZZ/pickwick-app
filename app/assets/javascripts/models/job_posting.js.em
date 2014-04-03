@@ -28,7 +28,9 @@ class PickwickApp.JobPosting extends Ember.Object
   ).property('description, title')
 
   employment_type_translated:( ->
-    if @translation[@employment_type]
+    if @employment_type == null
+      ''
+    else if @translation[@employment_type]
       @translation[@employment_type]
     else
       @employment_type
@@ -39,13 +41,18 @@ class PickwickApp.JobPosting extends Ember.Object
     if @distance
       " ... #{Math.round(@distance)} km"
     else
-      " "
+      ""
   ).property('distance')
 
 
   start_date_show:( ->
     if @start_date
-      moment(@start_date).format("D. M. YYYY")
+      formated_date = moment(@start_date).format("D. M. YYYY")
+      if formated_date == "Invalid date"
+        console.log("Problem with formating date: #{@start_date} -> #{formated_date}")
+        return ""
+      else
+        return formated_date
     else
       ""
   ).property('start_date')
