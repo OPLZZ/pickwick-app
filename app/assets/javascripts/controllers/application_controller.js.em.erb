@@ -79,16 +79,29 @@ class PickwickApp.ApplicationController extends Em.Controller
 
   ).observes('currentPath')
 
-  init: ->
+  init_search_from_localstorage: ->
     #fill search for first time
-    if localStorage["search_query"] != undefined && localStorage["search_query"] != 'null' && localStorage["search_query"] != 'undefined'
-      @search_query = localStorage["search_query"]
-    if localStorage["search_location"] != undefined && localStorage["search_location"] != 'null' && localStorage["search_location"] != 'undefined'
-      @search_location = localStorage["search_location"]
-    if localStorage["person_about"] != undefined && localStorage["person_about"] != 'null' && localStorage["person_about"] != 'undefined'
-      @person_about = localStorage["person_about"]
-    if localStorage["person_education"] != undefined && localStorage["person_education"] != 'null' && localStorage["person_education"] != 'undefined'
-      @person_education = localStorage["person_education"]
+    this_controller = @
+    lsq = localStorage["search_query"] 
+    if lsq != undefined && lsq != 'null' && lsq != 'undefined'
+      Ember.run ->
+        this_controller.search_query = lsq
+    lsl = localStorage["search_location"]
+    if lsl != undefined && lsl != 'null' && lsl != 'undefined'
+      Ember.run ->
+        this_controller.search_location = lsl
+    lsa = localStorage["person_about"]
+    if lsa != undefined && lsa != 'null' && lsa != 'undefined'
+      Ember.run ->
+        this_controller.person_about = lsa
+    lse = localStorage["person_education"]
+    if lse != undefined && lse != 'null' && lse != 'undefined'
+      Ember.run ->
+        this_controller.person_education = lse
+
+
+  init: ->
+    @init_search_from_localstorage()
 
     <% if Rails.env == "build_ios" || Rails.env == "build_android" %>
     controller = @
