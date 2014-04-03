@@ -4,7 +4,7 @@ class PickwickApp.JobPosting extends Ember.Object
   is_liked: false
   translation: {
     "full-time": 'plný úvazek'
-    "part-time": 'poloviční úvazek'
+    "part-time": 'částečný úvazek'
   }
 
   detail_link:( ->

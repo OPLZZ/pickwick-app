@@ -57,7 +57,7 @@ test "return description for HTML", ->
 
 test "return employment type translated", ->
   equal PickwickApp.JobPosting.create(employment_type: 'full-time').employment_type_translated, 'plný úvazek', "translate full-time"
-  equal PickwickApp.JobPosting.create(employment_type: 'part-time').employment_type_translated, 'poloviční úvazek', "translate part-time"
+  equal PickwickApp.JobPosting.create(employment_type: 'part-time').employment_type_translated, 'částečný úvazek', "translate part-time"
   equal PickwickApp.JobPosting.create(employment_type: 'unknown').employment_type_translated, 'unknown', "translate unknown"
   equal PickwickApp.JobPosting.create(employment_type: null).employment_type_translated, '', "translate NULL"
 
