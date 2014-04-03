@@ -43,7 +43,7 @@
   <link href="<%= image_path("apple-touch-startup-image-2048x1496.jpg") -%>" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
 </head>
 <body>
-<% if Rails.env != "build_ios" && Rails.env != "build_android" %>
+<% if Rails.env != "build_ios" && Rails.env != "build_android" && Rails.env != "test" %>
   <!-- Google Tag Manager -->
   <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WW36MJ"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
