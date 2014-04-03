@@ -5,6 +5,9 @@
   <title>Dáme Práci</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
+  <% if Rails.env.to_s == "test" %>
+    <%= javascript_include_tag "test", "data-turbolinks-track" => false %>
+  <% end %>
 
   <meta charset="utf-8">
 
