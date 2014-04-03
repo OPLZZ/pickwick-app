@@ -33,7 +33,6 @@ class PickwickApp.ApplicationController extends Em.Controller
     $(".ember-application").removeClass "push-liked"
     $(".ember-application").removeClass "push-menu"
 
-
     if path == "job_postings.index"
       @detailVisible = false
       @infoVisible = false
@@ -77,7 +76,6 @@ class PickwickApp.ApplicationController extends Em.Controller
 
     #save current path to previous
     @saved_previous_path = path
-    @pushBody()
 
   ).observes('currentPath')
 
