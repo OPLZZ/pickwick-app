@@ -1,12 +1,9 @@
 This = {}
+
 module "Application controller tests",
   setup: ->
-    Ember.run PickwickApp, PickwickApp.advanceReadiness
-    This.controller = PickwickApp.__container__.lookup('controller:application')
-
-  teardown: ->
     PickwickApp.reset()
-
+    This.controller = PickwickApp.__container__.lookup('controller:application')
 
 test "visit search", ->
   visit("/job_postings/search").then ->
@@ -42,23 +39,15 @@ test "currentPathDidChange -> detail", ->
 test "currentPathDidChange -> liked", ->
   This.controller.currentPath = "job_postings.liked"
   equal This.controller.detailVisible, false
-  equal This.controller.infoVisible,   false
-  equal This.controller.menuVisible,   false
   equal This.controller.likedVisible,  true
   ok $(".ember-application").hasClass('push-liked')
 
 test "currentPathDidChange -> search", ->
   This.controller.currentPath = "job_postings.search"
-  equal This.controller.detailVisible, false
-  equal This.controller.infoVisible,   false
   equal This.controller.menuVisible,   true
-  equal This.controller.likedVisible,  false
   ok $(".ember-application").hasClass('push-menu')
 
 test "currentPathDidChange -> info", ->
   This.controller.currentPath = "job_postings.info"
-  equal This.controller.detailVisible, false
   equal This.controller.infoVisible,   true
-  equal This.controller.menuVisible,   false
-  equal This.controller.likedVisible,  false
   ok $(".ember-application").hasClass('push-info')

@@ -81,13 +81,13 @@ class PickwickApp.ApplicationController extends Em.Controller
 
   init: ->
     #fill search for first time
-    if localStorage["search_query"] != undefined
+    if localStorage["search_query"] != undefined && localStorage["search_query"] != 'null' && localStorage["search_query"] != 'undefined'
       @search_query = localStorage["search_query"]
-    if localStorage["search_location"] != undefined
+    if localStorage["search_location"] != undefined && localStorage["search_location"] != 'null' && localStorage["search_location"] != 'undefined'
       @search_location = localStorage["search_location"]
-    if localStorage["person_about"] != undefined
+    if localStorage["person_about"] != undefined && localStorage["person_about"] != 'null' && localStorage["person_about"] != 'undefined'
       @person_about = localStorage["person_about"]
-    if localStorage["person_education"] != undefined
+    if localStorage["person_education"] != undefined && localStorage["person_education"] != 'null' && localStorage["person_education"] != 'undefined'
       @person_education = localStorage["person_education"]
 
     <% if Rails.env == "build_ios" || Rails.env == "build_android" %>
