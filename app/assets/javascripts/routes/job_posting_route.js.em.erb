@@ -12,8 +12,6 @@ class PickwickApp.JobPostingRoute extends Em.Route
 
 
     output = @get_job_posting_from_url(params.id)
-    console.log("FINSIHED LOADING")
-    console.log(output)
     output
 
   get_job_posting_from_url: (id) ->
@@ -26,8 +24,6 @@ class PickwickApp.JobPostingRoute extends Em.Route
     @controllerFor('liked_jobs')
 
   load_job_posting: (data) ->
-    console.log("LOADING")
-    console.log(data)
     job = PickwickApp.JobPosting.create data
     liked = @liked_jobs_controller().hasItem('id', job.id)
     if liked != undefined && liked.is_liked == true
