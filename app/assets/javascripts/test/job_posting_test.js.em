@@ -55,6 +55,21 @@ test "return detail link", ->
 test "return description for HTML", ->
   equal This.job_posting.description_with_brs, $.trim(This.data.description).replace("\n", "<br /><br />")
 
+test "return description_preferencies", ->
+  jp = PickwickApp.JobPosting.create({})
+  out = jp.description_preferencies
+  equal Object.keys(out), 0
+
+  jp = PickwickApp.JobPosting.create({"title": 'fool bar'})
+  out = jp.description_preferencies
+  valid_out = {"fool": 1}
+  equal out.fool, valid_out.fool
+
+  jp = PickwickApp.JobPosting.create({"title": 'foo barl', "description": 'barl'})
+  out = jp.description_preferencies
+  valid_out = {"barl": 2}
+  equal out.fool, valid_out.fool
+
 test "return employment type translated", ->
   equal PickwickApp.JobPosting.create(employment_type: 'full-time').employment_type_translated, 'plný úvazek', "translate full-time"
   equal PickwickApp.JobPosting.create(employment_type: 'part-time').employment_type_translated, 'částečný úvazek', "translate part-time"
