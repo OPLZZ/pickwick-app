@@ -21,12 +21,16 @@ class PickwickApp.JobPostingsController extends Ember.ArrayController
       return undefined
 
   addItem: (item) ->
-    @pushObject item
+    this_controller = @
+    Ember.run ->
+      this_controller.pushObject item
 
   removeItem: (propName, value) ->
     item = @hasItem(propName, value)
     if item != undefined
-      @removeObject item
+      this_controller = @
+      Ember.run ->
+        this_controller.removeObject item
       return true
     else
       console.log("Job: #{propName} -> #{value} not removed ->#{item}")
@@ -41,15 +45,19 @@ class PickwickApp.JobPostingsController extends Ember.ArrayController
 
   addSimilarItem: (item) ->
     #add only if it doesn't exists in main array
-    unless @hasItem('id', item.id)
-      @similar_jobs.pushObject item
+    unless @hasSimilarItem('id', item.id)
+      this_controller = @
+      Ember.run ->
+        this_controller.similar_jobs.pushObject item
       return true
     return false
 
   removeSimilarItem: (propName, value) ->
-    item = @hasItem(propName, value)
+    item = @hasSimilarItem(propName, value)
     if item != undefined
-      @similar_jobs.removeObject item
+      this_controller = @
+      Ember.run ->
+        this_controller.similar_jobs.removeObject item
       return true
     else
       console.log("Job: #{propName} -> #{value} not removed ->#{item}")

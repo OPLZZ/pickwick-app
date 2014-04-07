@@ -20,14 +20,18 @@ class PickwickApp.LikedJobsController extends Ember.ArrayController
 
   addItem: (item) ->
     item.set('is_liked', true)
-    @liked_jobs.pushObject item
+    this_controller = @
+    Ember.run ->
+      this_controller.liked_jobs.pushObject item
     @storeToLocalStorage()
 
   removeItem: (propName, value) ->
     item = @hasItem(propName, value)
     if item != undefined
       item.set('is_liked', false)
-      @liked_jobs.removeObject item
+      this_controller = @
+      Ember.run ->
+        this_controller.liked_jobs.removeObject item
       @storeToLocalStorage()
       #if there are no liked jobs
       if @liked_jobs.length == 0 && @controllers.application.get('likedVisible')
@@ -42,4 +46,7 @@ class PickwickApp.LikedJobsController extends Ember.ArrayController
     @notifyJobPostingController()
 
   notifyJobPostingController: ->
-    @controllers.jobPostings.set('hasLikedJobs', @liked_jobs.length > 0)
+    this_controller = @
+
+    Ember.run ->
+      this_controller.controllers.jobPostings.set('hasLikedJobs', this_controller.liked_jobs.length > 0)
