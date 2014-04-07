@@ -10,14 +10,30 @@ class PickwickApp.JobPostingRoute extends Em.Route
       if item
         return item
 
-    liked_jobs = @controllerFor('liked_jobs')
-    $.getJSON("#{window.PickwickApp.api_url_point}/vacancies/#{params.id}?token=#{window.PickwickApp.api_token}").then (response) ->
-      job = PickwickApp.JobPosting.create response.vacancy
-      liked = liked_jobs.hasItem('id', job.id)
-      if liked != undefined && liked.is_liked == true
-        job.set("is_liked", true)
-        #recreate object in liked jobs from search (update attributes)
-        liked_jobs.removeItem('id', job.id)
-        #add it again
-        liked_jobs.addItem(job)
-      job
+
+    output = @get_job_posting_from_url(params.id)
+    console.log("FINSIHED LOADING")
+    console.log(output)
+    output
+
+  get_job_posting_from_url: (id) ->
+    this_route = @
+    $.getJSON("#{window.PickwickApp.api_url_point}/vacancies/#{id}?token=#{window.PickwickApp.api_token}").then (response) ->
+      Ember.run ->
+        this_route.load_job_posting(response.vacancy)
+
+  liked_jobs_controller: ->
+    @controllerFor('liked_jobs')
+
+  load_job_posting: (data) ->
+    console.log("LOADING")
+    console.log(data)
+    job = PickwickApp.JobPosting.create data
+    liked = @liked_jobs_controller().hasItem('id', job.id)
+    if liked != undefined && liked.is_liked == true
+      job.set("is_liked", true)
+      #recreate object in liked jobs from search (update attributes)
+      @liked_jobs_controller().removeItem('id', job.id)
+      #add it again
+      @liked_jobs_controller().addItem(job)
+    job
