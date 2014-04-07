@@ -150,91 +150,167 @@ class PickwickApp.JobPostingsRoute extends Em.Route
       @controller.get('similar_jobs').replace(0, @controller.get('similar_jobs').get('length'), Em.A([]))
       @fetchPage(true, true)
 
-
-
-  fetchPage: (search, similar = false) ->
-    @controller.set('loadingMore', true)
-
-    app_controller = @controllerFor('application')
+  addJobPostingFromAjax: (job_posting) ->
     controller = @controllerFor('job_postings')
     liked_jobs = @controllerFor('liked_jobs')
+    liked = liked_jobs.hasItem('id', job_posting.id)
+    if liked != undefined && liked.is_liked == true
+      job_posting.set("is_liked", true)
+      #recreate object in liked jobs from search (update attributes)
+      liked_jobs.removeItem('id', job_posting.id)
+      #add it again
+      liked_jobs.addItem(job_posting)
+    if controller.get('loadingOtherSimilar')
+      controller.addSimilarItem(job_posting)
+    else
+      controller.addItem(job_posting)
 
+  loadDataFromAjax: (data) ->
+    controller = @controllerFor('job_postings')
+    if data.total == 0
+      @send('search_similar')
+    else
+      postings = data.vacancies.map (job_data) -> PickwickApp.JobPosting.create(job_data)
+
+      for job_posting in postings
+        @addJobPostingFromAjax(job_posting)
+
+      #next loading---
+      if data.links && data.links.next
+        controller.set('urlForLoadMore', data.links.next)
+      else if controller.get('noMoreItems') == false
+        @send('search_other_similar')
+      else
+        controller.set('noMoreItems', true)
+
+      #stop loading more
+      controller.set('loadingMore', false)
+
+  getUrlForFetch: (search) ->
+    controller = @controllerFor('job_postings')
+    if search
+      #clear previous search
+      controller.set('urlForLoadMore', undefined)
+
+      return "#{window.PickwickApp.api_url_point}/vacancies"
+    else if controller.get('urlForLoadMore') != undefined
+      return controller.get('urlForLoadMore')
+    else
+      return "#{window.PickwickApp.api_url_point}/vacancies"
+
+  getPreferencies: ->
+    app_controller = @controllerFor('application')
+    output = ""
+    if app_controller.person_about != null && app_controller.person_about != 'null' && app_controller.person_about != undefined
+      output += app_controller.person_about
+      output += " "
+    if app_controller.person_education != null && app_controller.person_education != 'null' && app_controller.person_education != undefined
+      output += app_controller.person_education
+    $.trim(output)
+
+  getSimilarPreferencies: ->
+    controller = @controllerFor('job_postings')
+    preference_text = ""
+    try
+      #get data from existing job postings and save them to one hash
+      output = {}
+      #choose only best 10 job postings
+      for job_posting in controller.toArray()[0..10]
+        for text, count of job_posting.get("description_preferencies")
+          output[text] ||= 0
+          output[text] += count
+      #change hash to array
+      text_array = []
+      for text, count of output
+        text_array.push({
+          text: text,
+          count: count
+        })
+      #sort keywords by cont desc
+      text_array_sorted = text_array.sort (a,b) ->
+        return if b.count >= a.count then 1 else -1
+
+      log_text = ""
+      #choose best 20 words and create 1 text from them
+      for txt in text_array_sorted[0..19]
+        preference_text += " #{txt.text}"
+        log_text += " #{txt.text} (#{txt.count}), "
+
+      console.log(log_text)
+    catch error
+      console.log(error)
+
+    $.trim("#{preference_text}")
+
+  getSearchQuery: ->
+    app_controller = @controllerFor('application')
+    if app_controller.search_query != null && app_controller.search_query != 'null' && app_controller.search_query != undefined
+      return app_controller.search_query
+    ""
+
+  getLocation: ->
+    app_controller = @controllerFor('application')
+    #has location setted to geo
+    if app_controller.search_location == "Aktuální poloha"
+      if @get('geolocation_object') == undefined && app_controller.enabled_geolocation == true
+        @set('geolocation_object', Em.GeoLocation.create({autoUpdate: true}))
+
+      if @get('geolocation_object') != undefined
+        if @get('geolocation_object').latitude != -99999
+          location = "#{@get('geolocation_object').latitude},#{@get('geolocation_object').longitude}"
+          #remeber last geolocation into local storage :D
+          try
+            localStorage['last_geolocation'] = location
+          catch e
+            console.log(e)
+          return location
+
+        #if there is no data for loaction try cached location
+        else if localStorage['last_geolocation'] != undefined && localStorage['last_geolocation'] != "undefined"
+          return location = localStorage['last_geolocation']
+
+    #has location setted to city
+    else
+      loc = @locations[app_controller.search_location]
+      if loc != undefined
+        return "#{loc.latitude},#{loc.longitude}"
+
+    return null
+
+  getArgsForFetch: (similar = false) ->
+    #build arguments for search
+    args = {}
+
+    if similar == false
+      if @getPreferencies().length > 0
+        args.preference = @getPreferencies()
+      if @getSearchQuery().length > 0
+        args.query = @getSearchQuery()
+    else
+      args.preference = "#{@getSearchQuery()} #{@getPreferencies()} #{@getSimilarPreferencies()}"
+
+    location = @getLocation()
+    if location
+      args.location = location
+
+    return args
+
+  fetchPage: (search, similar = false) ->
+    controller = @controllerFor('job_postings')
+    route = @
+    controller.set('loadingMore', true)
     #hide error
     controller.set('loadingError', false)
 
+    url = @getUrlForFetch(search)
+    args = {}
     if search
-      controller.set('urlForLoadMore', undefined)
-
-      #build arguments for search
-      args = {
-        token: "#{window.PickwickApp.api_token}"
-        per_page: controller.get('perPage')
-      }
-
-      if similar == false
-        args.preference =  "#{app_controller.person_about} #{app_controller.person_education}"
-        if app_controller.search_query.length > 0
-          args.query = app_controller.search_query
-      else
-        preference_text = ""
-        try
-          #get data from existing job postings and save them to one hash
-          output = {}
-          #choose only best 10 job postings
-          for job_posting in @get('job_posting_cache')[0..10]
-            for text, count of job_posting.get("description_preferencies")
-              output[text] ||= 0
-              output[text] += count
-          #change hash to array
-          text_array = []
-          for text, count of output
-            text_array.push({
-              text: text,
-              count: count
-            })
-          #sort keywords by cont desc
-          text_array_sorted = text_array.sort (a,b) ->
-            return if b.count >= a.count then 1 else -1
-
-          log_text = ""
-          #choose best 20 words and create 1 text from them
-          for txt in text_array_sorted[0..19]
-            preference_text += " #{txt.text}"
-            log_text += " #{txt.text} (#{txt.count}), "
-
-          console.log(log_text)
-        catch error
-          console.log(error)
-
-
-        args.preference = "#{app_controller.search_query} #{app_controller.person_about} #{app_controller.person_education} #{preference_text}"
-
-      #has location setted to geo
-      if app_controller.search_location == "Aktuální poloha"
-        if @get('geolocation_object') == undefined && app_controller.enabled_geolocation == true
-          @set('geolocation_object', Em.GeoLocation.create({autoUpdate: true}))
-
-        if @get('geolocation_object') != undefined
-          if @get('geolocation_object').latitude != -99999
-            args.location = "#{@get('geolocation_object').latitude},#{@get('geolocation_object').longitude}"
-            #remeber last geolocation into local storage :D
-            try
-              localStorage['last_geolocation'] = args.location
-            catch e
-              console.log(e)
-
-          #if there is no data for loaction try cached location
-          else if localStorage['last_geolocation'] != undefined && localStorage['last_geolocation'] != "undefined"
-            args.location = localStorage['last_geolocation']
-
-      #has location setted to city
-      else
-        loc = @locations[app_controller.search_location]
-        args.location = "#{loc.latitude},#{loc.longitude}"
-
-      url = "#{window.PickwickApp.api_url_point}/vacancies"
+      args = @getArgsForFetch(similar)
     else
-      url = controller.get('urlForLoadMore')
+      args = {}
+
+    args.token    = "#{window.PickwickApp.api_token}"
+    args.per_page = controller.get('perPage')
 
     $.ajax(
       method: 'GET'
@@ -243,36 +319,7 @@ class PickwickApp.JobPostingsRoute extends Em.Route
       data: args
       cache: false
     ).done( (data) ->
-      if data.total == 0
-        controller.send('search_similar')
-      else
-        postings = data.vacancies.map (job_data) -> PickwickApp.JobPosting.create(job_data)
-
-        for job_posting in postings
-          liked = liked_jobs.hasItem('id', job_posting.id)
-          if liked != undefined && liked.is_liked == true
-            job_posting.set("is_liked", true)
-            #recreate object in liked jobs from search (update attributes)
-            liked_jobs.removeItem('id', job_posting.id)
-            #add it again
-            liked_jobs.addItem(job_posting)
-          if controller.get('loadingOtherSimilar')
-            controller.addSimilarItem(job_posting)
-          else
-            controller.addItem(job_posting)
-
-        #next loading---
-        if data.links && data.links.next
-          controller.set('urlForLoadMore', data.links.next)
-        else if controller.get('noMoreItems') == false
-          controller.send('search_other_similar')
-        else
-          controller.set('noMoreItems', true)
-
-        #stop loading more
-        controller.set('loadingMore', false)
-
+      route.loadDataFromAjax(data)
     ).error (error)->
-
       #show loading error
       controller.set('loadingError', true)
