@@ -45,7 +45,7 @@ class PickwickApp.JobPostingsController extends Ember.ArrayController
 
   addSimilarItem: (item) ->
     #add only if it doesn't exists in main array
-    unless @hasSimilarItem('id', item.id)
+    unless @hasSimilarItem('id', item.id) || @hasItem('id', item.id)
       this_controller = @
       Ember.run ->
         this_controller.similar_jobs.pushObject item
