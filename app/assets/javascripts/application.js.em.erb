@@ -32,16 +32,15 @@ $(document).ready ->
 <% if Rails.env == "build_ios" %>
   $('body').addClass('mobile_nice')
 <% elsif Rails.env == "build_android" %>
-  console.log("ANDROID")
   $('body').addClass('mobile_nice')
   $('body').addClass('mobile_android')
 <% else %>
-if navigator.userAgent.match(/iPhone|iPad|iPod/i)
-  $('body').addClass('mobile_nice')
-else if navigator.userAgent.match(/Android|BlackBerry|Opera Mini|IEMobile|KFSOWI/i)
-  $('body').addClass('mobile_not_nice')
-else
-  $('body').addClass('desktop')
+  if navigator.userAgent.match(/iPhone|iPad|iPod/i)
+    $('body').addClass('mobile_nice')
+  else if navigator.userAgent.match(/Android|BlackBerry|Opera Mini|IEMobile|KFSOWI/i)
+    $('body').addClass('mobile_not_nice')
+  else
+    $('body').addClass('desktop')
 <% end %>
 
 PickwickApp.normalizeTouchEvent = (event) ->
