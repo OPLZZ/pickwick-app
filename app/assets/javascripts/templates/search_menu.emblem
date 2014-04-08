@@ -42,8 +42,11 @@
         .row
           .col
             br
+            .center
+              view 'user'
             br
             .center
               a click='goToInfo'
                 i.icon-info
                 ' Informace o projektu
+

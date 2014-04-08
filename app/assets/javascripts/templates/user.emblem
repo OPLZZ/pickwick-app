@@ -1,0 +1,6 @@
+if user
+  'Přihlášen jako
+  = user.name
+else
+  button onclick="hello( 'facebook' ).login()"
+    ' přihlásit se pomocí facebooku
