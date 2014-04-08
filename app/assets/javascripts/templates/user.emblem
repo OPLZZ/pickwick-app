@@ -1,6 +1,10 @@
 if user
   'Přihlášen jako
   = user.name
+
+  a click="goToUserJobPostings"
+    .icon-pencil
+      ' vlastní pracovní pozice
   br
   a onclick="hello( 'facebook' ).logout()"
     ' odhlásit se

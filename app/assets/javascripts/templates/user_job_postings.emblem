@@ -1,0 +1,30 @@
+#frame_index
+  header
+    a.pull-left click="goToMenu"
+      .icon-magnifier
+        ' vyhledat
+    .three_column_header Vlastní pracovní pozice
+  .infinite-scroll-box.infinite-scroll-list
+    .row.infinite-scroll-content
+      .row-fluid
+        .list-group.m-b-small
+          each job in controller
+            render 'job_list' job
+
+        .center.info-loading.in_view_postings
+          if loadingError
+            ' Problém s načtením dat z internetu
+            a click='tryAgain' Zkusit znovu
+          else
+            if noMoreItems
+              ' Došli jste na konec výsledků
+            else
+              if loadingMore
+                i.icon-refresh
+                ' 
+                ' Načítání dat
+              else
+                a click='getMore' Klikněte pro načtení dalších výsledků
+
+#frame_own_detail
+  = outlet

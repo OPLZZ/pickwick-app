@@ -39,6 +39,9 @@ class PickwickApp.ApplicationRoute extends Ember.Route
     goToInfo: ->
       @transitionTo "job_postings.info"
 
+    goToUserJobPostings: ->
+      @transitionTo "user_job_postings"
+
     goToMenu: ->
       @transitionTo "job_postings.search"
       $('#search_query_text_box').focus()
