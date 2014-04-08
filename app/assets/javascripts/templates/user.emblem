@@ -1,6 +1,9 @@
 if user
   'Přihlášen jako
   = user.name
+  br
+  a onclick="hello( 'facebook' ).logout()"
+    ' odhlásit se
 else
   button onclick="hello( 'facebook' ).login()"
     ' přihlásit se pomocí facebooku
