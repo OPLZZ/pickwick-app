@@ -1,6 +1,7 @@
 # For more information see: http://emberjs.com/guides/routing/
 
 PickwickApp.Router.map ->
+  @route('search', {path: '/search/:query'})
   @resource('job_postings', ->
     @resource('job_posting', { path: ':id' })
     @route("search", { path: "/search" })
