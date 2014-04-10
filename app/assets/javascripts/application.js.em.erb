@@ -26,7 +26,11 @@ window.PickwickApp = Ember.Application.create(
 
 window.PickwickApp.api_url_point = "http://api.damepraci.cz"
 window.PickwickApp.api_token = "59a3b1a51c80c8db71c9a881d8b23c6e2b41727c"
+<% if Rails.env == "production" %>
 window.PickwickApp.user_url_point = "http://www.damepraci.cz"
+<% else %>
+window.PickwickApp.user_url_point = ""
+<% end %>
 window.PickwickApp.user_api_token = "59a3b1a51c80c8db71c9a881d8b23c6e2b41727c"
 
 $(document).ready ->
