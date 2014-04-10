@@ -1,0 +1,94 @@
+form.col
+  .row
+    label for="title"
+      ' Název pozice
+  .row.form-group
+    Ember.TextField valueBinding="title" id='title' name='title' placeholder='např. hlídač korálového útesu' autofocus="true"
+
+  .row
+    label for="employment_type"
+      ' Typ úvazku
+  .row.form-group.select-chevron
+    view Ember.Select content=employment_type_select optionValuePath='content.key' optionLabelPath='content.value' value=employment_type id='employment_type' name="employment_type"  autofocus="true"
+
+  .row
+    label for="description"
+      ' Popis pozice
+  .row.form-group
+    Ember.TextArea valueBinding="description" id='description' name='description' rows='1' placeholder='např. mám řidičský průkaz a mluvím anglicky'  autofocus="true"
+
+  hr
+  h3 Ohodnocení
+
+  .row
+    label for="compensation_value"
+      ' Cena
+  .row.form-group
+    Ember.TextField valueBinding="compensation.value" id='compensation_value' name='compensation_value' autofocus="true"
+
+  .row
+    label for="compensation_currency"
+      ' Měna
+  .row.form-group
+    view Ember.Select content=compensation_currency_select optionValuePath='content.key' optionLabelPath='content.value' value=compensation.currency id='compensation_currency' name="compensation_currency"  autofocus="true"
+
+  .row
+    label for="compensation_type"
+      ' Za období
+  .row.form-group
+    view Ember.Select content=compensation_type_select optionValuePath='content.key' optionLabelPath='content.value' value=compensation.type id='compensation_type' name="compensation_type"  autofocus="true"
+
+  hr
+  h3 Firemní informace
+  .row
+    label for="employer_name"
+      ' Jméno zaměstnavatele
+  .row.form-group
+    Ember.TextField valueBinding="employer.name" id='employer_name' name='employer_name' autofocus="true"
+
+  .row
+    label for="employer_company"
+      ' Jméno firmy
+  .row.form-group
+    Ember.TextField valueBinding="employer.company" id='employer_company' name='employer_company' autofocus="true"
+
+  hr
+  h3 Kontaktní informace
+  .row
+    label for="contact_name"
+      ' Jméno kontaktní osoby
+  .row.form-group
+    Ember.TextField valueBinding="contact.name" id='contact_name' name='contact_name' autofocus="true"
+
+  .row
+    label for="contact_phone"
+      ' Telefonní číslo
+  .row.form-group
+    Ember.TextField valueBinding="contact.phone" id='contact_phone' name='contact_phone' autofocus="true"
+
+  .row
+    label for="contact_email"
+      ' Email
+  .row.form-group
+    Ember.TextField valueBinding="contact.email" id='contact_email' name='contact_email'  autofocus="true"
+
+  hr
+  h3 Adresa firmy
+
+  .row
+    label for="location_street"
+      ' Ulice
+  .row.form-group
+    Ember.TextField valueBinding="location.street" id='location_street' name='location_street' autofocus="true"
+
+  .row
+    label for="location_city"
+      ' Město
+  .row.form-group
+    Ember.TextField valueBinding="location.city" id='location_city' name='location_city' autofocus="true"
+
+  .row
+    label for="location_zip"
+      ' PSČ
+  .row.form-group
+    Ember.TextField valueBinding="location.zip" id='location_zip' name='location_zip' autofocus="true"

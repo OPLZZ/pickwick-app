@@ -23,6 +23,58 @@ class PickwickApp.JobPosting extends Ember.Object
     'CZK': 'Kč'
     'EUR': '€'
   }
+
+  destroy: ->
+    console.log("DELETING")
+
+  save: ->
+    if @id
+      console.log("UPDATING")
+    else
+      @id = Math.random()
+      console.log("CREATING")
+
+  valid_title:( ->
+    if title || title.length > 6
+      true
+  ).property('title')
+
+  valid_description:( ->
+    if title || title.length > 6
+      true
+  ).property('desc')
+
+  duplicate: ->
+    new_job = {}
+    new_job.id      = @id
+    new_job.title   = @title
+    new_job.employment_type = @employment_type
+    new_job.description     = @description
+
+    new_job.employer = Ember.Object.create({})
+    new_job.employer.company = @employer.company
+    new_job.employer.name    = @employer.name
+
+    new_job.location = Ember.Object.create({})
+    new_job.location.city   = @location.city
+    new_job.location.street = @location.street
+    new_job.location.zip    = @location.zip
+
+    new_job.contact = Ember.Object.create({})
+    new_job.contact.name  = @contact.name
+    new_job.contact.phone = @contact.phone
+    new_job.contact.email = @contact.email
+
+    new_job.compensation = Ember.Object.create({})
+    if @compensation
+      console.log(@compensation)
+      new_job.compensation.value    = @compensation.value
+      new_job.compensation.type     = @compensation.type
+      new_job.compensation.currency = @compensation.currency
+
+    PickwickApp.JobPosting.create(new_job)
+
+
   #for select box in new/edit form
   employment_type_select:(->
     out = Em.A([])

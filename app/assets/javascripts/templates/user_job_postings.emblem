@@ -1,15 +1,17 @@
 #frame_index
   header
     a.pull-left click="goToMenu"
-      .icon-magnifier
-        ' vyhledat
+      .icon-chevron-left
+        ' zpět
     .three_column_header Vlastní pracovní pozice
+    a.pull-right click="goToNewUserJobPosting"
+      ' nová pozice
   .infinite-scroll-box.infinite-scroll-list
     .row.infinite-scroll-content
       .row-fluid
         .list-group.m-b-small
           each job in controller
-            render 'job_list' job
+            render 'user_job_list' job
 
         .center.info-loading.in_view_postings
           if loadingError
@@ -26,5 +28,5 @@
               else
                 a click='getMore' Klikněte pro načtení dalších výsledků
 
-#frame_own_detail
+#frame_detail
   = outlet

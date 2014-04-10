@@ -36,13 +36,14 @@ class PickwickApp.ApplicationController extends Em.Controller
     $(".ember-application").removeClass "push-liked"
     $(".ember-application").removeClass "push-menu"
 
-    if path == "job_postings.index"
+    if path == "job_postings.index" || path == "user_job_postings.index"
       @detailVisible = false
       @infoVisible = false
       @menuVisible = false
       @likedVisible = false
 
-    if path == "job_postings.job_posting"
+    console.log(path)
+    if path == "job_postings.job_posting" || path == "user_job_postings.user_job_posting" || path == "user_job_postings.new" || path == "user_job_postings.edit"
       @detailVisible = true
 
     if path == "job_postings.search"

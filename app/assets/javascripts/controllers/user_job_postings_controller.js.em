@@ -25,6 +25,10 @@ class PickwickApp.UserJobPostingsController extends Ember.ArrayController
     Ember.run ->
       this_controller.pushObject item
 
+  updateItem: (item) ->
+    @removeItem('id', item.id)
+    @addItem(item)
+
   removeItem: (propName, value) ->
     item = @hasItem(propName, value)
     if item != undefined

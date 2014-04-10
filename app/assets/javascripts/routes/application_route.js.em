@@ -46,3 +46,32 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       @transitionTo "job_postings.search"
       $('#search_query_text_box').focus()
 
+    backFromUserJobPosting: ->
+      @transitionTo "user_job_postings"
+
+    goToNewUserJobPosting: ->
+      @transitionTo 'user_job_posting.new'
+
+    goToUserJobPosting: (model) ->
+      @transitionTo 'user_job_posting', model
+
+    editUserJobPosting: (model) ->
+      @transitionTo 'user_job_posting.edit', model.duplicate()
+
+    createUserJobPosting: (model) ->
+      @controllerFor('user_job_postings').addItem(model)
+      model.save()
+      @transitionTo( 'user_job_postings' )
+
+    updateUserJobPosting: (model) ->
+      model.save()
+      @controllerFor('user_job_postings').updateItem(model)
+      @transitionTo( 'user_job_postings' )
+
+    removeUserJobPosting: (model) ->
+      model.destroy()
+      @controllerFor('user_job_postings').removeItem('id', model.id)
+      @transitionTo( 'user_job_postings' )
+
+    cancleUserJobPosting: ->
+      @transitionTo "user_job_postings"

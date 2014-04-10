@@ -1,0 +1,18 @@
+header
+  a.pull-left.back_button click="backFromUserJobPosting"
+    i.icon-chevron-left
+    | zpět
+
+  .three_column_header Úprava pozice
+
+section.infinite-scroll-box.infinite-scroll-detail
+  .main
+    render 'user_job_posting/form' this
+    br
+    .form.col
+      button.btn.btn-large.btn-primary.pull-right click='updateUserJobPosting this'
+        ' Upravit
+      button.btn.btn-large.btn-danger.pull-left click='cancleUserJobPosting this'
+        ' Zrušit
+    br
+    .form.col

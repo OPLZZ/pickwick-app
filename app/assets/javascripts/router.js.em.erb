@@ -10,7 +10,9 @@ PickwickApp.Router.map ->
   )
 
   @resource('user_job_postings', ->
-    @resource('user_job_posting', { path: ':id' })
+    @resource('user_job_posting.new',   { path: 'new' })
+    @resource('user_job_posting',       { path: ':id' })
+    @resource('user_job_posting.edit',  { path: ':id/edit' })
   )
 
 <% if Rails.env == "build_www" %>

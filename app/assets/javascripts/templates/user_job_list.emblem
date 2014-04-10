@@ -1,0 +1,21 @@
+linkTo 'user_job_posting' this class='gtm_view_user_detail'
+  .job_posting.list
+    .arrow_to_detail
+      i.icon-chevron-right.link_to_detail
+    .title= title
+    if employer.company
+      .contact= employer.company
+    else
+      if employer.name
+        .contact= employer.name
+    ul
+      if location.city
+        li.icon-location
+          = location.city
+          = distance_text
+      if employment_type
+        li.icon-tie
+          = employment_type_translated
+      if compensation_text
+        li.icon-money
+          = compensation_text

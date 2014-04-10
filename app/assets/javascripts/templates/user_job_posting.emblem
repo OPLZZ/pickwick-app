@@ -1,0 +1,63 @@
+header
+  a.pull-left.back_button click="backFromDetail"
+    i.icon-chevron-left
+    | zpět
+
+  .three_column_header Detail vlastní pozice
+
+  a.pull-right click="editUserJobPosting this"
+    ' upravit
+
+section.infinite-scroll-box.infinite-scroll-detail
+  .main.job_posting_detail
+    h1 = title
+
+    if employer.company
+      h2
+        = employer.company
+    else
+      if job_posting.employer.name
+        h2
+          = employer_name
+
+    if url
+      a href= url
+        = url
+    if title
+      ul.job_posting
+        if location.city
+          li.icon-location
+            = location.city
+            if location.street
+              ' ,
+              = location.street
+
+        if employment_type
+          li.icon-tie
+            = employment_type_translated
+
+        if compensation_text
+          li.icon-money
+            = compensation_text
+        if contact.name
+          li.icon-profile
+            = contact.name
+            if contact.phone
+              ' ,
+              = contact.phone
+            if contact.email
+              ' ,
+              = contact.email
+        if start_date
+          li.icon-calendar2
+            ' nástup
+            = start_date_show
+
+    .detail_text
+      == description_with_brs
+
+
+    br
+    .form.col
+      button.btn.btn-large.btn-danger.pull-right click='destroy'
+        ' Smazat pracovní pozici
