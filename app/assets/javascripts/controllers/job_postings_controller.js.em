@@ -11,7 +11,8 @@ class PickwickApp.JobPostingsController extends Ember.ArrayController
     search: () ->
       @set("page", 0)
       @set('recordsCount', -1)
-      @get('target').send('search')
+      Ember.run ->
+        PickwickApp.__container__.lookup('route:job_postings').send('search')
 
   hasItem: (propName, value) ->
     try
