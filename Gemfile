@@ -49,6 +49,10 @@ gem "octokit", "~> 2.0"
 gem 'heroku'
 gem 'rails_12factor', group: :production
 
+
+gem 'yajl-ruby', require: 'yajl'
+
 gem 'pry-rails'
 
 ruby "2.0.0"
+
