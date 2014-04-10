@@ -27,6 +27,6 @@ linkTo 'job_posting' id class='gtm_view_detail'
       if employment_type
         li.icon-tie
           = employment_type_translated
-      if compensation
+      if compensation_text
         li.icon-money
-          = compensation
+          = compensation_text

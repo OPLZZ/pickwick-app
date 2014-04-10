@@ -88,6 +88,31 @@ test "return start_date", ->
   equal PickwickApp.JobPosting.create(start_date: null).start_date_show, '', "NULL - return empty text"
   equal PickwickApp.JobPosting.create(start_date: undefined).start_date_show, '', "Undefined - return empty text"
 
+test "return compensation text", ->
+  equal PickwickApp.JobPosting.create().compensation_text, '', "return empty text"
+  equal PickwickApp.JobPosting.create(compensation: {value: 100}).compensation_text, '100'
+  equal PickwickApp.JobPosting.create(compensation: {min_value: 50}).compensation_text, '50'
+  equal PickwickApp.JobPosting.create(compensation: {max_value: 60}).compensation_text, '60'
+  equal PickwickApp.JobPosting.create(compensation: {min_value: 40, max_value: 70}).compensation_text, '40-70'
+  equal PickwickApp.JobPosting.create(compensation: {min_value: 40, max_value: 70, type: 'annual'}).compensation_text, '40-70 roční'
+  equal PickwickApp.JobPosting.create(compensation: {min_value: 40, max_value: 70, currency: 'CZK'}).compensation_text, '40-70 Kč'
+  equal PickwickApp.JobPosting.create(compensation: {min_value: 40, max_value: 70, type: 'annual', currency: 'CZK'}).compensation_text, '40-70 Kč roční'
+
+test "return compensation type translated", ->
+  equal PickwickApp.JobPosting.create(compensation: {type: 'annual'}).compensation_type_translated, 'roční'
+  equal PickwickApp.JobPosting.create(compensation: {type: 'hourly'}).compensation_type_translated, 'hodinová'
+  equal PickwickApp.JobPosting.create(compensation: {type: 'fixed'}).compensation_type_translated, 'fixní'
+  equal PickwickApp.JobPosting.create(compensation: {type: 'monthly'}).compensation_type_translated, 'měsíční'
+  equal PickwickApp.JobPosting.create(compensation: {}).compensation_type_translated, '', "return empty text "
+  equal PickwickApp.JobPosting.create().compensation_type_translated, '', "return without compensation empty text"
+
+test "return compensation currency translated", ->
+  equal PickwickApp.JobPosting.create(compensation: {currency: 'CZK'}).compensation_currency_translated, 'Kč', "return Kč"
+  equal PickwickApp.JobPosting.create(compensation: {currency: 'EUR'}).compensation_currency_translated, '€', "return €"
+  equal PickwickApp.JobPosting.create(compensation: {currency: 'PLN'}).compensation_currency_translated, 'PLN', "return unknown PLN"
+  equal PickwickApp.JobPosting.create(compensation: {}).compensation_currency_translated, '', "return empty text"
+  equal PickwickApp.JobPosting.create().compensation_currency_translated, '', "return without compensation empty text"
+
 test "return is_new", ->
   equal PickwickApp.JobPosting.create(created_at: moment().subtract('days', 3)).is_new, false, "older date"
   equal PickwickApp.JobPosting.create(created_at: moment().subtract('days', 1)).is_new, true, "younger tahn 2 days"

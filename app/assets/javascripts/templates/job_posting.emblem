@@ -40,19 +40,20 @@ section.infinite-scroll-box.infinite-scroll-detail
         = url
     if title
       ul.job_posting
-        li.icon-location
-          = location.city
-          if location.street
-            ' ,
-            = location.street
+        if location.city
+          li.icon-location
+            = location.city
+            if location.street
+              ' ,
+              = location.street
 
         if employment_type
           li.icon-tie
             = employment_type_translated
 
-        if compensation
+        if compensation_text
           li.icon-money
-            = compensation
+            = compensation_text
         if contact.name
           li.icon-profile
             = contact.name
