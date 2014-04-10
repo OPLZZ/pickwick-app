@@ -1,19 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  employment_type: MyString
-  location: MyString
-  description: MyText
-  compensation: MyString
-  contact: MyString
-  url: MyString
-
-two:
-  title: MyString
-  employment_type: MyString
-  location: MyString
-  description: MyText
-  compensation: MyString
-  contact: MyString
-  url: MyString
+  user_id: 1
+  title: Super title
+  employment_type: full-time
+  description: Some long text
+  location:
+    city: Praha
+    street: Delnicka 12
+    zip: 17000
+  compensation:
+    value: 100
+    type:  annual
+    currency: CZK
+  contact:
+    name: Contact Person
+    phone: 123456789
+    email: test@email.cz
+  employer:
+    company: OPLZZ
