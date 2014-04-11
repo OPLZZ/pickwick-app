@@ -20,4 +20,14 @@
 .ruby-version
 
 build/www
+build/ios
+build/ios_old
+build/android
+build/android_old
 build/release
+build/build_www
+build/build_ios
+build/build_ios_old
+build/build_android
+build/test_android
+build/build_android_old
