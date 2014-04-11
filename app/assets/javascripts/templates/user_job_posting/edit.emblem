@@ -10,8 +10,13 @@ section.infinite-scroll-box.infinite-scroll-detail
     render 'user_job_posting/form' this
     br
     .form.col
-      button.btn.btn-large.btn-primary.pull-right click='updateUserJobPosting this'
-        ' Upravit
+
+      if valid_save
+        button.btn.btn-large.btn-primary.pull-right click='updateUserJobPosting this'
+          ' Upravit
+      else
+        button.btn.btn-large.btn-primary.pull-right disabled="disabled"
+          ' Upravit
       button.btn.btn-large.btn-danger.pull-left click='cancleUserJobPosting this'
         ' Zrušit
     br

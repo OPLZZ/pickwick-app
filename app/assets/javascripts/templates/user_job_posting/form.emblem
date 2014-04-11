@@ -56,8 +56,12 @@ form.col
   h3 Zaměstnavatel
 
   .row
-    label for="employer_name"
-      ' Název
+    if valid_employer
+      label for="employer_name"
+        ' Název
+    else
+      label.btn-danger for="employer_name"
+        ' Název
   .row.form-group
     Ember.TextField valueBinding="employer.name" id='employer_name' name='employer_name' autofocus="true"
   .row.form-group
@@ -73,14 +77,22 @@ form.col
     Ember.TextField valueBinding="contact.name" id='contact_name' name='contact_name' autofocus="true"
 
   .row
-    label for="contact_phone"
-      ' Telefonní číslo
+    if valid_contact
+      label for="contact_phone"
+        ' Telefonní číslo
+    else
+      label.btn-danger for="contact_phone"
+        ' Telefonní číslo
   .row.form-group
     Ember.TextField valueBinding="contact.phone" id='contact_phone' name='contact_phone' autofocus="true"
 
   .row
-    label for="contact_email"
-      ' Email
+    if valid_contact
+      label for="contact_email"
+        ' Email
+    else
+      label.btn-danger for="contact_email"
+        ' Email
   .row.form-group
     Ember.TextField valueBinding="contact.email" id='contact_email' name='contact_email'  autofocus="true"
 
@@ -94,8 +106,12 @@ form.col
     Ember.TextField valueBinding="location.street" id='location_street' name='location_street' autofocus="true"
 
   .row
-    label for="location_city"
-      ' Město
+    if valid_location_city
+      label for="location_city"
+        ' Město
+    else
+      label.btn-danger for="location_city"
+        ' Město
   .row.form-group
     Ember.TextField valueBinding="location.city" id='location_city' name='location_city' autofocus="true"
 

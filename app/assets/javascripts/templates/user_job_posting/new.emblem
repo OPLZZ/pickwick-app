@@ -10,8 +10,13 @@ section.infinite-scroll-box.infinite-scroll-detail
     render 'user_job_posting/form' this
     br
     .form.col
-      button.btn.btn-large.btn-primary.pull-right click='createUserJobPosting this'
-        ' Vytvořit
+      if valid_save
+        button.btn.btn-large.btn-primary.pull-right click='createUserJobPosting this'
+          ' Vytvořit
+      else
+        button.btn.btn-large.btn-primary.pull-right disabled="disabled"
+          ' Vytvořit
+
       button.btn.btn-large.btn-danger.pull-left click='cancleUserJobPosting this'
         ' Zrušit
     br

@@ -126,6 +126,10 @@ class PickwickApp.JobPosting extends Ember.Object
       ).error (error)->
         console.log("ERROR WITH SAVING")
 
+  valid_save: ( ->
+    @valid_title && @valid_description && @valid_employer && @valid_contact && @valid_location_city
+  ).property('valid_title','valid_description', 'valid_employer', 'valid_contact','valid_location_city')
+
   valid_title:( ->
     if @title && @title.length > 6
       true
@@ -139,6 +143,34 @@ class PickwickApp.JobPosting extends Ember.Object
     else
       false
   ).property('description')
+
+  valid_employer:( ->
+    if @employer.name && @employer.name.length > 3
+      true
+    else
+      false
+  ).property('employer','employer.name')
+
+  valid_contact:( ->
+    console.log(@contact.phone)
+    if @contact.phone
+      console.log(@contact.phone.match(@phone_regexp))
+    console.log(@contact.email)
+    if @contact.email
+      console.log(@contact.email.match(@email_regexp))
+    if @contact && ((@contact.phone && @contact.phone.match(@phone_regexp)) || (@contact.email && @contact.email.match(@email_regexp)))
+      true
+    else
+      false
+  ).property('contact', 'contact.phone', 'contact.email')
+
+  valid_location_city:( ->
+    if @location && @location.city && @location.city.length > 3
+      true
+    else
+      false
+  ).property('location','location.city')
+
 
   duplicate: ->
     new_job = {}
@@ -220,7 +252,7 @@ class PickwickApp.JobPosting extends Ember.Object
         output[ii] ||= 0
         output[ii] += 1
     output
-  ).property('description, title')
+  ).property('description', 'title')
 
   employment_type_translated:( ->
     if @employment_type == null
@@ -246,7 +278,7 @@ class PickwickApp.JobPosting extends Ember.Object
       @compensation.currency
     else
       ""
-  ).property('compensation,compensation.currency')
+  ).property('compensation','compensation.currency')
 
   compensation_type_translated: ( ->
     if @compensation && @compensation.type && @compensation_type_translation[@compensation.type]
@@ -255,7 +287,7 @@ class PickwickApp.JobPosting extends Ember.Object
       @compensation.type
     else
       ""
-  ).property('compensation,compensation.currency')
+  ).property('compensation','compensation.currency')
 
 
   compensation_text: ( ->
@@ -275,7 +307,7 @@ class PickwickApp.JobPosting extends Ember.Object
       out
     else
       ""
-  ).property('compensation,compensation.value,compensation.type,compensation.currency')
+  ).property('compensation','compensation.value','compensation.type','compensation.currency')
 
   start_date_show:( ->
     if @start_date
