@@ -26,7 +26,6 @@ class PickwickApp.User extends Ember.Object
 
       controller = PickwickApp.__container__.lookup('controller:user_job_postings');
       controller.set('user', user)
-      controller.send('search')
 
   save: ->
     this_object = @

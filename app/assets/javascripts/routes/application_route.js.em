@@ -90,3 +90,6 @@ class PickwickApp.ApplicationRoute extends Ember.Route
 
     cancleUserJobPosting: ->
       @transitionTo "user_job_postings"
+
+    search: ->
+      console.log("search")

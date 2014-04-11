@@ -8,10 +8,10 @@ class PickwickApp.UserJobPostingsController extends Ember.ArrayController
   user: null
 
   actions:
-    search: () ->
+    search_user: () ->
       @set("page", 0)
       @set('recordsCount', -1)
-      @get('target').send('search')
+      @get('target').send('search_user')
 
   hasItem: (propName, value) ->
     try

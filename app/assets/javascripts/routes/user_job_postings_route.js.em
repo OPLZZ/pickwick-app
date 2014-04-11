@@ -5,7 +5,7 @@ class PickwickApp.UserJobPostingsRoute extends Em.Route
     @get('job_posting_cache')
 
   actions:
-    search: ->
+    search_user: ->
       @controller.set('noMoreItems', false)
       @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
       @fetchPage(true)
