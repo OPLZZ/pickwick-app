@@ -282,3 +282,30 @@ class PickwickApp.JobPosting extends Ember.Object
     else
       false
   ).property('created_at')
+
+  checked_text:( ->
+    if @checked == "valid"
+      "Schváleno administrátorem a zobrazuje se uživatelům ve výsledcích vyhledávání"
+    else if @checked == "invalid"
+      "Není schváleno administrátorem!"
+    else
+      "Čeká na schválení administrátora"
+  ).property('checked')
+
+  checked_badge_klass: ( ->
+    if @checked == "valid"
+      "new_badge green"
+    else if @checked == "invalid"
+      "new_badge red"
+    else
+      "new_badge gray"
+  ).property('checked')
+
+  checked_badge_text: ( ->
+    if @checked == "valid"
+      "ok"
+    else if @checked == "invalid"
+      "err"
+    else
+      "čeká"
+  ).property('checked')
