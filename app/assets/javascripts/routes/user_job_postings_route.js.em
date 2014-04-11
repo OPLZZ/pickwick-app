@@ -33,7 +33,8 @@ class PickwickApp.UserJobPostingsRoute extends Em.Route
 
   addJobPostingFromAjax: (job_posting) ->
     controller = @controllerFor('user_job_postings')
-    controller.addItem(job_posting)
+    if !controller.hasItem('id', job_posting.id)
+      controller.addItem(job_posting)
 
   loadDataFromAjax: (data) ->
     controller = @controllerFor('user_job_postings')
