@@ -5,3 +5,6 @@ document.write(
   '  <div id="ember-testing"></div>' +
   '</div>'
 )
+PickwickApp.rootElement = '#ember-testing'
+PickwickApp.setupForTesting()
+PickwickApp.injectTestHelpers()
