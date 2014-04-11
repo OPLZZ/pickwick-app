@@ -6,6 +6,7 @@ class PickwickApp.JobPosting extends Ember.Object
   location: Ember.Object.create({})
   contact:  Ember.Object.create({})
   compensation:  Ember.Object.create({})
+  start_date: null
 
   employment_type_translation: {
     "full-time": 'plný úvazek'
@@ -24,25 +25,107 @@ class PickwickApp.JobPosting extends Ember.Object
     'EUR': '€'
   }
 
+  employer_type_select: [
+    {'key': 'company', 'value': 'Firma'},
+    {'key': 'private', 'value': 'Soukromá osob'},
+  ]
+
+  set_defaults_for_new: ->
+    @start_date = moment().format('YYYY-MM-DD')
+    app_controller = PickwickApp.__container__.lookup('controller:application')
+    @contact.name =  app_controller.user.name
+    @employer.type = "private"
+
   destroy: ->
-    console.log("DELETING")
+    app_controller = PickwickApp.__container__.lookup('controller:application')
+    url = "#{window.PickwickApp.user_url_point}/users/#{app_controller.user.id}/job_postings/#{@id}"
+
+    this_object = @
+    Ember.run ->
+      $.ajax(
+        method: 'DELETE'
+        dataType: 'json'
+        contentType: 'application/json'
+        url: url
+        processData: false
+        headers: {
+          'Application-Token': window.PickwickApp.user_api_token
+          'User-Token': app_controller.user.token
+        }
+        cache: false
+      ).done( (data) ->
+        console.log("DELETED: #{this_object.id}")
+      ).error (error)->
+        console.log("ERROR WITH DELETING")
+
+  save_params: (->
+    {
+      job_posting: {
+        title:           @title
+        start_date:      @start_date
+        description:     @description
+        employment_type: @employment_type
+        employer:        @employer
+        location:        @location
+        contact:         @contact
+        compensation:    @compensation
+      }
+    }
+  ).property('title, description, employment_type, employer, location, contact, compensation')
+
+  update_attributes: (job_posting) ->
+    @id = job_posting.id
+    @checked = job_posting.checked
 
   save: ->
+    console.log("SAVING")
+    this_object = @
+    app_controller = PickwickApp.__container__.lookup('controller:application')
+    
+    unless app_controller.user
+      alert('cant save without sign in')
+
     if @id
-      console.log("UPDATING")
+      method = "PATCH"
+      url = "#{window.PickwickApp.user_url_point}/users/#{app_controller.user.id}/job_postings/#{@id}"
     else
-      @id = Math.random()
-      console.log("CREATING")
+      method = "POST"
+      url = "#{window.PickwickApp.user_url_point}/users/#{app_controller.user.id}/job_postings"
+    
+    this_object = @
+
+    console.log(JSON.stringify(this_object.save_params))
+    Ember.run ->
+      $.ajax(
+        method: method
+        dataType: 'json'
+        contentType: 'application/json'
+        url: url
+        processData: false
+        data: JSON.stringify(this_object.save_params)
+        headers: { 
+          'Application-Token': window.PickwickApp.user_api_token
+          'User-Token': app_controller.user.token
+        }
+        cache: false
+      ).done( (data) ->
+        this_object.update_attributes(data.job_posting)
+      ).error (error)->
+        console.log("ERROR WITH SAVING")
 
   valid_title:( ->
-    if title || title.length > 6
+    if @title && @title.length > 6
       true
+    else
+      false
   ).property('title')
 
   valid_description:( ->
-    if title || title.length > 6
+    if @description && @description.length > 6
       true
-  ).property('desc')
+    else
+      false
+  ).property('description')
 
   duplicate: ->
     new_job = {}
@@ -50,10 +133,12 @@ class PickwickApp.JobPosting extends Ember.Object
     new_job.title   = @title
     new_job.employment_type = @employment_type
     new_job.description     = @description
+    new_job.start_date      = @start_date
 
     new_job.employer = Ember.Object.create({})
-    new_job.employer.company = @employer.company
-    new_job.employer.name    = @employer.name
+    new_job.employer.type = @employer.type
+    new_job.employer.name = @employer.name
+
 
     new_job.location = Ember.Object.create({})
     new_job.location.city   = @location.city
@@ -66,11 +151,9 @@ class PickwickApp.JobPosting extends Ember.Object
     new_job.contact.email = @contact.email
 
     new_job.compensation = Ember.Object.create({})
-    if @compensation
-      console.log(@compensation)
-      new_job.compensation.value    = @compensation.value
-      new_job.compensation.type     = @compensation.type
-      new_job.compensation.currency = @compensation.currency
+    new_job.compensation.value    = @compensation.value
+    new_job.compensation.type     = @compensation.type
+    new_job.compensation.currency = @compensation.currency
 
     PickwickApp.JobPosting.create(new_job)
 
@@ -164,7 +247,6 @@ class PickwickApp.JobPosting extends Ember.Object
 
   compensation_text: ( ->
     out = ""
-    console.log(@compensation)
     if @compensation && @compensation.value
       out += "#{@compensation.value}"
     else if @compensation && @compensation.min_value && @compensation.max_value
@@ -175,8 +257,8 @@ class PickwickApp.JobPosting extends Ember.Object
       out += "#{@compensation.max_value}"
 
     if out.length > 0
-      out += " #{@compensation_currency_translated}" if @compensation_currency_translated.length > 1
-      out += " #{@compensation_type_translated}"     if @compensation_type_translated.length > 1
+      out += " #{@compensation_currency_translated}" if @compensation_currency_translated.length > 0
+      out += " #{@compensation_type_translated}"     if @compensation_type_translated.length > 0
       out
     else
       ""
