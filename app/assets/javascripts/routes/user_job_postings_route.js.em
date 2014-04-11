@@ -38,7 +38,7 @@ class PickwickApp.UserJobPostingsRoute extends Em.Route
       controller.set('loadingMore', false)
       controller.set('noMoreItems', true)
     else
-      postings = data.job_postings.map (job_data) -> PickwickApp.JobPosting.create(job_data)
+      postings = data.job_postings.map (job_data) -> PickwickApp.UserJobPosting.create(job_data)
 
       for job_posting in postings
         @addJobPostingFromAjax(job_posting)
