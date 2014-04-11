@@ -71,19 +71,7 @@ Build Settings -> (click on show all) -> Valid Achitectures to `armv7 armv7s`
 
 ```
 cd build
-phonegap create build_android cz.damepraci.app "DamePraci"
-cd build_android
-phonegap build android
-phonegap plugin add org.apache.cordova.geolocation
-
+mkdir build_android
 bundle exec rake build_android RAILS_ENV=build_android
-
-open platforms/ios/DamePraci.xcodeproj
 ```
-
-then you need to update:
-
-General -> Bundle Identifier to `cz.damepraci.app`
-Build Settings -> (click on show all) -> Valid Achitectures to `armv7 armv7s`
-
 
