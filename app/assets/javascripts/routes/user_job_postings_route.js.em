@@ -1,5 +1,8 @@
 class PickwickApp.UserJobPostingsRoute extends Em.Route
 
+  setupController: ->
+    console.log("Setup User Job Postings controller")
+
   model: ->
     @set('job_posting_cache', Em.A([]))
     @get('job_posting_cache')

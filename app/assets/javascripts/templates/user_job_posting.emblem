@@ -1,5 +1,5 @@
 header
-  a.pull-left.back_button click="backFromDetail"
+  a.pull-left.back_button click="backFromUserJobPosting"
     i.icon-chevron-left
     | zpět
 
