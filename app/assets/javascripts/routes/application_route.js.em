@@ -53,25 +53,40 @@ class PickwickApp.ApplicationRoute extends Ember.Route
       @transitionTo 'user_job_posting.new'
 
     goToUserJobPosting: (model) ->
-      @transitionTo 'user_job_posting', model
+      if @controllerFor('application').user && @controllerFor('application').user.id
+        @transitionTo 'user_job_posting', model
+      else
+        @transitionTo 'user_job_postings'
 
     editUserJobPosting: (model) ->
-      @transitionTo 'user_job_posting.edit', model.duplicate()
-
+      if @controllerFor('application').user && @controllerFor('application').user.id
+        @transitionTo 'user_job_posting.edit', model.duplicate()
+      else
+        @transitionTo 'user_job_postings'
+  
     createUserJobPosting: (model) ->
-      @controllerFor('user_job_postings').addItem(model)
-      model.save()
-      @transitionTo( 'user_job_postings' )
+      if @controllerFor('application').user && @controllerFor('application').user.id
+        @controllerFor('user_job_postings').addItem(model)
+        model.save()
+        @transitionTo( 'user_job_posting', model )
+      else
+        @transitionTo 'user_job_postings'
 
     updateUserJobPosting: (model) ->
-      model.save()
-      @controllerFor('user_job_postings').updateItem(model)
-      @transitionTo( 'user_job_postings' )
+      if @controllerFor('application').user && @controllerFor('application').user.id
+        model.save()
+        @controllerFor('user_job_postings').updateItem(model)
+        @transitionTo( 'user_job_posting', model )
+      else
+        @transitionTo 'user_job_postings'
 
     removeUserJobPosting: (model) ->
-      model.destroy()
-      @controllerFor('user_job_postings').removeItem('id', model.id)
-      @transitionTo( 'user_job_postings' )
+      if @controllerFor('application').user && @controllerFor('application').user.id
+        model.destroy()
+        @controllerFor('user_job_postings').removeItem('id', model.id)
+        @transitionTo( 'user_job_postings' )
+      else
+        @transitionTo 'user_job_postings'
 
     cancleUserJobPosting: ->
       @transitionTo "user_job_postings"

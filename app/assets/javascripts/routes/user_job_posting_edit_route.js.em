@@ -1,4 +1,4 @@
-class PickwickApp.UserJobPostingRoute extends Em.Route
+class PickwickApp.UserJobPostingEditRoute extends Em.Route
 
   model: (params) ->
     console.log(params)

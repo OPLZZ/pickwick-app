@@ -5,11 +5,16 @@ class PickwickApp.UserJobPostingsRoute extends Em.Route
     @get('job_posting_cache')
 
   actions:
+    search: ->
+      @controller.set('noMoreItems', false)
+      @get('job_posting_cache').replace(0, @get('job_posting_cache').get('length'), Em.A([]))
+      @fetchPage(true)
+
     getMore: ->
-      @fetchPage(false)
+      @fetchPage()
 
     fetchPage: ->
-      @fetchPage(false)
+      @fetchPage()
 
     inViewShown: ->
       return if @controller.get('noMoreItems')
@@ -19,62 +24,63 @@ class PickwickApp.UserJobPostingsRoute extends Em.Route
 
     tryAgain: ->
       if @controllerFor('job_postings').get('urlForLoadMore') == undefined
-        @fetchPage(true)
+        @fetchPage()
       else
-        @fetchPage(false)
+        @fetchPage()
 
   addJobPostingFromAjax: (job_posting) ->
-    controller = @controllerFor('own_job_postings')
+    controller = @controllerFor('user_job_postings')
     controller.addItem(job_posting)
 
   loadDataFromAjax: (data) ->
-    controller = @controllerFor('own_job_postings')
+    controller = @controllerFor('user_job_postings')
     if data.total == 0
-      controller.set('loadingMore', true)
+      controller.set('loadingMore', false)
+      controller.set('noMoreItems', true)
     else
-      postings = data.vacancies.map (job_data) -> PickwickApp.JobPosting.create(job_data)
+      postings = data.job_postings.map (job_data) -> PickwickApp.JobPosting.create(job_data)
 
       for job_posting in postings
         @addJobPostingFromAjax(job_posting)
 
       #next loading---
-      if data.links && data.links.next
-        controller.set('urlForLoadMore', data.links.next)
-      else
-        controller.set('noMoreItems', true)
+      controller.set('noMoreItems', true)
 
       #stop loading more
       controller.set('loadingMore', false)
 
-  getUrlForFetch: (search) ->
-    controller = @controllerFor('job_postings')
-    if search
-      #clear previous search
-      controller.set('urlForLoadMore', undefined)
-
-      return "#{window.PickwickApp.user_url_point}/vacancies"
-    else if controller.get('urlForLoadMore') != undefined
-      return controller.get('urlForLoadMore')
+  user_token: ->
+    app_controller = @controllerFor('application')
+    if app_controller.user
+      app_controller.user.token
     else
-      return "#{window.PickwickApp.user_url_point}/vacancies"
+      ""
 
-  fetchPage: (search, similar = false) ->
-    controller = @controllerFor('job_postings')
+  user_id: ->
+    app_controller = @controllerFor('application')
+    if app_controller.user
+      app_controller.user.id
+    else
+      ""
+
+  fetchPage: () ->
+    controller = @controllerFor('user_job_postings')
+
     route = @
     controller.set('loadingMore', true)
     #hide error
     controller.set('loadingError', false)
 
-    url = @getUrlForFetch(search)
-
-    args.token    = "#{window.PickwickApp.user_api_token}"
-    args.per_page = controller.get('perPage')
+    url = "#{window.PickwickApp.user_url_point}/users/#{@user_id()}/job_postings"
 
     $.ajax(
       method: 'GET'
       dataType: 'json'
       url: url
-      data: args
+      headers: { 
+        'Application-Token': window.PickwickApp.user_api_token
+        'User-Token': @user_token()
+      }
       cache: false
     ).done( (data) ->
       route.loadDataFromAjax(data)
