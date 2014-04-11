@@ -19,6 +19,11 @@ section.infinite-scroll-box.infinite-scroll-detail
     if url
       a href= url
         = url
+
+    .status-box
+      div class=checked_badge_klass
+        =checked_text
+
     if title
       ul.job_posting
         if location.city

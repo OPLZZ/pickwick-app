@@ -4,8 +4,9 @@
       .icon-chevron-left
         ' zpět
     .three_column_header Vlastní pracovní pozice
-    a.pull-right click="goToNewUserJobPosting"
-      ' nová pozice
+    if user
+      a.pull-right click="goToNewUserJobPosting"
+        ' nová pozice
   .infinite-scroll-box.infinite-scroll-list
     if user
       .row.infinite-scroll-content

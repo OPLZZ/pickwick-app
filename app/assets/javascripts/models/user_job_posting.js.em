@@ -234,9 +234,9 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
 
   checked_badge_text: ( ->
     if @checked == "valid"
-      "ok"
+      "<div class='icon-star badge-icon'></div>"
     else if @checked == "invalid"
-      "err"
+      "<div class='icon-warning badge-icon'></div>"
     else
-      "čeká"
+      "<div class='icon-time badge-icon'></div>"
   ).property('checked')
