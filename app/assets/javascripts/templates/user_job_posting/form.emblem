@@ -1,7 +1,11 @@
 form.col
   .row
-    label for="title"
-      ' Název pozice
+    if valid_title
+      label for="title"
+        ' Název pozice
+    else
+      label.btn-danger for="title"
+        ' Název pozice
   .row.form-group
     Ember.TextField valueBinding="title" id='title' name='title' placeholder='např. hlídač korálového útesu' autofocus="true"
 
@@ -12,17 +16,27 @@ form.col
     view Ember.Select content=employment_type_select optionValuePath='content.key' optionLabelPath='content.value' value=employment_type id='employment_type' name="employment_type"  autofocus="true"
 
   .row
-    label for="description"
-      ' Popis pozice
+    if valid_description
+      label for="description"
+        ' Popis pozice
+    else
+      label.btn-danger for="description"
+        ' Popis pozice
   .row.form-group
     Ember.TextArea valueBinding="description" id='description' name='description' rows='1' placeholder='např. mám řidičský průkaz a mluvím anglicky'  autofocus="true"
 
+  .row
+    label for="employment_type"
+      ' Datum nástupu
+  .row.form-group.form-inline.select-chevron
+    Ember.TextField valueBinding="start_date" id='start_date' name='start_date' type='date' autofocus="true"
+
   hr
-  h3 Ohodnocení
+  h3 Plat
 
   .row
     label for="compensation_value"
-      ' Cena
+      ' Částka
   .row.form-group
     Ember.TextField valueBinding="compensation.value" id='compensation_value' name='compensation_value' autofocus="true"
 
@@ -34,23 +48,21 @@ form.col
 
   .row
     label for="compensation_type"
-      ' Za období
+      ' Frekvence
   .row.form-group
     view Ember.Select content=compensation_type_select optionValuePath='content.key' optionLabelPath='content.value' value=compensation.type id='compensation_type' name="compensation_type"  autofocus="true"
 
   hr
-  h3 Firemní informace
-  .row
-    label for="employer_name"
-      ' Jméno zaměstnavatele
-  .row.form-group
-    Ember.TextField valueBinding="employer.name" id='employer_name' name='employer_name' autofocus="true"
+  h3 Zaměstnavatel
 
   .row
-    label for="employer_company"
-      ' Jméno firmy
+    label for="employer_name"
+      ' Název
   .row.form-group
-    Ember.TextField valueBinding="employer.company" id='employer_company' name='employer_company' autofocus="true"
+    Ember.TextField valueBinding="employer.name" id='employer_name' name='employer_name' autofocus="true"
+  .row.form-group
+    view Ember.Select content=employer_type_select optionValuePath='content.key' optionLabelPath='content.value' value=employer.type id='employer_type' name="employer_type"  autofocus="true"
+
 
   hr
   h3 Kontaktní informace
@@ -73,7 +85,7 @@ form.col
     Ember.TextField valueBinding="contact.email" id='contact_email' name='contact_email'  autofocus="true"
 
   hr
-  h3 Adresa firmy
+  h3 Místo výkonu práce
 
   .row
     label for="location_street"

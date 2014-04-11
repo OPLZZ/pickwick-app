@@ -12,13 +12,9 @@ section.infinite-scroll-box.infinite-scroll-detail
   .main.job_posting_detail
     h1 = title
 
-    if employer.company
+    if employer.name
       h2
-        = employer.company
-    else
-      if job_posting.employer.name
-        h2
-          = employer_name
+        = employer.name
 
     if url
       a href= url
@@ -58,6 +54,7 @@ section.infinite-scroll-box.infinite-scroll-detail
 
 
     br
-    .form.col
-      button.btn.btn-large.btn-danger.pull-right click='destroy'
-        ' Smazat pracovní pozici
+    .form.col.bottom-padding
+      .center
+        button.btn.btn-small.btn-danger click='destroy'
+          ' Smazat pracovní pozici

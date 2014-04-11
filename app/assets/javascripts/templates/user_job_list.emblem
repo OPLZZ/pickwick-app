@@ -1,13 +1,14 @@
-linkTo 'user_job_posting' this class='gtm_view_user_detail'
+linkTo 'user_job_posting' this class='gtm_view_user_detail' title=checked_text
   .job_posting.list
+    div class=checked_badge_klass
+      .badge_container
+        span= checked_badge_text
+
     .arrow_to_detail
       i.icon-chevron-right.link_to_detail
     .title= title
-    if employer.company
-      .contact= employer.company
-    else
-      if employer.name
-        .contact= employer.name
+    if employer.name
+      .contact= employer.name
     ul
       if location.city
         li.icon-location

@@ -15,4 +15,4 @@ section.infinite-scroll-box.infinite-scroll-detail
       button.btn.btn-large.btn-danger.pull-left click='cancleUserJobPosting this'
         ' Zrušit
     br
-    .form.col
+    .row.bottom-padding

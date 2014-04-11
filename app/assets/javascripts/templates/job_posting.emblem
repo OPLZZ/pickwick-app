@@ -21,9 +21,9 @@ section.infinite-scroll-box.infinite-scroll-detail
       h2
         = employer.company
     else
-      if job_posting.employer.name
+      if employer.name
         h2
-          = employer_name
+          = employer.name
 
     if is_liked
       a.contact_link.gtm_set_liked click="setDislike"

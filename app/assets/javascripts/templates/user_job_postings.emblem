@@ -7,26 +7,32 @@
     a.pull-right click="goToNewUserJobPosting"
       ' nová pozice
   .infinite-scroll-box.infinite-scroll-list
-    .row.infinite-scroll-content
-      .row-fluid
-        .list-group.m-b-small
-          each job in controller
-            render 'user_job_list' job
+    if user
+      .row.infinite-scroll-content
+        .row-fluid
+          .list-group.m-b-small
+            each job in controller
+              render 'user_job_list' job
 
-        .center.info-loading.in_view_postings
-          if loadingError
-            ' Problém s načtením dat z internetu
-            a click='tryAgain' Zkusit znovu
-          else
-            if noMoreItems
-              ' Došli jste na konec výsledků
+          .center.info-loading.in_view_postings
+            if loadingError
+              ' Problém s načtením dat z internetu
+              a click='tryAgain' Zkusit znovu
             else
-              if loadingMore
-                i.icon-refresh
-                ' 
-                ' Načítání dat
+              if noMoreItems
+                ' Došli jste na konec výsledků
               else
-                a click='getMore' Klikněte pro načtení dalších výsledků
+                if loadingMore
+                  i.icon-refresh
+                  ' 
+                  ' Načítání dat
+                else
+                  a click='getMore' Klikněte pro načtení dalších výsledků
+    else
+      br
+      .center
+        button onclick="hello( 'facebook' ).login()"
+          ' přihlásit se pomocí facebooku
 
 #frame_detail
   = outlet
