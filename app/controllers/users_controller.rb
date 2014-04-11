@@ -14,10 +14,23 @@ class UsersController < ApplicationController
 
   # POST /job_postings
   def create
-    if user_params[:token] && @user = User.where(token: user_params[:token]).first
+
+    create_params = user_params
+    begin
+      fb_user = FbGraph::User.me(user_params[:token]).fetch
+      create_params[:system_id] = fb_user.identifier
+      create_params[:name] = fb_user.name
+    rescue Exception => e
+      render json: {error: 'INVALID LOGIN', message: e.message}, status: 400
+    end
+
+    if user_params[:token] && @user = User.where(system_id: create_params[:system_id]).first
+      #update token if needed
+      @user.token = user_params[:token] if @user.token != user_params[:token]
+      @user.save
       render json: {user: @user}, status: 200
     else
-      @user = User.new(user_params)
+      @user = User.new(create_params)
 
       if @user.save
         render json: {user: @user}, status: 201
@@ -26,8 +39,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
