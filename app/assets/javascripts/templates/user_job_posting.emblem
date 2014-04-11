@@ -38,9 +38,9 @@ section.infinite-scroll-box.infinite-scroll-detail
         if contact.name
           li.icon-profile
             = contact.name
-            if contact.phone
+            if get_contact_phone
               ' ,
-              = contact.phone
+              = get_contact_phone
             if contact.email
               ' ,
               = contact.email

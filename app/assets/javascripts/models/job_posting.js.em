@@ -7,6 +7,8 @@ class PickwickApp.JobPosting extends Ember.Object
   contact:  Ember.Object.create({})
   compensation:  Ember.Object.create({})
   start_date: null
+  phone_regexp: /\+?\d{3}[ -]?\d{3}[ -]?\d{3}[ -]?\d{0,3}/
+  email_regexp: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 
   employment_type_translation: {
     "full-time": 'plný úvazek'
@@ -73,6 +75,17 @@ class PickwickApp.JobPosting extends Ember.Object
     }
   ).property('title, description, employment_type, employer, location, contact, compensation')
 
+  get_contact_phone: (->
+    if @contact && @contact.phone
+      phone = @contact.phone.split(",")[0]
+      if phone.match(@phone_regexp)
+        phone
+      else
+        null
+    else
+      null
+  ).property('contact, contact.phone')
+
   update_attributes: (job_posting) ->
     @id = job_posting.id
     @checked = job_posting.checked
@@ -81,7 +94,7 @@ class PickwickApp.JobPosting extends Ember.Object
     console.log("SAVING")
     this_object = @
     app_controller = PickwickApp.__container__.lookup('controller:application')
-    
+
     unless app_controller.user
       alert('cant save without sign in')
 

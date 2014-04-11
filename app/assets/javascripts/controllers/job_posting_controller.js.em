@@ -2,9 +2,9 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
   needs: ["likedJobs", 'application']
   actions:
     callPhone: ->
-      url = "tel:#{@get('content.contact.phone')}"
+      url = "tel:#{@get('content.get_contact_phone')}"
       bootbox.dialog({
-        title: "Zavolat na telefonní číslo: #{@get('content.contact.phone')} ?"
+        title: "Zavolat na telefonní číslo: #{@get('content.get_contact_phone')} ?"
         message: "Pracovní nabídka: #{@get('content.title')}"
         buttons: {
           close: {

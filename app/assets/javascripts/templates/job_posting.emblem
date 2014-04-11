@@ -57,9 +57,9 @@ section.infinite-scroll-box.infinite-scroll-detail
         if contact.name
           li.icon-profile
             = contact.name
-            if contact.phone
+            if get_contact_phone
               ' ,
-              = contact.phone
+              = get_contact_phone
             if contact.email
               ' ,
               = contact.email
@@ -72,7 +72,7 @@ section.infinite-scroll-box.infinite-scroll-detail
       == description_with_brs
 
     .row
-      if contact.phone
+      if get_contact_phone
         a.contact_link.gtm_contact_phone click='callPhone'
           i.icon-phone
           '   Zavolat
