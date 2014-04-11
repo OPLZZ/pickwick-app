@@ -165,7 +165,7 @@ class PickwickApp.JobPosting extends Ember.Object
   ).property('contact', 'contact.phone', 'contact.email')
 
   valid_location_city:( ->
-    if @location && @location.city && @location.city.length > 3
+    if @location && @location.city && @location.city.length > 1
       true
     else
       false
