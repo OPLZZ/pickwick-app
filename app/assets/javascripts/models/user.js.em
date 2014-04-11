@@ -19,6 +19,15 @@ class PickwickApp.User extends Ember.Object
   update_attributes: (args) ->
     @id = args.id if args.id
 
+  after_save_hooks: ->
+    Ember.run ->
+      app_controller = PickwickApp.__container__.lookup('controller:application');
+      app_controller.set('user', user)
+
+      controller = PickwickApp.__container__.lookup('controller:user_job_postings');
+      controller.set('user', user)
+      controller.send('search')
+
   save: ->
     this_object = @
     url = "#{window.PickwickApp.user_url_point}/users"
@@ -35,5 +44,6 @@ class PickwickApp.User extends Ember.Object
         cache: false
       ).done( (data) ->
         this_object.update_attributes(data.user)
+        this_object.after_save_hooks()
       ).error (error)->
         console.log("ERROR WITH SAVING")

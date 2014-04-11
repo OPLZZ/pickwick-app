@@ -3,11 +3,11 @@ class PickwickApp.UserJobPostingsController extends Ember.ArrayController
   urlForLoadMore: undefined
   loadingError:  false
   hasLikedJobs:  false
-  loadingSimilar: true
-  loadingOtherSimilar: true
   similar_jobs:  Em.A([])
   searchQuery: ''
-  actions: 
+  user: null
+
+  actions:
     search: () ->
       @set("page", 0)
       @set('recordsCount', -1)
