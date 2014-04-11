@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Dáme Práci - admin</title>
+  <meta charset="utf-8">
+
+  <link href="<%= image_path("favicon.ico") %>" rel="shortcut icon">
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td, th {
+      border: 1px solid #ccc;
+      padding: 2px 5px;
+    }
+    td {
+      height: 35px;
+    }
+    td.description div{
+      overflow: hidden;
+      display: block;
+      width: 100%;
+      max-height: 35px;
+    }
+    .td-more {
+      position: absolute;
+      width: 300px;
+      background: #eee;
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+    .btn:hover, .btn.active{
+      opacity: 1;
+    }
+    .btn {
+      opacity: 0.4;
+      display: inline-block;
+      padding: 5px 6px;
+      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.42857;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-radius: 4px;
+    }
+    .btn-bad {
+      color: white;
+      background-color: #d9534f;
+      border-color: #d9534f;
+    }
+    .btn-ok {
+      color: white;
+      background-color: #4cae4c;
+      border-color: #449d44;
+    }
+  </style>
+  <script>
+    $(document).ready(function() {
+      $('td').click(function(){
+        $('.td-more').remove()
+      })
+      $( '.description').click(function() {
+        $('.td-more').remove()
+        pos = $(this).offset()
+        $("<div class='td-more'>" + $(this).html() + "</div>")
+          .appendTo('body')
+          .css({
+            top: pos.top,
+            left: pos.left
+          })
+      })
+    })
+  </script>
+</head>
+<body>
+<div id='main_container'>
+  <div id="web_header">
+    <%= yield %>
+  </div>
+
+  <div id="web_footer">
+    <%= render template: 'root/footer' %>
+  </div>
+
+</div>
+</body>
+</html>

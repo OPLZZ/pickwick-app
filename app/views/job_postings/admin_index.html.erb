@@ -1,0 +1,57 @@
+<h1>Seznam Pozic</h1>
+
+<% if @filter == "all" %>
+  <%= link_to 'Jen nezkontrolované pozice', '?filter=not_checked' %>
+<% else %>
+  <%= link_to 'Všechny pozice', '?filter=all' %>
+<% end %>
+<br />
+<br />
+<br />
+<table>
+  <thead>
+    <tr>
+      <th>Uživatel</th>
+      <th>schválit</th>
+      <th>Název</th>
+      <th>Typ pozice</th>
+      <th>Datum nástupu</th>
+      <th>Popis</th>
+      <th>Adresa</th>
+      <th>Ohodnocení</th>
+      <th>Kontakt</th>
+      <th>Zaměstnavatel</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @job_postings.each do |job_posting| %>
+      <tr>
+        <td><%= job_posting.user.name %></td>
+        <td>
+          <% if job_posting.checked == "not_checked" %>
+            <%= link_to 'BAD',   admin_invalid_path(id: job_posting, filter: @filter), class: 'btn btn-bad' %>
+            <%= link_to 'VALID', admin_valid_path(  id: job_posting, filter: @filter), class: 'btn btn-ok' %>
+          <% elsif job_posting.checked == "valid" %>
+            <span class='btn btn-ok active'>VALID</span>
+            <%= link_to 'BAD',   admin_invalid_path(id: job_posting, filter: @filter), class: 'btn btn-bad' %>
+          <% elsif job_posting.checked == "invalid" %>
+            <span class='btn btn-bad active'>BAD</span>
+            <%= link_to 'VALID', admin_valid_path(  id: job_posting, filter: @filter), class: 'btn btn-ok' %>
+          <% end %>
+        </td>
+        <td><%= job_posting.title %></td>
+        <td><%= job_posting.employment_type %></td>
+        <td><%= job_posting.start_date %></td>
+        <td class='description'><div><%= job_posting.description_text %></div></td>
+        <td><%= job_posting.location_text %></td>
+        <td><%= job_posting.compensation_text %></td>
+        <td><%= job_posting.contact_text %></td>
+        <td><%= job_posting.employer_text %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />
+<br />
+<br />
