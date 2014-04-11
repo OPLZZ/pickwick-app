@@ -3,7 +3,7 @@ class CreateJobPostings < ActiveRecord::Migration
 
     create_table :job_postings do |t|
       t.integer :user_id, :limit => 5
-      t.boolean :authorized
+      t.string  :checked, default: 'not_checked'
       t.string  :api_id
       t.string  :title
       t.string  :employment_type
@@ -12,6 +12,7 @@ class CreateJobPostings < ActiveRecord::Migration
       t.text    :compensation
       t.text    :contact
       t.text    :employer
+      t.date    :start_date
       t.timestamps
     end
 
