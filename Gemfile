@@ -49,6 +49,7 @@ gem "octokit", "~> 2.0"
 gem 'heroku'
 gem 'rails_12factor', group: :production
 
+gem 'fb_graph'
 
 gem 'yajl-ruby', require: 'yajl'
 
