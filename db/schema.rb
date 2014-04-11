@@ -11,18 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206103900) do
+ActiveRecord::Schema.define(version: 20140410125835) do
 
   create_table "job_postings", force: true do |t|
+    t.integer  "user_id",         limit: 5
+    t.string   "checked",                   default: "not_checked"
+    t.string   "api_id"
     t.string   "title"
     t.string   "employment_type"
-    t.string   "location"
     t.text     "description"
-    t.string   "compensation"
-    t.string   "contact"
-    t.string   "url"
+    t.text     "location"
+    t.text     "compensation"
+    t.text     "contact"
+    t.text     "employer"
+    t.date     "start_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "job_postings", ["api_id"], name: "index_job_postings_on_api_id"
+  add_index "job_postings", ["user_id"], name: "index_job_postings_on_user_id"
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "token"
+    t.string   "system_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["system_id"], name: "index_users_on_system_id"
+  add_index "users", ["token"], name: "index_users_on_token"
 
 end
