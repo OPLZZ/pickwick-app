@@ -15,7 +15,7 @@ class JobPostingsController < ApplicationController
   def admin_index
     if params[:filter] == "all"
       @filter = params[:filter]
-      @job_postings = JobPosting.order(:created_at).includes(:user)
+      @job_postings = JobPosting.order('created_at desc').includes(:user)
     else
       @filter = 'not_checked'
       @job_postings = JobPosting.where(checked: 'not_checked').order(:created_at).includes(:user)
