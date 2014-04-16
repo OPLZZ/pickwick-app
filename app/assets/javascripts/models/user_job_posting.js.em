@@ -16,14 +16,14 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
 
   employer_type_select: [
     {'key': 'company', 'value': 'Firma'},
-    {'key': 'private', 'value': 'Soukromá osob'},
+    {'key': 'private', 'value': 'Soukromá osoba'},
   ]
 
   set_defaults_for_new: ->
     @start_date = moment().format('YYYY-MM-DD')
     app_controller = PickwickApp.__container__.lookup('controller:application')
     @contact.name =  app_controller.user.name
-    @employer.type = "private"
+    @employer.type = "company"
 
   destroy: ->
     app_controller = PickwickApp.__container__.lookup('controller:application')
@@ -114,8 +114,8 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
         console.log("ERROR WITH SAVING")
 
   valid_save: ( ->
-    @valid_title && @valid_description && @valid_employer && @valid_contact && @valid_location_city
-  ).property('valid_title','valid_description', 'valid_employer', 'valid_contact','valid_location_city')
+    @valid_title && @valid_description && @valid_employer && @valid_contact && @valid_location_city && @valid_contact_name
+  ).property('valid_title','valid_description', 'valid_employer', 'valid_contact','valid_location_city', 'valid_contact_name')
 
   valid_title:( ->
     if @title && @title.length > 6
@@ -137,6 +137,13 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
     else
       false
   ).property('employer','employer.name')
+
+  valid_contact_name:( ->
+    if @contact && @contact.name && @contact.name.length > 3
+      true
+    else
+      false
+  ).property('contact', 'contact.name')
 
   valid_contact:( ->
     console.log(@contact.phone)

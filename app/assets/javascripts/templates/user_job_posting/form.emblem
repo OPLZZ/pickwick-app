@@ -7,7 +7,7 @@ form.col
       label.btn-danger for="title"
         ' Název pozice
   .row.form-group
-    Ember.TextField valueBinding="title" id='title' name='title' placeholder='např. hlídač korálového útesu' autofocus="true"
+    Ember.TextField valueBinding="title" id='title' name='title' autofocus="true"
 
   .row
     label for="employment_type"
@@ -23,7 +23,7 @@ form.col
       label.btn-danger for="description"
         ' Popis pozice
   .row.form-group
-    Ember.TextArea valueBinding="description" id='description' name='description' rows='1' placeholder='např. mám řidičský průkaz a mluvím anglicky'  autofocus="true"
+    Ember.TextArea valueBinding="description" id='description' name='description' rows='1'  autofocus="true"
 
   .row
     label for="employment_type"
@@ -71,8 +71,12 @@ form.col
   hr
   h3 Kontaktní informace
   .row
-    label for="contact_name"
-      ' Jméno kontaktní osoby
+    if valid_contact_name
+      label for="contact_name"
+        ' Jméno kontaktní osoby
+    else
+      label.btn-danger for="contact_name"
+        ' Jméno kontaktní osoby
   .row.form-group
     Ember.TextField valueBinding="contact.name" id='contact_name' name='contact_name' autofocus="true"
 
