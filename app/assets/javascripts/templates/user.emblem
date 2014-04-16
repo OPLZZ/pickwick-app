@@ -11,7 +11,11 @@ if user
     .text
       ' odhlásit se
 else
+  ' Pokud chcete přidávat nové pracovní pozice,
+  br
+  ' přihlaste se pomocí Facebook účtu
+  br 
   button.fb-button.fb-login onclick="hello( 'facebook' ).login()"
     .fbicon
     .text
-      ' přihlásit se pomocí facebooku
+      ' přihlásit se

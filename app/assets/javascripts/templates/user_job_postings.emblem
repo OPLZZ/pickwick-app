@@ -32,8 +32,14 @@
     else
       br
       .center
-        button onclick="hello( 'facebook' ).login()"
-          ' přihlásit se pomocí facebooku
-
+        ' Pokud chcete přidávat nové pracovní pozice,
+        br
+        ' přihlaste se pomocí Facebook účtu
+        br 
+        br 
+        button.fb-button.fb-login onclick="hello( 'facebook' ).login()"
+          .fbicon
+          .text
+            ' přihlásit se
 #frame_detail
   = outlet
