@@ -21,7 +21,7 @@ class PickwickApp.JobPosting extends Ember.Object
   ).property('id')
 
   description_with_brs:( ->
-    $.trim(@description).replace(@description_replace, "<br /><br />")
+    $.trim(@description).replace(@description_replace, "<br />")
   ).property('description')
 
   description_preferencies:( ->
