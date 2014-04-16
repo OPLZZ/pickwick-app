@@ -6,8 +6,12 @@ if user
     .icon-pencil
       ' vlastní pracovní pozice
   br
-  a onclick="hello( 'facebook' ).logout()"
-    ' odhlásit se
+  button.fb-button.fb-logout onclick="hello( 'facebook' ).logout()"
+    .fbicon
+    .text
+      ' odhlásit se
 else
-  button onclick="hello( 'facebook' ).login()"
-    ' přihlásit se pomocí facebooku
+  button.fb-button.fb-login onclick="hello( 'facebook' ).login()"
+    .fbicon
+    .text
+      ' přihlásit se pomocí facebooku
