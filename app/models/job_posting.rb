@@ -31,6 +31,7 @@ class JobPosting < ActiveRecord::Base
   def set_valid
     self.update_column :checked, 'valid'
     self.update_column :updated_at, Time.now
+    save_to_api
   end
 
   def set_invalid
