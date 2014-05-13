@@ -57,5 +57,3 @@ gem 'yajl-ruby', require: 'yajl'
 
 gem 'pry-rails'
 
-ruby "2.0.0"
-
