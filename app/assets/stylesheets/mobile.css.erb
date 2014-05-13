@@ -1,0 +1,9 @@
+<% if Rails.env == "build_ios" || Rails.env == "build_adnroid" %>
+.facebook_login {
+  display: none;
+}
+.modal-dialog {
+  padding-top: 90px;
+  top: 60px;
+}
+<% end %>

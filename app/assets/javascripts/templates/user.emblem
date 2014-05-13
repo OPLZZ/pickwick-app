@@ -1,21 +1,22 @@
-if user
-  'Přihlášen jako
-  = user.name
+.facebook_login
+  if user
+    'Přihlášen jako
+    = user.name
 
-  a click="goToUserJobPostings"
-    .icon-pencil
-      ' moje pracovní inzeráty
-  br
-  button.fb-button.fb-logout onclick="hello( 'facebook' ).logout()"
-    .fbicon
-    .text
-      ' odhlásit se
-else
-  ' Pro bezplatné vložení pracovního inzerátu
-  ' se přihlaste pomocí Facebookového účtu.
-  br 
-  br 
-  button.fb-button.fb-login onclick="hello( 'facebook', {'display': 'page'} ).login()"
-    .fbicon
-    .text
-      ' přihlásit se
+    a click="goToUserJobPostings"
+      .icon-pencil
+        ' moje pracovní inzeráty
+    br
+    button.fb-button.fb-logout onclick="hello( 'facebook' ).logout()"
+      .fbicon
+      .text
+        ' odhlásit se
+  else
+    ' Pro bezplatné vložení pracovního inzerátu
+    ' se přihlaste pomocí Facebookového účtu.
+    br 
+    br 
+    button.fb-button.fb-login onclick="hello( 'facebook', {'display': 'page'} ).login()"
+      .fbicon
+      .text
+        ' přihlásit se
