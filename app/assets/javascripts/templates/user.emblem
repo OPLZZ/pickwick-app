@@ -4,18 +4,18 @@ if user
 
   a click="goToUserJobPostings"
     .icon-pencil
-      ' vlastní pracovní pozice
+      ' moje pracovní inzeráty
   br
   button.fb-button.fb-logout onclick="hello( 'facebook' ).logout()"
     .fbicon
     .text
       ' odhlásit se
 else
-  ' Pokud chcete přidávat nové pracovní pozice,
-  br
-  ' přihlaste se pomocí Facebook účtu
+  ' Pro bezplatné vložení pracovního inzerátu
+  ' se přihlaste pomocí Facebookového účtu.
   br 
-  button.fb-button.fb-login onclick="hello( 'facebook' ).login()"
+  br 
+  button.fb-button.fb-login onclick="hello( 'facebook', {'display': 'page'} ).login()"
     .fbicon
     .text
       ' přihlásit se

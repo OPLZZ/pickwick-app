@@ -5,7 +5,7 @@ class PickwickApp.UserJobPostingController extends Ember.ObjectController
       app_controller = @controllers.application
       content = @get('content')
       bootbox.dialog({
-        title: "Chcete opravdu smazat pracovní pozici: #{@get('content.title')} ?"
+        title: "Chcete opravdu smazat inzerát: #{@get('content.title')} ?"
         message: "Pracovní nabídka: #{@get('content.title')}"
         buttons: {
           close: {

@@ -34,7 +34,7 @@ form.col
     view Ember.Select content=date_year_select optionValuePath='content.key' optionLabelPath='content.value' value=start_date_year id='start_date_year' name="start_date_year"  autofocus="true"
 
   hr
-  h3 Plat
+  h3 Mzda
 
   .row
     label for="compensation_value"
@@ -95,10 +95,10 @@ form.col
   .row
     if valid_contact
       label for="contact_email"
-        ' Email
+        ' E-mail
     else
       label.btn-danger for="contact_email"
-        ' Email
+        ' E-mail
   .row.form-group
     Ember.TextField valueBinding="contact.email" id='contact_email' name='contact_email'  autofocus="true"
 

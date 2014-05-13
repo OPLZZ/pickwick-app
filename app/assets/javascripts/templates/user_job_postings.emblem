@@ -3,10 +3,10 @@
     a.pull-left click="goToMenu"
       .icon-chevron-left
         ' zpět
-    .three_column_header Vlastní pracovní pozice
+    .three_column_header Moje pracovní inzeráty
     if user
       a.pull-right click="goToNewUserJobPosting"
-        ' nová pozice
+        ' vložit inzerát
   .infinite-scroll-box.infinite-scroll-list
     if user
       .row.infinite-scroll-content
@@ -31,15 +31,16 @@
                   a click='getMore' Klikněte pro načtení dalších výsledků
     else
       br
-      .center
-        ' Pokud chcete přidávat nové pracovní pozice,
-        br
-        ' přihlaste se pomocí Facebook účtu
-        br 
-        br 
-        button.fb-button.fb-login onclick="hello( 'facebook' ).login()"
-          .fbicon
-          .text
-            ' přihlásit se
+      .row
+        .col-lg-10.col-offset-1
+          .center
+            ' Pro bezplatné vložení pracovního inzerátu
+            ' se přihlaste pomocí Facebookového účtu.
+            br 
+            br 
+            button.fb-button.fb-login onclick="hello( 'facebook' ).login()"
+              .fbicon
+              .text
+                ' přihlásit se
 #frame_detail
   = outlet

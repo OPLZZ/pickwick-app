@@ -3,10 +3,17 @@ header
     i.icon-chevron-left
     | zpět
 
-  .three_column_header Úprava pozice
+  .three_column_header Úprava pracovního inzerátu
 
 section.infinite-scroll-box.infinite-scroll-detail
   .main
+    if show_info_message_for_edit
+      .row
+        .col-lg-10.col-offset-1
+          .status-box
+            div class="new_badge red"
+              'Pozor! Upravený inzerát musí znovu schválit správce.
+
     render 'user_job_posting/form' this
     br
     .form.col

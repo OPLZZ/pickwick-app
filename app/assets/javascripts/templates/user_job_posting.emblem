@@ -3,7 +3,7 @@ header
     i.icon-chevron-left
     | zpět
 
-  .three_column_header Detail vlastní pozice
+  .three_column_header Detail mého inzerátu
 
   a.pull-right click="editUserJobPosting this"
     ' upravit
@@ -62,4 +62,4 @@ section.infinite-scroll-box.infinite-scroll-detail
     .form.col.bottom-padding
       .center
         button.btn.btn-small.btn-danger click='destroy'
-          ' Smazat pracovní pozici
+          ' Smazat pracovní inzerát

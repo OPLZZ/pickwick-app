@@ -218,6 +218,8 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
     new_job.employment_type = @employment_type
     new_job.description     = @description
     new_job.start_date      = @start_date
+    #just for showing warning message
+    new_job.checked         = @checked
 
     new_job.employer = Ember.Object.create({})
     new_job.employer.type = @employer.type
@@ -292,13 +294,17 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
     out
   ).property('compensation_currency_translation')
 
+  show_info_message_for_edit:( ->
+    @checked == "valid"
+  ).property('checked')
+
   checked_text:( ->
     if @checked == "valid"
-      "Schváleno administrátorem a zobrazuje se uživatelům ve výsledcích vyhledávání"
+      "Inzerát byl schválen. Uživatelům se bude zobrazovat do uplynutí data nástupu, pokud jej dříve sami nesmažete."
     else if @checked == "invalid"
-      "Není schváleno administrátorem!"
+      "Inzerát nebyl schválen správcem."
     else
-      "Čeká na schválení administrátora"
+      "Inzerát čeká na schválení správcem."
   ).property('checked')
 
   checked_badge_klass: ( ->
