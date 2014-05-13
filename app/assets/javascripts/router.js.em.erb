@@ -15,6 +15,7 @@ PickwickApp.Router.map ->
     @resource('user_job_posting.edit',  { path: ':id/edit' })
   )
 
+  @route("error_404", { path: "*path"})
 <% if Rails.env == "build_www" || Rails.env == "production" %>
   PickwickApp.Router.reopen location: "history"
 <% end %>
