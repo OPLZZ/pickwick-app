@@ -7,6 +7,8 @@ hello.on('auth.login', function(auth){
         console.log(r)
         user = PickwickApp.User.create({'name': r.name, 'system_id': r.id, 'token': auth.authResponse.access_token });
         user.save()
+        route = PickwickApp.__container__.lookup('route:application');
+        route.transitionTo("user_job_postings");
       })
     });
   });
