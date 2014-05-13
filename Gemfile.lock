@@ -55,6 +55,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    curb (0.8.5)
     ember-data-source (0.14)
       ember-source
     ember-rails (0.14.1)
@@ -197,6 +198,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   coffee-rails (~> 4.0.0)
+  curb
   ember-rails
   ember-source (= 1.2.0)
   ember_script-rails!
