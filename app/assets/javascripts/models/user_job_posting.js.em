@@ -238,7 +238,7 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
 
     new_job.compensation = Ember.Object.create({})
     new_job.compensation.value    = @compensation.value
-    new_job.compensation.type     = @compensation.type
+    new_job.compensation.compensation_type     = @compensation.compensation_type
     new_job.compensation.currency = @compensation.currency
 
     new_job_object = PickwickApp.UserJobPosting.create(new_job)

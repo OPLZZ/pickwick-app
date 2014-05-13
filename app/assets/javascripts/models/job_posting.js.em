@@ -73,9 +73,13 @@ class PickwickApp.JobPosting extends Ember.Object
       @compensation_type_translation[@compensation.type]
     else if @compensation && @compensation.type
       @compensation.type
+    else if @compensation && @compensation.compensation_type && @compensation_type_translation[@compensation.compensation_type]
+      @compensation_type_translation[@compensation.compensation_type]
+    else if @compensation && @compensation.compensation_type
+      @compensation.compensation_type
     else
       ""
-  ).property('compensation','compensation.currency')
+  ).property('compensation','compensation.type','compensation.compensation_type')
 
 
   compensation_text: ( ->
@@ -84,10 +88,16 @@ class PickwickApp.JobPosting extends Ember.Object
       out += "#{@compensation.value}"
     else if @compensation && @compensation.min_value && @compensation.max_value
       out += "#{@compensation.min_value}-#{@compensation.max_value}"
+    else if @compensation && @compensation.minimum && @compensation.maximum
+      out += "#{@compensation.minimum}-#{@compensation.maximum}"
     else if @compensation && @compensation.min_value
       out += "#{@compensation.min_value}"
+    else if @compensation && @compensation.minimum
+      out += "#{@compensation.minimum}"
     else if @compensation && @compensation.max_value
       out += "#{@compensation.max_value}"
+    else if @compensation && @compensation.maximum
+      out += "#{@compensation.maximum}"
 
     if out.length > 0
       out += " #{@compensation_currency_translated}" if @compensation_currency_translated.length > 0
@@ -95,7 +105,7 @@ class PickwickApp.JobPosting extends Ember.Object
       out
     else
       ""
-  ).property('compensation','compensation.value','compensation.type','compensation.currency')
+  ).property('compensation','compensation.minimum','compensation.maximum','compensation.value','compensation.type','compensation.compensation_type','compensation.currency')
 
   start_date_show:( ->
     if @start_date

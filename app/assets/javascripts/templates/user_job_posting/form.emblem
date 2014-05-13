@@ -52,7 +52,7 @@ form.col
     label for="compensation_type"
       ' Frekvence
   .row.form-group
-    view Ember.Select content=compensation_type_select optionValuePath='content.key' optionLabelPath='content.value' value=compensation.type id='compensation_type' name="compensation_type"  autofocus="true"
+    view Ember.Select content=compensation_type_select optionValuePath='content.key' optionLabelPath='content.value' value=compensation.compensation_type id='compensation_type' name="compensation_type"  autofocus="true"
 
   hr
   h3 Zaměstnavatel

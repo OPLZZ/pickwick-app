@@ -8,7 +8,7 @@ class JobPostingsController < ApplicationController
 
   def authenticate_admin
     authenticate_or_request_with_http_basic do |username, password|
-      username == "admin" && password == "secret"
+      username == ENV['PICKWICK_ADMIN_USERNAME'] && password == ENV['PICKWICK_ADMIN_PASSWORD']
     end
   end
 
@@ -66,8 +66,6 @@ class JobPostingsController < ApplicationController
 
   # PATCH/PUT /job_postings/1
   def update
-    pp @job_posting
-    pp job_posting_params
     if @job_posting.update(job_posting_params.merge(checked: 'not_checked'))
       render json: {job_posting: @job_posting}, status: 200
     else
@@ -99,7 +97,7 @@ class JobPostingsController < ApplicationController
       params.merge!(Yajl::Parser.parse(request.body.read, symbolize_keys: true))
       params.require(:job_posting).permit(:id, :user_id, :title, :description, :employment_type, :start_date,
         location: [:street, :city, :zip],
-        compensation: [:value, :min_value, :max_value, :type, :currency],
+        compensation: [:value, :min_value, :max_value, :type, :currency, :compensation_type],
         contact: [:name, :phone, :email],
         employer: [:name, :type]
       )
