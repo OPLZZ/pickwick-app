@@ -14,6 +14,36 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
     'EUR': '€'
   }
 
+  date_day_text:(->
+    out = {}
+    for i in [1..31]
+      out[''+i] = i
+    out
+  )
+
+  date_month_text: {
+    "1": "leden",
+    "2": "únor",
+    "3": "březen",
+    "4": "duben",
+    "5": "květen",
+    "6": "červen",
+    "7": "červenec",
+    "8": "srpen",
+    "9": "září",
+    "10": "říjen",
+    "11": "listopad",
+    "12": "prosinec"
+  }
+ 
+  date_year_text:(->
+    out = {}
+    current_year = parseInt(moment().format('YYYY'))
+    out[''+(current_year)] = current_year
+    out[''+(current_year+1)] = current_year+1
+    out
+  )
+
   employer_type_select: [
     {'key': 'company', 'value': 'Firma'},
     {'key': 'private', 'value': 'Soukromá osoba'},
@@ -21,9 +51,24 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
 
   set_defaults_for_new: ->
     @start_date = moment().format('YYYY-MM-DD')
+    @update_form_dates()
+
     app_controller = PickwickApp.__container__.lookup('controller:application')
     @contact.name =  app_controller.user.name
     @employer.type = "company"
+
+
+  update_start_date:( ->
+    console.log("#{@start_date_day}-#{@start_date_month}-#{@start_date_year}")
+    date = "#{@start_date_day}-#{@start_date_month}-#{@start_date_year}"
+    @start_date = moment(date, "D-M-YYYY").format('YYYY-MM-DD')
+  ).observes('start_date_day', 'start_date_month', 'start_date_year')
+
+  update_form_dates: ->
+    date = moment(@start_date, "YYYY-MM-DD")
+    @start_date_day = date.format("D")
+    @start_date_month = date.format("M")
+    @start_date_year = date.format("YYYY")
 
   destroy: ->
     app_controller = PickwickApp.__container__.lookup('controller:application')
@@ -91,7 +136,7 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
     else
       method = "POST"
       url = "#{window.PickwickApp.user_url_point}/users/#{app_controller.user.id}/job_postings"
-    
+
     this_object = @
 
     console.log(JSON.stringify(this_object.save_params))
@@ -194,8 +239,34 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
     new_job.compensation.type     = @compensation.type
     new_job.compensation.currency = @compensation.currency
 
-    PickwickApp.UserJobPosting.create(new_job)
+    new_job_object = PickwickApp.UserJobPosting.create(new_job)
+    new_job_object.update_form_dates()
+    new_job_object
 
+
+  #for select box in new/edit form
+  date_day_select:(->
+    out = Em.A([])
+    for key, value of @date_day_text()
+      out.push({'key': key, 'value': value})
+    out
+  ).property('date_day_text')
+
+  #for select box in new/edit form
+  date_month_select:(->
+    out = Em.A([])
+    for key, value of @date_month_text
+      out.push({'key': key, 'value': value})
+    out
+  ).property('date_month_text')
+
+  #for select box in new/edit form
+  date_year_select:(->
+    out = Em.A([])
+    for key, value of @date_year_text()
+      out.push({'key': key, 'value': value})
+    out
+  ).property('date_year_text')
 
   #for select box in new/edit form
   employment_type_select:(->

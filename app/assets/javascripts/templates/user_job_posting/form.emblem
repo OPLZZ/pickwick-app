@@ -28,8 +28,10 @@ form.col
   .row
     label for="employment_type"
       ' Datum nástupu
-  .row.form-group.form-inline.select-chevron
-    Ember.TextField valueBinding="start_date" id='start_date' name='start_date' type='date' autofocus="true"
+  .row.form-group.form-inline
+    view Ember.Select content=date_day_select optionValuePath='content.key' optionLabelPath='content.value' value=start_date_day id='start_date_day' name="start_date_day"  autofocus="true"
+    view Ember.Select content=date_month_select optionValuePath='content.key' optionLabelPath='content.value' value=start_date_month id='start_date_month' name="start_date_month"  autofocus="true"
+    view Ember.Select content=date_year_select optionValuePath='content.key' optionLabelPath='content.value' value=start_date_year id='start_date_year' name="start_date_year"  autofocus="true"
 
   hr
   h3 Plat
