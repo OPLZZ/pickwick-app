@@ -2,18 +2,6 @@
 
 class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
 
-  compensation_type_translation: {
-    "monthly": 'měsíční'
-    "hourly":  'hodinová'
-    "annual":  'roční'
-    "fixed":   'fixní'
-  }
-
-  compensation_currency_translation: {
-    'CZK': 'Kč'
-    'EUR': '€'
-  }
-
   date_day_text:(->
     out = {}
     for i in [1..31]

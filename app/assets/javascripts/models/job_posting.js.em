@@ -15,6 +15,18 @@ class PickwickApp.JobPosting extends Ember.Object
     "part-time": 'částečný úvazek'
   }
 
+  compensation_type_translation: {
+    "monthly": 'měsíční'
+    "hourly":  'hodinová'
+    "annual":  'roční'
+    "fixed":   'fixní'
+  }
+
+  compensation_currency_translation: {
+    'CZK': 'Kč'
+    'EUR': '€'
+  }
+
   #for links in index
   detail_link:( ->
     "job_postings/#{@id}"
@@ -86,9 +98,9 @@ class PickwickApp.JobPosting extends Ember.Object
     out = ""
     if @compensation && @compensation.value
       out += "#{@compensation.value}"
-    else if @compensation && @compensation.min_value && @compensation.max_value
+    else if @compensation && @compensation.min_value && @compensation.max_value && @compensation.min_value != @compensation.max_value
       out += "#{@compensation.min_value}-#{@compensation.max_value}"
-    else if @compensation && @compensation.minimum && @compensation.maximum
+    else if @compensation && @compensation.minimum && @compensation.maximum && @compensation.minimum != @compensation.maximum
       out += "#{@compensation.minimum}-#{@compensation.maximum}"
     else if @compensation && @compensation.min_value
       out += "#{@compensation.min_value}"
