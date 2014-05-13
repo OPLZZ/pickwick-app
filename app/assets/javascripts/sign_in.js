@@ -24,5 +24,5 @@ hello.on('auth.logout', function(auth){
   });
 
 hello.init({ 
-    facebook : '213747822167688',
+    facebook : '458081994294211',
   },{redirect_uri:'redirect.html'});
