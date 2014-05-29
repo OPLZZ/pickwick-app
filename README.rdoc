@@ -1,4 +1,4 @@
-==Pickwick-APP
+=Pickwick::APP
 This repository represents main frontend for damepraci.eu project.
 
 Frontend currently implements search, pagination, and geoposition location.
@@ -7,7 +7,7 @@ After user sign in by `facebook connect` can create new vacancies, edit them and
 
 There is a simple admin frontend, for validating uses vacancies.
 
-=== Instalation
+== Instalation
 
 clone repo
 `git clone git@github.com:OPLZZ/pickwick-app.git`
