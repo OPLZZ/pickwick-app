@@ -38,7 +38,7 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
   ]
 
   set_defaults_for_new: ->
-    @start_date = moment().format('YYYY-MM-DD')
+    @start_date = moment().add('days', 14).format('YYYY-MM-DD')
     @update_form_dates()
 
     app_controller = PickwickApp.__container__.lookup('controller:application')
