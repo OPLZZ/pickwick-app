@@ -95,17 +95,6 @@ class PickwickApp.UserJobPosting extends PickwickApp.JobPosting
     }
   ).property('title, description, employment_type, employer, location, contact, compensation')
 
-  get_contact_phone: (->
-    if @contact && @contact.phone
-      phone = @contact.phone.split(",")[0]
-      if phone.match(@phone_regexp)
-        phone
-      else
-        null
-    else
-      null
-  ).property('contact, contact.phone')
-
   update_attributes: (job_posting) ->
     @id = job_posting.id
     @checked = job_posting.checked

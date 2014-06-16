@@ -119,6 +119,17 @@ class PickwickApp.JobPosting extends Ember.Object
       ""
   ).property('compensation','compensation.minimum','compensation.maximum','compensation.value','compensation.type','compensation.compensation_type','compensation.currency')
 
+  get_contact_phone: (->
+    if @contact && @contact.phone
+      phone = @contact.phone.split(",")[0]
+      if phone.match(@phone_regexp)
+        phone
+      else
+        null
+    else
+      null
+  ).property('contact, contact.phone')
+
   start_date_show:( ->
     if @start_date
       formated_date = moment(@start_date).format("D. M. YYYY")
