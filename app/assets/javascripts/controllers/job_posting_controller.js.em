@@ -26,7 +26,7 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
       url = "mailto:#{@get('content.contact.email')}?subject=#{encodeURIComponent(subject)}"
 
       bootbox.dialog({
-        title: "Kontatovat mailem na: #{@get('content.contact.email')} ?"
+        title: "Kontaktovat mailem na: #{@get('content.contact.email')} ?"
         message: "Pracovní nabídka: #{@get('content.title')}"
         buttons: {
           close: {
