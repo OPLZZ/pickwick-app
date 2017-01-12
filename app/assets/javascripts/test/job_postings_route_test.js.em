@@ -94,7 +94,7 @@ test "get getSimilarPreferencies", ->
 test "get url for fetch", ->
   #undefined - return normal search url
   url = JPRTest.route.getUrlForFetch(false)
-  equal url, "http://api.damepraci.cz/vacancies"
+  equal url, "https://api.damepraci.cz/vacancies"
 
   #defined - return saved url
   saved_url = "http://saved.url"
@@ -104,7 +104,7 @@ test "get url for fetch", ->
 
   #normal search
   url = JPRTest.route.getUrlForFetch(true)
-  equal url, "http://api.damepraci.cz/vacancies"
+  equal url, "https://api.damepraci.cz/vacancies"
 
 test "get search query", ->
   JPRTest.app_controller.set('search_query', "Foo")
