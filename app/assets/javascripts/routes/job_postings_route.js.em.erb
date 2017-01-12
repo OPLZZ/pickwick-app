@@ -248,26 +248,23 @@ class PickwickApp.JobPostingsRoute extends Em.Route
       return app_controller.search_query
     ""
 
+  locationDidChange: ->
+    controller = @get('controller')
+    controller.send('search')
+
   getLocation: ->
     app_controller = @controllerFor('application')
     #has location setted to geo
     if app_controller.search_location == "Aktuální poloha"
       if @get('geolocation_object') == undefined && app_controller.enabled_geolocation == true
-        @set('geolocation_object', Em.GeoLocation.create({autoUpdate: true}))
+        location = Em.GeoLocation.create({autoUpdate: false, locationDidChange: @locationDidChange})
+        location.set('controller', this)
+        location.updateLocation()
+        @set('geolocation_object', location)
 
       if @get('geolocation_object') != undefined
         if @get('geolocation_object').latitude != -99999
-          location = "#{@get('geolocation_object').latitude},#{@get('geolocation_object').longitude}"
-          #remeber last geolocation into local storage :D
-          try
-            localStorage['last_geolocation'] = location
-          catch e
-            console.log(e)
-          return location
-
-        #if there is no data for loaction try cached location
-        else if localStorage['last_geolocation'] != undefined && localStorage['last_geolocation'] != "undefined"
-          return location = localStorage['last_geolocation']
+          return "#{@get('geolocation_object').latitude},#{@get('geolocation_object').longitude}"
 
     #has location setted to city
     else
@@ -306,20 +303,23 @@ class PickwickApp.JobPostingsRoute extends Em.Route
     args = {}
     if search
       args = @getArgsForFetch(similar)
-    else
-      args = {}
 
     args.token    = "#{window.PickwickApp.api_token}"
     args.per_page = controller.get('perPage')
 
-    $.ajax(
-      method: 'GET'
-      dataType: 'json'
-      url: url
-      data: args
-      cache: false
-    ).done( (data) ->
-      route.loadDataFromAjax(data)
-    ).error (error)->
-      #show loading error
-      controller.set('loadingError', true)
+    console.log(@get('geolocation_object'))
+
+    if @get('geolocation_object') && @get('geolocation_object').get('updating') && count < 5
+      Ember.run.later(this, 'fetchPage', search, similar, count + 1, 1000)
+    else
+      $.ajax(
+        method: 'GET'
+        dataType: 'json'
+        url: url
+        data: args
+        cache: false
+      ).done( (data) ->
+        route.loadDataFromAjax(data)
+      ).error (error)->
+        #show loading error
+        controller.set('loadingError', true)
