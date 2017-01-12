@@ -3935,7 +3935,7 @@ a.list-group-item.active > .badge {
       -webkit-transform: rotate(45deg);
       -o-transform: rotate(-45deg);
       -ms-transform: rotate(-45deg);
-      transform: rotate(-45deg);
+      transform: rotate(45deg);
       display: block;
       right: -12px;
       color: white;
@@ -4155,8 +4155,8 @@ label.btn-danger {
     left: -3px; }
 @font-face {
   font-family: "icomoon";
-  src: url(/assets/icomoon-f1b80f994bd75397b8517343f37b36ec.eot);
-  src: url(/assets/icomoon-f1b80f994bd75397b8517343f37b36ec.eot?#iefix) format("embedded-opentype"), url(/assets/icomoon-1f8f1c9b46797ccd57683f6985a26d36.ttf) format("truetype"), url(/assets/icomoon-49ef5e9b34ef32e6703f2acc67babd82.woff) format("woff"), url(/assets/icomoon-2e1bb4f91ae54dd8a2852b4b783ce1dc.svg#icomoon) format("svg");
+  src: url(/assets/icomoon.eot);
+  src: url(/assets/icomoon.eot?#iefix) format("embedded-opentype"), url(/assets/icomoon.ttf) format("truetype"), url(/assets/icomoon.woff) format("woff"), url(/assets/icomoon.svg#icomoon) format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -4503,6 +4503,12 @@ label.btn-danger {
   display: none; }
 
 @media all and (max-width: 799px) {
+  .desktop #web_header .web_logo {
+    max-width: 100% !important;
+    margin: 0 10px; }
+  .desktop #web_header .partners_logo {
+    display: none !important; }
+
   .mobile_android .push-liked #frame_index, .mobile_android .push-detail #frame_index, .mobile_android .push-menu #frame_index, .mobile_android .push-info #frame_index {
     display: none; }
   .mobile_android .push-liked #frame_liked {
@@ -4897,16 +4903,32 @@ label.btn-danger {
   right: 0;
   width: 100%; }
 .desktop #web_header {
-  display: block; }
+  display: block;
+  height: 110px;
+  line-height: 110px; }
   .desktop #web_header h1 {
     text-indent: -100em;
-    background: url(/assets/web_logo_black-50d41f0d622d46d532157dc9a1b72d86.png);
+    background: url(/assets/web_logo_black.png);
     width: 463px;
     height: 75px; }
   .desktop #web_header .download_apps {
     position: absolute;
     right: 50px;
     top: 58px; }
+  .desktop #web_header .web_logo {
+    display: inline-block;
+    float: left;
+    max-width: 50%; }
+  .desktop #web_header .partners_logo {
+    display: inline-block;
+    float: right;
+    max-width: 50%; }
+  .desktop #web_header .partners_logos {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    width: 581px;
+    height: 75px; }
 .desktop #web_footer {
   display: block;
   background: black;
