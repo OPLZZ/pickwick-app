@@ -12,7 +12,8 @@ class PickwickApp.JobPosting extends Ember.Object
   description_replace: /\n/gm
   employment_type_translation: {
     "full-time": 'plný úvazek'
-    "part-time": 'částečný úvazek'
+    "part-time": 'částečný úvazek',
+    "seasonal": 'sezónní práce'
   }
 
   compensation_type_translation: {

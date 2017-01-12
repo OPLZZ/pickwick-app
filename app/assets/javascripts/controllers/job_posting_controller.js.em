@@ -117,7 +117,7 @@ class PickwickApp.JobPostingController extends Ember.ObjectController
             className: "btn-default pull-left"
           },
           success: {
-            label: "otveřít mapu",
+            label: "otevřít mapu",
             className: "btn-success"
             callback: (out)->
               console.log(url+"->"+target)
