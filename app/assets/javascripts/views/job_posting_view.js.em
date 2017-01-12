@@ -37,6 +37,6 @@ class PickwickApp.JobPostingView extends Ember.View
         if job_posting_object.distance && job_posting_object.distance < 10
           zoom = 15
 
-        $('#detail_map').html("<img src='http://maps.googleapis.com/maps/api/staticmap?ll=#{job_posting_location}&zoom=#{zoom}&size=640x350&maptype=roadmap&markers=color:red%7Csize:big%7C#{job_posting_location}&sensor=false'>")
+        $('#detail_map').html("<img src='https://maps.googleapis.com/maps/api/staticmap?ll=#{job_posting_location}&zoom=#{zoom}&size=640x350&maptype=roadmap&markers=color:red%7Csize:big%7C#{job_posting_location}&sensor=false'>")
 
   ).observes('controller.content')
